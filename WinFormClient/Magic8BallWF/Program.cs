@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Magic8BallREST
+namespace Magic8BallWF
 {
     static class Program
     {

@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Magic8BallREST;
+using Magic8BallWF;
 
-// This C# sample is used to test the C# Magic 8-Ball WinForm REST Example (Magic8BallREST.DLL).
-//   Magic8BallREST.Magic8Ball - provides access to Magic 8 Ball RESTful service
+// This C# sample is used to test the C# Magic 8-Ball WinForm REST Example (Magic8BallWF.DLL).
+//   Magic8BallWF.Magic8Ball - provides access to Magic 8 Ball RESTful service
 
-namespace Magic8BallREST
+namespace Magic8BallWF
 {
     public partial class Form1 : Form
     {
@@ -34,7 +34,7 @@ namespace Magic8BallREST
         {
             try
             {
-                var oMagic8Ball = new Magic8BallREST.Magic8Ball();
+                var oMagic8Ball = new Magic8BallWF.Magic8Ball();
                 string sQuestion = txtQuestion.Text;
                 if (string.IsNullOrWhiteSpace(sQuestion)) sQuestion = @"..\..\";    // if no question, force an error to demonstrate inner exception handling
                 this.Cursor = Cursors.WaitCursor;
@@ -43,13 +43,13 @@ namespace Magic8BallREST
                 var iType = oMagic8Ball.Type;
                 switch (iType)
                 {
-                    case Magic8BallREST.AnswerType.Affirmative:
+                    case Magic8BallWF.AnswerType.Affirmative:
                         txtAnswer.BackColor = Color.LightGreen;
                         break;
-                    case Magic8BallREST.AnswerType.Neutral:
+                    case Magic8BallWF.AnswerType.Neutral:
                         txtAnswer.BackColor = Color.PaleGoldenrod;
                         break;
-                    case Magic8BallREST.AnswerType.Contrary:
+                    case Magic8BallWF.AnswerType.Contrary:
                         txtAnswer.BackColor = Color.LightCoral;
                         break;
                     default:

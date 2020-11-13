@@ -1,4 +1,4 @@
-﻿namespace Magic8BallREST
+﻿namespace Magic8BallWF
 {
     partial class Form1
     {
@@ -71,7 +71,7 @@
             // btnMagic8Ball
             // 
             this.btnMagic8Ball.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMagic8Ball.BackgroundImage = global::Magic8BallREST.Properties.Resources.Magic_8_Ball;
+            this.btnMagic8Ball.BackgroundImage = global::Magic8BallWF.Properties.Resources.Magic_8_Ball;
             this.btnMagic8Ball.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMagic8Ball.Location = new System.Drawing.Point(355, 26);
             this.btnMagic8Ball.Name = "btnMagic8Ball";

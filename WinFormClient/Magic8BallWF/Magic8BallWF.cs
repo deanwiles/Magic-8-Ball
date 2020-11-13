@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace Magic8BallREST
+namespace Magic8BallWF
 {
     /// <summary>
     /// Magic 8 Ball Question and Answer

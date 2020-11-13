@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace Magic8BallREST
+namespace Magic8BallWF
 {
     /// <summary>
     /// MosaicOA C# Extension Utility functions
