@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using Magic8BallWF;
 
 // This C# sample is used to test the C# Magic 8-Ball WinForm REST Example (Magic8BallWF.DLL).
-//   Magic8BallWF.Magic8Ball - provides access to Magic 8 Ball RESTful service
+//   Magic8BallWF.Magic8Ball - provides access to Magic 8-Ball RESTful service
 
 namespace Magic8BallWF
 {
@@ -22,14 +22,14 @@ namespace Magic8BallWF
             InitializeComponent();
         }
 
-        // This Magic 8 Ball test demonstrates calling a RESTful API.
-        // After the user enters a question and clicks the Magic 8 Ball button
+        // This Magic 8-Ball test demonstrates calling a RESTful API.
+        // After the user enters a question and clicks the Magic 8-Ball button
         // it instantiates the .NET COM class and calls the Ask method with the specified question.
         // The question is sent as an HTTP GET request and the response is received as a JSON message.
         // The answer response is displayed and the response background color set to green, yellow or red
         // based on the type of response (affirmative, neutral or contrary).
         // If any errors occur, they are displayed in a C# message box.
-        // To force an error, leave the Question empty and click the Magic 8 Ball button.
+        // To force an error, leave the Question empty and click the Magic 8-Ball button.
         private void btnMagic8Ball_Click(object sender, EventArgs e)
         {
             try
@@ -43,13 +43,13 @@ namespace Magic8BallWF
                 var iType = oMagic8Ball.Type;
                 switch (iType)
                 {
-                    case Magic8BallWF.AnswerType.Affirmative:
+                    case Magic8BallWF.AnswerType.Positive:
                         txtAnswer.BackColor = Color.LightGreen;
                         break;
                     case Magic8BallWF.AnswerType.Neutral:
                         txtAnswer.BackColor = Color.PaleGoldenrod;
                         break;
-                    case Magic8BallWF.AnswerType.Contrary:
+                    case Magic8BallWF.AnswerType.Negative:
                         txtAnswer.BackColor = Color.LightCoral;
                         break;
                     default:

@@ -1,216 +1,152 @@
-﻿using RestSharp;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace Magic8BallWF
 {
     /// <summary>
-    /// Magic 8 Ball Question and Answer
+    /// Type of Magic 8-Ball Answer
     /// </summary>
-    public class Magic
-    {
-        /// <summary>
-        /// Question asked of Magic 8 Ball
-        /// </summary>
-        public string Question { get; set; }
-        /// <summary>
-        /// Answer from Magic 8 Ball
-        /// </summary>
-        public string Answer { get; set; }
-        /// <summary>
-        /// Type of Magic 8 Ball Answer
-        /// </summary>
-        public string Type { get; set; }
-    }
-
-    class Magic8BallApi
-    {
-        const string BaseUrl = "https://8ball.delegator.com/magic";
-
-        readonly IRestClient _client;
-
-        readonly DataFormat _dataFormat;
-
-        public Magic8BallApi(DataFormat Format)
-        {
-            _client = new RestClient(BaseUrl);
-            _dataFormat = Format;
-        }
-
-#if (true)
-        public T Execute<T>(RestRequest request) where T : new()
-        {
-            request.AddParameter("Format", _dataFormat.ToString("G"), ParameterType.UrlSegment); // used on every request
-
-            Utils.LogMsg($"Magic8Ball {request.Method.ToString("G")} {_client.BuildUri(request)}");
-
-            var response = _client.Execute<T>(request);
-
-            if (response.ErrorException != null)
-            {
-                const string message = "Error retrieving response.  Check inner details for more info.";
-                var magic8Exception = new ApplicationException(message, response.ErrorException);
-                throw magic8Exception;
-            }
-
-            Utils.LogMsg($"Magic8Ball response: {Environment.NewLine}{response.Content}");
-
-            return response.Data;
-        }
-
-        public Magic GetMagic(string Question)
-        {
-            var request = new RestRequest()
-            {
-                Resource = "{Format}/{Question}",
-                RequestFormat = _dataFormat,
-                RootElement = "magic"
-            };
-
-            request.AddParameter("Question", Question, ParameterType.UrlSegment);
-
-            return Execute<Magic>(request);
-        }
-#endif
-    }
-
-    /// <summary>
-    /// Type of Magic 8 Ball Answer
-    /// </summary>
-    [ComVisible(true)]
-    [Description("Type of Magic 8 Ball Answer")]
     public enum AnswerType
     {
         /// <summary>
-        /// Contrary/Negative Answer
+        /// Negative / Contrary Answer
         /// </summary>
-        [Description("Contrary/Negative Answer")]
-        Contrary = -1,
+        [Description("Negative / Contrary Answer")]
+        Negative = -1,
         /// <summary>
-        /// Neutral/Non-committal Answer
+        /// Neutral / Non-committal Answer
         /// </summary>
-        [Description("Neutral/Non-committal Answer")]
+        [Description("Neutral / Non-committal Answer")]
         Neutral = 0,
         /// <summary>
-        /// Affirmative/Positive Answer
+        /// Positive / Affirmative Answer
         /// </summary>
-        [Description("Affirmative/Positive Answer")]
-        Affirmative = 1,
+        [Description("Positive / Affirmative Answer")]
+        Positive = 1,
     }
 
     /// <summary>
-    /// COM Interface for Magic 8 Ball RESTful web service
+    /// Magic 8-Ball Answer
     /// </summary>
-    [ComVisible(true)]
-    [Description("Magic 8 Ball Interface")]
-    public interface IMagic8Ball
+    public class MagicAnswer
     {
         /// <summary>
-        /// Ask the Magic 8 Ball a Question
+        /// Type of Magic 8-Ball Answer
         /// </summary>
-        /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>The Magic 8 Ball answer</returns>
-        [Description("Ask the Magic 8 Ball a Question")]
-        string Ask(string Question);
+        public AnswerType Type { get; set; }
 
         /// <summary>
-        /// Question asked of Magic 8 Ball
+        /// Answer from Magic 8-Ball
         /// </summary>
-        string Question { [Description("Question asked of Magic 8 Ball")] get; }
+        public string Answer { get; set; }
 
         /// <summary>
-        /// Answer from Magic 8 Ball
+        /// Magic 8-Ball Answer Default Constructor
         /// </summary>
-        string Answer { [Description("Answer from Magic 8 Ball")] get; }
-
-        /// <summary>
-        /// Type of Magic 8 Ball Answer
-        /// </summary>
-        AnswerType Type { [Description("Type of Magic 8 Ball Answer")] get; }
-    }
-
-    /// <summary>
-    /// COM Callable Wrapper for for Magic 8 Ball RESTful web service
-    /// </summary>
-    /// <remarks>
-    /// This class only supports late binding for COM clients
-    /// </remarks>
-    [ComVisible(true)]
-    [ProgId("MESample.Magic8Ball")]
-    [Description("Magic 8 Ball Class")]
-    [ClassInterface(ClassInterfaceType.None)]
-    public class Magic8Ball : IMagic8Ball
-    {
-        private Magic _magic = new Magic();
-
-        /// <summary>
-        /// Create instance of Magic8Ball class
-        /// </summary>
-        // NOTE: Default constructor is required for COM components
-        public Magic8Ball()
+        public MagicAnswer()
         {
+            // Default type is Neutral
+            this.Type = AnswerType.Neutral;
         }
 
         /// <summary>
-        /// Ask the Magic 8 Ball a Question
+        /// Magic 8-Ball Answer Constructor with Values
+        /// </summary>
+        /// <param name="Type">Type of Magic 8-Ball Answer</param>
+        /// <param name="Answer">Answer from Magic 8-Ball</param>
+        public MagicAnswer(AnswerType Type, string Answer)
+        {
+            // Save Answer and Type
+            this.Type = Type;
+            this.Answer = Answer;
+        }
+    }
+
+    /// <summary>
+    /// Magic 8-Ball Question and Answer
+    /// </summary>
+    public class Magic : MagicAnswer
+    {
+        /// <summary>
+        /// Question asked of Magic 8-Ball
+        /// </summary>
+        public string Question { get; set; }
+    }
+
+    /// <summary>
+    /// Magic 8-Ball service
+    /// </summary>
+    public class Magic8Ball
+    {
+        private Magic _magic = new Magic();
+
+        // Classic Magic 8-Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
+        private List<MagicAnswer> _answers = new List<MagicAnswer>()
+        {
+            new MagicAnswer(AnswerType.Negative, "Don't count on it"),
+            new MagicAnswer(AnswerType.Negative, "My reply is no"),
+            new MagicAnswer(AnswerType.Negative, "My sources say no"),
+            new MagicAnswer(AnswerType.Negative, "Outlook not so good"),
+            new MagicAnswer(AnswerType.Negative, "Very doubtful"),
+            new MagicAnswer(AnswerType.Neutral, "Ask again later"),
+            new MagicAnswer(AnswerType.Neutral, "Better not tell you now"),
+            new MagicAnswer(AnswerType.Neutral, "Cannot predict now"),
+            new MagicAnswer(AnswerType.Neutral, "Concentrate and ask again"),
+            new MagicAnswer(AnswerType.Neutral, "Reply hazy, try again"),
+            new MagicAnswer(AnswerType.Positive, "As I see it, yes"),
+            new MagicAnswer(AnswerType.Positive, "It is certain"),
+            new MagicAnswer(AnswerType.Positive, "It is decidedly so"),
+            new MagicAnswer(AnswerType.Positive, "Most likely"),
+            new MagicAnswer(AnswerType.Positive, "Outlook good"),
+            new MagicAnswer(AnswerType.Positive, "Signs point to yes"),
+            new MagicAnswer(AnswerType.Positive, "Without a doubt"),
+            new MagicAnswer(AnswerType.Positive, "Yes"),
+            new MagicAnswer(AnswerType.Positive, "Yes – definitely"),
+            new MagicAnswer(AnswerType.Positive, "You may rely on it")
+        };
+
+        private Random _random = new Random();
+
+        /// <summary>
+        /// Ask the Magic 8-Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>The Magic 8 Ball answer</returns>
+        /// <returns>The Magic 8-Ball answer</returns>
         public string Ask(string Question)
         {
             // Catch and log any errors
             try
             {
-                // Create Magic 8 Ball Api instance using JSON
-                var api = new Magic8BallApi(DataFormat.Json);
-                // Ask the specified question and return the answer
-                _magic = api.GetMagic(Question);
+                // Get random answer
+                int index = _random.Next(_answers.Count);
+                var answer = _answers[index];
+                // Save question, answer and type
+                _magic = new Magic() { Question = Question, Type = answer.Type, Answer = answer.Answer };
+                // Return the answer
                 return Answer;
             }
             catch (Exception eek)
             {
-                Utils.LogErr(eek, $"Failed asking the Magic 8 Ball '{Question}'");
-                throw;  // Rethrow the error back to RT
+                Utils.LogErr(eek, $"Failed asking the Magic 8-Ball '{Question}'");
+                throw;  // Rethrow the error back to caller
             }
         }
 
         /// <summary>
-        /// Question asked of Magic 8 Ball
+        /// Question asked of Magic 8-Ball
         /// </summary>
-        public string Question { get { return _magic.Question; } }
+        public string Question { get => _magic.Question; }
 
         /// <summary>
-        /// Answer from Magic 8 Ball
+        /// Answer from Magic 8-Ball
         /// </summary>
-        public string Answer { get { return _magic.Answer; } }
+        public string Answer { get => _magic.Answer; }
 
         /// <summary>
-        /// Type of Magic 8 Ball Answer
+        /// Type of Magic 8-Ball Answer
         /// </summary>
-        public AnswerType Type
-        {
-            get
-            {
-                AnswerType type;
-                switch (_magic.Type?.ToLower())
-                {
-                    case "negative":
-                    case "contrary":
-                        type = AnswerType.Contrary;
-                        break;
-                    case "affirmative":
-                    case "positive":
-                        type = AnswerType.Affirmative;
-                        break;
-                    case "neutral":
-                    case "noncommittal":
-                    default:
-                        type = AnswerType.Neutral;
-                        break;
-                }
-                return type;
-            }
-        }
+        public AnswerType Type { get => _magic.Type; }
     }
 }
