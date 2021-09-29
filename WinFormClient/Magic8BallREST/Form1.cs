@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Magic8BallREST;
 
 // This C# sample is used to test the C# Magic 8-Ball WinForm REST Example (Magic8BallREST.DLL).
 //   Magic8BallREST.Magic8Ball - provides access to Magic 8 Ball RESTful service
@@ -30,7 +22,7 @@ namespace Magic8BallREST
         // based on the type of response (affirmative, neutral or contrary).
         // If any errors occur, they are displayed in a C# message box.
         // To force an error, leave the Question empty and click the Magic 8 Ball button.
-        private void btnMagic8Ball_Click(object sender, EventArgs e)
+        private void BtnMagic8Ball_Click(object sender, EventArgs e)
         {
             try
             {
@@ -41,21 +33,13 @@ namespace Magic8BallREST
                 string sAnswer = oMagic8Ball.Ask(sQuestion);
                 txtAnswer.Text = sAnswer;
                 var iType = oMagic8Ball.Type;
-                switch (iType)
+                txtAnswer.BackColor = iType switch
                 {
-                    case Magic8BallREST.AnswerType.Affirmative:
-                        txtAnswer.BackColor = Color.LightGreen;
-                        break;
-                    case Magic8BallREST.AnswerType.Neutral:
-                        txtAnswer.BackColor = Color.PaleGoldenrod;
-                        break;
-                    case Magic8BallREST.AnswerType.Contrary:
-                        txtAnswer.BackColor = Color.LightCoral;
-                        break;
-                    default:
-                        txtAnswer.BackColor = SystemColors.Window;
-                        break;
-                }
+                    Magic8BallREST.AnswerType.Affirmative => Color.LightGreen,
+                    Magic8BallREST.AnswerType.Neutral => Color.PaleGoldenrod,
+                    Magic8BallREST.AnswerType.Contrary => Color.LightCoral,
+                    _ => SystemColors.Window,
+                };
             }
             catch (Exception eek)
             {

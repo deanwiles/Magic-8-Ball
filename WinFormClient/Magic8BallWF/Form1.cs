@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Magic8BallWF;
 
 // This C# sample is used to test the C# Magic 8-Ball WinForm REST Example (Magic8BallWF.DLL).
 //   Magic8BallWF.Magic8Ball - provides access to Magic 8-Ball RESTful service
@@ -30,7 +22,7 @@ namespace Magic8BallWF
         // based on the type of response (affirmative, neutral or contrary).
         // If any errors occur, they are displayed in a C# message box.
         // To force an error, leave the Question empty and click the Magic 8-Ball button.
-        private void btnMagic8Ball_Click(object sender, EventArgs e)
+        private void BtnMagic8Ball_Click(object sender, EventArgs e)
         {
             try
             {
@@ -41,21 +33,13 @@ namespace Magic8BallWF
                 string sAnswer = oMagic8Ball.Ask(sQuestion);
                 txtAnswer.Text = sAnswer;
                 var iType = oMagic8Ball.Type;
-                switch (iType)
+                txtAnswer.BackColor = iType switch
                 {
-                    case Magic8BallWF.AnswerType.Positive:
-                        txtAnswer.BackColor = Color.LightGreen;
-                        break;
-                    case Magic8BallWF.AnswerType.Neutral:
-                        txtAnswer.BackColor = Color.PaleGoldenrod;
-                        break;
-                    case Magic8BallWF.AnswerType.Negative:
-                        txtAnswer.BackColor = Color.LightCoral;
-                        break;
-                    default:
-                        txtAnswer.BackColor = SystemColors.Window;
-                        break;
-                }
+                    Magic8BallWF.AnswerType.Positive => Color.LightGreen,
+                    Magic8BallWF.AnswerType.Neutral => Color.PaleGoldenrod,
+                    Magic8BallWF.AnswerType.Negative => Color.LightCoral,
+                    _ => SystemColors.Window,
+                };
             }
             catch (Exception eek)
             {

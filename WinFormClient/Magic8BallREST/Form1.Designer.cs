@@ -78,7 +78,7 @@
             this.btnMagic8Ball.Size = new System.Drawing.Size(71, 71);
             this.btnMagic8Ball.TabIndex = 4;
             this.btnMagic8Ball.UseVisualStyleBackColor = true;
-            this.btnMagic8Ball.Click += new System.EventHandler(this.btnMagic8Ball_Click);
+            this.btnMagic8Ball.Click += new System.EventHandler(this.BtnMagic8Ball_Click);
             // 
             // Form1
             // 

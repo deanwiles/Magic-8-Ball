@@ -43,7 +43,7 @@ namespace Magic8BallREST
         {
             request.AddParameter("Format", _dataFormat.ToString("G"), ParameterType.UrlSegment); // used on every request
 
-            Utils.LogMsg($"Magic8Ball {request.Method.ToString("G")} {_client.BuildUri(request)}");
+            Utils.LogMsg($"Magic8Ball {request.Method:G} {_client.BuildUri(request)}");
 
             var response = _client.Execute<T>(request);
 
@@ -142,7 +142,7 @@ namespace Magic8BallREST
     [ClassInterface(ClassInterfaceType.None)]
     public class Magic8Ball : IMagic8Ball
     {
-        private Magic _magic = new Magic();
+        private Magic _magic = new();
 
         /// <summary>
         /// Create instance of Magic8Ball class
@@ -192,23 +192,12 @@ namespace Magic8BallREST
         {
             get
             {
-                AnswerType type;
-                switch (_magic.Type?.ToLower())
+                var type = (_magic.Type?.ToLower()) switch
                 {
-                    case "negative":
-                    case "contrary":
-                        type = AnswerType.Contrary;
-                        break;
-                    case "affirmative":
-                    case "positive":
-                        type = AnswerType.Affirmative;
-                        break;
-                    case "neutral":
-                    case "noncommittal":
-                    default:
-                        type = AnswerType.Neutral;
-                        break;
-                }
+                    "negative" or "contrary" => AnswerType.Contrary,
+                    "affirmative" or "positive" => AnswerType.Affirmative,
+                    _ => AnswerType.Neutral,
+                };
                 return type;
             }
         }

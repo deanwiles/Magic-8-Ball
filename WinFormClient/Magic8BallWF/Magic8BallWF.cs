@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace Magic8BallWF
 {
@@ -80,10 +79,10 @@ namespace Magic8BallWF
     /// </summary>
     public class Magic8Ball
     {
-        private Magic _magic = new Magic();
+        private Magic _magic = new();
 
         // Classic Magic 8-Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
-        private List<MagicAnswer> _answers = new List<MagicAnswer>()
+        private readonly List<MagicAnswer> _answers = new()
         {
             new MagicAnswer(AnswerType.Negative, "Don't count on it"),
             new MagicAnswer(AnswerType.Negative, "My reply is no"),
@@ -107,7 +106,7 @@ namespace Magic8BallWF
             new MagicAnswer(AnswerType.Positive, "You may rely on it")
         };
 
-        private Random _random = new Random();
+        private readonly Random _random = new();
 
         /// <summary>
         /// Ask the Magic 8-Ball a Question

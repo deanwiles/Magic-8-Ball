@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8BallWF", "Magic8BallWF\Magic8BallWF.csproj", "{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8BallREST", "Magic8BallREST\Magic8BallREST.csproj", "{DA0AF6A9-8377-494B-875E-69E514E9EE7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0AF6A9-8377-494B-875E-69E514E9EE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0AF6A9-8377-494B-875E-69E514E9EE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0AF6A9-8377-494B-875E-69E514E9EE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0AF6A9-8377-494B-875E-69E514E9EE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0CCDCE3-FD78-47C8-A32E-DE01676F9D21}
+	EndGlobalSection
+EndGlobal

@@ -1,11 +1,12 @@
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Magic8BallREST
 {
     /// <summary>
-    /// MosaicOA C# Extension Utility functions
+    /// C# Extension Utility functions
     /// </summary>
     [ComVisible(false)]
     public class Utils
@@ -165,44 +166,34 @@ namespace Magic8BallREST
         }
 
         /// <summary>
-        /// Log a text message to console stdout
+        /// Log a text message to debug output
         /// </summary>
         /// <param name="Message">The text message to log</param>
-        /// <remarks>
-        /// Mosaic uses the console stdout for debug and trace messages, 
-        /// so messages logged here will be displayed inline with OFB/RT logging
-        /// </remarks>
         public static void LogMsg(string Message)
         {
-            // Log the text message to console stdout
-            Console.Out.WriteLine($"{Utils.Title}: {Message}");
-            Console.Out.Flush();
+            // Log the text message to debug output
+            Debug.WriteLine($"{Utils.Title}: {Message}");
+            Debug.Flush();
         }
 
         /// <summary>
-        /// Log a .NET exception and descriptive message to console stderr
+        /// Log a .NET exception and descriptive message to debug output
         /// </summary>
         /// <param name="Eek">The .NET exception to log</param>
         /// <param name="Message">Descriptive text regarding the cause or operation that caused the exception</param>
-        /// <remarks>
-        /// Mosaic uses the console stderr for error messages, 
-        /// so exceptions logged here will be displayed inline with OFB/RT error logging
-        /// </remarks>
         public static void LogErr(Exception Eek, string Message)
         {
-            // Log a .NET exception and descriptive message to console stderr
-            Console.Error.WriteLine($"{Utils.Title} Exception occurred: '{Message}'");
-            Console.Error.WriteLine($"Exception source: '{Eek.Source}', HRESULT: 0x{Eek.HResult:X}");
+            // Log a .NET exception and descriptive message to debug output
+            Debug.WriteLine($"{Utils.Title} Exception occurred: '{Message}'");
+            Debug.WriteLine($"Exception source: '{Eek.Source}', HRESULT: 0x{Eek.HResult:X}");
             Exception inner = Eek.InnerException;
             if (null != inner)
             {
-                Console.Error.WriteLine($"Inner exception: '{inner.Message}'");
-                Console.Error.WriteLine($"Inner exception source: '{inner.Source}', HRESULT: 0x{inner.HResult:X}");
+                Debug.WriteLine($"Inner exception: '{inner.Message}'");
+                Debug.WriteLine($"Inner exception source: '{inner.Source}', HRESULT: 0x{inner.HResult:X}");
             }
-            Console.Error.WriteLine($"Exception details: {Eek.ToString()}");
-            Console.Error.Flush();
+            Debug.WriteLine($"Exception details: {Eek}");
+            Debug.Flush();
         }
-
-        // TODO: Add read-only properties for MOADIR, MOAPROJ and MOACURPROJ
     }
 }

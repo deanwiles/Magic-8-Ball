@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Magic8BallWF
 {
     /// <summary>
-    /// MosaicOA C# Extension Utility functions
+    /// C# Extension Utility functions
     /// </summary>
     [ComVisible(false)]
     public class Utils
