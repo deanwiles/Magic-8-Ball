@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace Magic8BallWF
+namespace Magic8Ball.Client
 {
     /// <summary>
     /// C# Extension Utility functions

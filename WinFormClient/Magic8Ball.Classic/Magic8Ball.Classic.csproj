@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Company>Access Computer Systems</Company>
+    <Copyright>Copyright © 2020-2021 Access Computer Systems</Copyright>
+    <Product>Magic 8-Ball</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.Shared\Magic8Ball.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
