@@ -53,6 +53,7 @@ namespace Magic8Ball.Delegator
         /// <summary>
         /// Type of Magic 8 Ball Answer
         /// </summary>
+        [JsonIgnore]
         public AnswerType Type
         {
             get
@@ -86,11 +87,9 @@ namespace Magic8Ball.Delegator
             // Catch and log any errors
             try
             {
-                // If no question, force an error using an invalid url to demonstrate inner exception handling
-                if (string.IsNullOrWhiteSpace(Question))
-                    Question = @"..\..\";
                 // Send HHTP GET request and parse JSON response
-                string url = $"{BaseUrl}/{Question}";
+                // NOTE: If no question, an error will occur, which will demonstrate inner exception handling
+                string url = Uri.EscapeUriString($"{BaseUrl}/json/{Question}");
                 var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url);
                 // Save question, answer and type
                 this.Question = Question;
