@@ -1,4 +1,5 @@
 ﻿using Magic8Ball.Classic;
+using Magic8Ball.Delegator;
 using Magic8Ball.Shared;
 using System;
 using System.Drawing;
@@ -9,6 +10,10 @@ namespace Magic8Ball.Client
 {
     public partial class Form1 : Form
     {
+        private readonly Color colorPositiveAnswer = Color.LightGreen;
+        private readonly Color colorNeutralAnswer = Color.PaleGoldenrod;
+        private readonly Color colorNegativeAnswer = Color.LightCoral;
+        private readonly Color colorNoAnswer = SystemColors.Window;
         public Form1()
         {
             InitializeComponent();
@@ -26,28 +31,38 @@ namespace Magic8Ball.Client
         {
             try
             {
-                var oMagic8Ball = new ClassicMagic8Ball();
+                // Reset response
+                txtAnswer.Text = string.Empty;
+                txtAnswer.BackColor = colorNoAnswer;
+                // Instantiate selected Magic 8-Ball service type
+                Magic8BallBase oMagic8Ball;
+                oMagic8Ball = new ClassicMagic8Ball();
+                //oMagic8Ball = new DelegatorMagic8Ball();
+                // Ask the Magic 8-Ball service the user's question
                 string sQuestion = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
                 string sAnswer = await oMagic8Ball.AskAsync(sQuestion);
+                // Display and color code the answer
                 txtAnswer.Text = sAnswer;
                 var iType = oMagic8Ball.Type;
                 txtAnswer.BackColor = iType switch
                 {
-                    AnswerType.Positive => Color.LightGreen,
-                    AnswerType.Neutral => Color.PaleGoldenrod,
-                    AnswerType.Negative => Color.LightCoral,
-                    _ => SystemColors.Window,
+                    AnswerType.Positive => colorPositiveAnswer,
+                    AnswerType.Neutral => colorNeutralAnswer,
+                    AnswerType.Negative => colorNegativeAnswer,
+                    _ => colorNoAnswer,
                 };
             }
             catch (Exception eek)
             {
+                // Error occurred; display message box with error details
                 string msg = eek.Message;
                 if (null != eek.InnerException) msg += $"{Environment.NewLine}{eek.InnerException.Message}";
                 MessageBox.Show(msg, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
+                // Reset any hourglass cursor
                 this.Cursor = Cursors.Default;
             }
         }

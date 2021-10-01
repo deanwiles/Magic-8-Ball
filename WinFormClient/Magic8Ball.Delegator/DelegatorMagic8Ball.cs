@@ -24,7 +24,7 @@ namespace Magic8Ball.Delegator
         /// https://8ball.delegator.com/magic/json/{question}
         /// </remarks>
         [JsonPropertyName("magic")]
-        public Magic Magic { get; set; }
+        public InnerMagic Magic { get; set; }
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace Magic8Ball.Delegator
     /// <remarks>
     /// This class represents the inner JSON object in the MagicResponse class
     /// </remarks>
-    public class Magic
+    public class InnerMagic
     {
         /// <summary>
         /// Question asked of Magic 8 Ball
