@@ -36,7 +36,7 @@ namespace Magic8Ball.Client
                 txtAnswer.BackColor = colorNoAnswer;
                 // Instantiate selected Magic 8-Ball service type
                 Magic8BallBase oMagic8Ball;
-                //oMagic8Ball = new ClassicMagic8Ball();
+                oMagic8Ball = new ClassicMagic8Ball();
                 oMagic8Ball = new DelegatorMagic8Ball();
                 // Ask the Magic 8-Ball service the user's question
                 string sQuestion = txtQuestion.Text;
