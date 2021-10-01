@@ -1,4 +1,6 @@
-﻿namespace Magic8Ball.Shared
+﻿using System.Threading.Tasks;
+
+namespace Magic8Ball.Shared
 {
     /// <summary>
     /// Type of Magic 8-Ball Answer
@@ -57,13 +59,48 @@
     }
 
     /// <summary>
-    /// Magic 8-Ball Question and Answer
+    /// Magic 8-Ball Question and Answer base class
     /// </summary>
-    public class Magic8BallBase : MagicAnswer
+    public abstract class Magic8BallBase : MagicAnswer
     {
         /// <summary>
         /// Question asked of Magic 8-Ball
         /// </summary>
         public string Question { get; set; }
+
+        /// <summary>
+        /// Magic 8-Ball Question and Answer Default Constructor
+        /// </summary>
+        public Magic8BallBase()
+        {
+            // Default answer is non-committal
+            Answer = "I don't know how to answer that :(";
+            Type = AnswerType.Neutral;
+        }
+
+        /// <summary>
+        /// Magic 8-Ball Question and Answer Constructor with Values
+        /// </summary>
+        /// <param name="Question">Yes/No question to ask</param>
+        /// <param name="Answer">Answer from Magic 8-Ball</param>
+        /// <param name="Type">Type of Magic 8-Ball Answer</param>
+        public Magic8BallBase(string Question, string Answer, AnswerType Type) : base(Type, Answer)
+        {
+            // Also save Question
+            this.Question = Question;
+        }
+
+        /// <summary>
+        /// Ask the Magic 8-Ball a Question
+        /// </summary>
+        /// <param name="Question">Yes/No question to ask</param>
+        /// <returns>The Magic 8-Ball answer</returns>
+        public virtual async Task<string> AskAsync(string Question)
+        {
+            // Save question
+            this.Question = Question;
+            // Return the default answer
+            return await Task.FromResult(Answer);
+        }
     }
 }

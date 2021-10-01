@@ -1,13 +1,14 @@
 ﻿using Magic8Ball.Shared;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Magic8Ball.Classic
 {
     public class ClassicMagic8Ball : Magic8BallBase
     {
         // Classic Magic 8-Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
-        private readonly List<MagicAnswer> _answers = new()
+        private static readonly List<MagicAnswer> _answers = new()
         {
             new MagicAnswer(AnswerType.Negative, "Don't count on it"),
             new MagicAnswer(AnswerType.Negative, "My reply is no"),
@@ -31,14 +32,14 @@ namespace Magic8Ball.Classic
             new MagicAnswer(AnswerType.Positive, "You may rely on it")
         };
 
-        private readonly Random _random = new();
+        private static readonly Random _random = new();
 
         /// <summary>
         /// Ask the Magic 8-Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
         /// <returns>The Magic 8-Ball answer</returns>
-        public string Ask(string Question)
+        public override async Task<string> AskAsync(string Question)
         {
             // Catch and log any errors
             try
@@ -54,7 +55,7 @@ namespace Magic8Ball.Classic
                 Type = answer.Type;
                 Answer = answer.Answer;
                 // Return the answer
-                return Answer;
+                return await Task.FromResult(Answer);
             }
             catch (Exception eek)
             {

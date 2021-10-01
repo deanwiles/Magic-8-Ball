@@ -22,14 +22,14 @@ namespace Magic8Ball.Client
         // based on the type of response (affirmative, neutral or contrary).
         // If any errors occur, they are displayed in a message box.
         // To force an error, leave the Question empty and click the Magic 8-Ball button.
-        private void BtnMagic8Ball_Click(object sender, EventArgs e)
+        private async void BtnMagic8Ball_Click(object sender, EventArgs e)
         {
             try
             {
                 var oMagic8Ball = new ClassicMagic8Ball();
                 string sQuestion = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
-                string sAnswer = oMagic8Ball.Ask(sQuestion);
+                string sAnswer = await oMagic8Ball.AskAsync(sQuestion);
                 txtAnswer.Text = sAnswer;
                 var iType = oMagic8Ball.Type;
                 txtAnswer.BackColor = iType switch
