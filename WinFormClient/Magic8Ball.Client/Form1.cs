@@ -1,7 +1,6 @@
-﻿using Magic8Ball.Classic;
-using Magic8Ball.Delegator;
-using Magic8Ball.Shared;
+﻿using Magic8Ball.Shared;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -35,9 +34,8 @@ namespace Magic8Ball.Client
                 txtAnswer.Text = string.Empty;
                 txtAnswer.BackColor = colorNoAnswer;
                 // Instantiate selected Magic 8-Ball service type
-                Magic8BallBase oMagic8Ball;
-                oMagic8Ball = new ClassicMagic8Ball();
-                oMagic8Ball = new DelegatorMagic8Ball();
+                var service = cboService.SelectedItem as Magic8BallService;
+                var oMagic8Ball = Activator.CreateInstance(Type.GetType(service.TypeName)) as Magic8BallBase;
                 // Ask the Magic 8-Ball service the user's question
                 string sQuestion = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
@@ -65,6 +63,28 @@ namespace Magic8Ball.Client
                 // Reset any hourglass cursor
                 this.Cursor = Cursors.Default;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Initial list of Magic 8-Ball Services
+            List<Magic8BallService> list = new();
+            list.Add(new Magic8BallService("Classic 8-Ball Answers", "Magic8Ball.Classic.ClassicMagic8Ball, Magic8Ball.Classic"));
+            list.Add(new Magic8BallService("Delegator 8-Ball REST Service", "Magic8Ball.Delegator.DelegatorMagic8Ball, Magic8Ball.Delegator"));
+            cboService.DataSource = list;
+            cboService.ValueMember = "TypeName";
+            cboService.DisplayMember = "DisplayName";
+        }
+    }
+
+    public class Magic8BallService
+    {
+        public string DisplayName { get; set; }
+        public string TypeName { get; set; }
+        public Magic8BallService(string DisplayName, string TypeName)
+        {
+            this.DisplayName = DisplayName;
+            this.TypeName = TypeName;
         }
     }
 }
