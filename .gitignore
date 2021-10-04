@@ -343,8 +343,8 @@ healthchecksdb
 /Images/original_b0cb455f-3e8d-4407-918e-0cda41adfbba_IMG_20201030_075539.jpg
 /Images/IMG_20201030_075032.jpg
 /Images/giphy-downsized.gif
-/WinFormClient/Magic8BallWF.backup/
-/WinFormClient/Magic8BallREST.backup/
-/WinFormClient/packages/
+/Magic8BallWF.backup/
+/Magic8BallREST.backup/
+/packages/
 
-/WinFormClient/upgrade-assistant.clef
+/upgrade-assistant.clef
