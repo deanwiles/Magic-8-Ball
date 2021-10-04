@@ -24,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
+    <ProjectReference Include="..\Magic8Ball.Delegator\Magic8Ball.Delegator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 

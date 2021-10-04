@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD314
 		Images\Magic 8-Ball.png = Images\Magic 8-Ball.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "favicon_package", "favicon_package", "{8CFEB513-61EE-4513-AB46-8D6638C32316}"
+	ProjectSection(SolutionItems) = preProject
+		Images\favicon_package_v0.16\favicon-16x16.png = Images\favicon_package_v0.16\favicon-16x16.png
+		Images\favicon_package_v0.16\favicon-32x32.png = Images\favicon_package_v0.16\favicon-32x32.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +54,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CFEB513-61EE-4513-AB46-8D6638C32316} = {2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0CCDCE3-FD78-47C8-A32E-DE01676F9D21}
