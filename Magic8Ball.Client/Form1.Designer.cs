@@ -36,6 +36,8 @@
             this.btnMagic8Ball = new System.Windows.Forms.Button();
             this.lblService = new System.Windows.Forms.Label();
             this.cboService = new System.Windows.Forms.ComboBox();
+            this.rtbInstructions = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtQuestion
@@ -45,7 +47,7 @@
             this.txtQuestion.Location = new System.Drawing.Point(18, 98);
             this.txtQuestion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtQuestion.Name = "txtQuestion";
-            this.txtQuestion.Size = new System.Drawing.Size(373, 23);
+            this.txtQuestion.Size = new System.Drawing.Size(468, 23);
             this.txtQuestion.TabIndex = 3;
             this.txtQuestion.Text = "Will I win the lottery?";
             // 
@@ -66,7 +68,7 @@
             this.txtAnswer.Location = new System.Drawing.Point(18, 157);
             this.txtAnswer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtAnswer.Name = "txtAnswer";
-            this.txtAnswer.Size = new System.Drawing.Size(373, 23);
+            this.txtAnswer.Size = new System.Drawing.Size(468, 23);
             this.txtAnswer.TabIndex = 6;
             // 
             // lblAnswer
@@ -85,7 +87,7 @@
             this.btnMagic8Ball.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMagic8Ball.BackgroundImage = global::Magic8Ball.Client.Properties.Resources.Magic_8_Ball;
             this.btnMagic8Ball.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMagic8Ball.Location = new System.Drawing.Point(414, 38);
+            this.btnMagic8Ball.Location = new System.Drawing.Point(511, 38);
             this.btnMagic8Ball.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnMagic8Ball.Name = "btnMagic8Ball";
             this.btnMagic8Ball.Size = new System.Drawing.Size(142, 142);
@@ -111,15 +113,40 @@
             this.cboService.FormattingEnabled = true;
             this.cboService.Location = new System.Drawing.Point(18, 38);
             this.cboService.Name = "cboService";
-            this.cboService.Size = new System.Drawing.Size(373, 23);
+            this.cboService.Size = new System.Drawing.Size(468, 23);
             this.cboService.TabIndex = 1;
+            // 
+            // rtbInstructions
+            // 
+            this.rtbInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbInstructions.Location = new System.Drawing.Point(18, 221);
+            this.rtbInstructions.Name = "rtbInstructions";
+            this.rtbInstructions.ReadOnly = true;
+            this.rtbInstructions.Size = new System.Drawing.Size(636, 84);
+            this.rtbInstructions.TabIndex = 7;
+            this.rtbInstructions.TabStop = false;
+            this.rtbInstructions.Text = resources.GetString("rtbInstructions.Text");
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 203);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Instructions:";
             // 
             // Form1
             // 
             this.AcceptButton = this.btnMagic8Ball;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 199);
+            this.ClientSize = new System.Drawing.Size(674, 320);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rtbInstructions);
             this.Controls.Add(this.cboService);
             this.Controls.Add(this.lblService);
             this.Controls.Add(this.btnMagic8Ball);
@@ -146,6 +173,8 @@
         internal System.Windows.Forms.Button btnMagic8Ball;
         internal System.Windows.Forms.Label lblService;
         private System.Windows.Forms.ComboBox cboService;
+        private System.Windows.Forms.RichTextBox rtbInstructions;
+        internal System.Windows.Forms.Label label1;
     }
 }
 
