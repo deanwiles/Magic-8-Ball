@@ -15,11 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.WebApp", "Magic8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}"
 	ProjectSection(SolutionItems) = preProject
-		Images\giphy-downsized.gif = Images\giphy-downsized.gif
-		Images\IMG_20201030_075032.jpg = Images\IMG_20201030_075032.jpg
 		Images\Magic 8-Ball.ico = Images\Magic 8-Ball.ico
 		Images\Magic 8-Ball.png = Images\Magic 8-Ball.png
-		Images\original_b0cb455f-3e8d-4407-918e-0cda41adfbba_IMG_20201030_075539.jpg = Images\original_b0cb455f-3e8d-4407-918e-0cda41adfbba_IMG_20201030_075539.jpg
 	EndProjectSection
 EndProject
 Global
