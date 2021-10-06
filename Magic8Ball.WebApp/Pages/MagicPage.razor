@@ -6,12 +6,12 @@
     <b>Instructions:</b><br />
     1. (optional) Select a Magic 8-Ball Service to use (default is a local service with the classic Magic 8-Ball answers).<br />
     2. Type a yes/no question to ask the Magic 8-Ball.<br />
-    3. Press Enter or click the 8-Ball button to ask your question.<br />
+    3. Press Enter or click the Magic 8-Ball button to ask your question.<br />
     4. Wait while the Magic 8-Ball ponders your question, and then the answer will be displayed.<br />
     5. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
 </p>
 
-@if (MyMagic8Ball == null)
+@if (Magic8BallData == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -19,16 +19,16 @@ else
 {
     <div>
         <p><b>Question:</b></p>
-        <p>@MyMagic8Ball.Question</p>
+        <p>@Magic8BallData.Question</p>
         <button class="btn btn-primary" @onclick="AskQuestion">Magic 8-Ball</button>
         <p/>
     </div>
     <div>
         <p><b>Answer:</b></p>
-        <p>@MyMagic8Ball.Answer</p>
+        <p>@Magic8BallData.Answer</p>
     </div>
     <div>
         <p><b>Answer Type:</b></p>
-        <p>@MyMagic8Ball.Type.ToString()</p>
+        <p>@Magic8BallData.Type.ToString()</p>
     </div>
 }

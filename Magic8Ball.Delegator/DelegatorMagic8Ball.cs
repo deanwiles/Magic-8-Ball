@@ -70,8 +70,7 @@ namespace Magic8Ball.Delegator
 
     }
 
-
-    public class DelegatorMagic8Ball : Magic8BallBase
+    public class DelegatorMagic8Ball : Magic8BallData, IMagic8BallService
     {
         const string BaseUrl = "https://8ball.delegator.com/magic";
 
@@ -81,8 +80,8 @@ namespace Magic8Ball.Delegator
         /// Ask the Magic 8-Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>The Magic 8-Ball answer</returns>
-        public override async Task<string> AskAsync(string Question)
+        /// <returns>This Magic 8-Ball object with resulting Question, Answer and Type</returns>
+        public async Task<Magic8BallData> AskAsync(string Question)
         {
             // Catch and log any errors
             try
@@ -95,8 +94,8 @@ namespace Magic8Ball.Delegator
                 this.Question = Question;
                 Type = magicResponse.Magic.Type;
                 Answer = magicResponse.Magic.Answer;
-                // Return the answer
-                return Answer;
+                // Return this Magic 8-Ball object with resulting Question, Answer and Type
+                return this;
             }
             catch (Exception eek)
             {

@@ -6,24 +6,24 @@ namespace Magic8Ball.WebApp.Pages
 {
     public partial class MagicPage
     {
-        public Magic8BallBase MyMagic8Ball { get; set; } = null;
+        public Magic8BallData Magic8BallData { get; set; } = null;
 
         protected override void OnInitialized()
         {
             // Set default question
             string question = "Will I win the lottery?";
             // Reset response
-            MyMagic8Ball = null;
+            Magic8BallData = null;
             // Instantiate selected Magic 8-Ball service type
             //var service = cboService.SelectedItem as Magic8BallService;
             //var oMagic8Ball = Activator.CreateInstance(Type.GetType(service.TypeName)) as Magic8BallBase;
-            MyMagic8Ball = new ClassicMagic8Ball() { Question = question };
+            Magic8BallData = new ClassicMagic8Ball() { Question = question };
         }
 
         private async Task AskQuestion()
-        { 
+        {
             // Ask the Magic 8-Ball service the user's question
-            await MyMagic8Ball.AskAsync(MyMagic8Ball.Question);
+            await (Magic8BallData as IMagic8BallService).AskAsync(Magic8BallData.Question);
             // Refresh screen with Answer & Type
             StateHasChanged();
         }

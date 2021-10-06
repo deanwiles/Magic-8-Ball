@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Magic8Ball.Classic
 {
-    public class ClassicMagic8Ball : Magic8BallBase
+    public class ClassicMagic8Ball : Magic8BallData, IMagic8BallService
     {
         // Classic Magic 8-Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
         private static readonly List<MagicAnswer> _answers = new()
@@ -38,8 +38,8 @@ namespace Magic8Ball.Classic
         /// Ask the Magic 8-Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>The Magic 8-Ball answer</returns>
-        public override async Task<string> AskAsync(string Question)
+        /// <returns>This Magic 8-Ball object with resulting Question, Answer and Type</returns>
+        public async Task<Magic8BallData> AskAsync(string Question)
         {
             // Catch and log any errors
             try
@@ -54,8 +54,8 @@ namespace Magic8Ball.Classic
                 this.Question = Question;
                 Type = answer.Type;
                 Answer = answer.Answer;
-                // Return the answer
-                return await Task.FromResult(Answer);
+                // Return this Magic 8-Ball object with resulting Question, Answer and Type
+                return await Task.FromResult(this);
             }
             catch (Exception eek)
             {
