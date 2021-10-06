@@ -48,3 +48,16 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.img-magic8ball {
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.btn-magic8ball {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: transparent;
+}
