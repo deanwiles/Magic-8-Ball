@@ -51,12 +51,6 @@
     <Content Include="..\Images\Magic 8-Ball.png" Link="Images\Magic 8-Ball.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.246501">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.Delegator\Magic8Ball.Delegator.csproj" />
   </ItemGroup>
