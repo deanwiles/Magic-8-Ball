@@ -1,4 +1,4 @@
-﻿namespace Magic8Ball.Client
+﻿namespace Magic8Ball.WFClient
 {
     partial class Form1
     {
@@ -85,7 +85,7 @@
             // 
             this.btnMagic8Ball.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMagic8Ball.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMagic8Ball.BackgroundImage = global::Magic8Ball.Client.Properties.Resources.Magic_8_Ball;
+            this.btnMagic8Ball.BackgroundImage = global::Magic8Ball.WFClient.Properties.Resources.Magic_8_Ball;
             this.btnMagic8Ball.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMagic8Ball.Location = new System.Drawing.Point(511, 38);
             this.btnMagic8Ball.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

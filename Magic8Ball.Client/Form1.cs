@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 // This C# sample is used to test the Classic Magic 8-Ball class.
-namespace Magic8Ball.Client
+namespace Magic8Ball.WFClient
 {
     public partial class Form1 : Form
     {

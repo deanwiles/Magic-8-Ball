@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Client", "Magic8Ball.Client\Magic8Ball.Client.csproj", "{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.WFClient", "Magic8Ball.Client\Magic8Ball.WFClient.csproj", "{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Shared", "Magic8Ball.Shared\Magic8Ball.Shared.csproj", "{ECC8421D-F2FC-4BA6-85A5-7860ABD6329B}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Classic", "Magic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Delegator", "Magic8Ball.Delegator\Magic8Ball.Delegator.csproj", "{CD0B9730-8144-4960-9567-69B3504705D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.WebApp", "Magic8Ball.WebApp\Magic8Ball.WebApp.csproj", "{42ED3460-F1F8-4190-940C-8BCD93D95AE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.WebApp", "Magic8Ball.WebApp\Magic8Ball.WebApp.csproj", "{42ED3460-F1F8-4190-940C-8BCD93D95AE9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}"
 	ProjectSection(SolutionItems) = preProject
