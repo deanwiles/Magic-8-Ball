@@ -7,9 +7,11 @@ namespace Magic8Ball.WebApp.Pages
 {
     public partial class MagicPage
     {
-        public Magic8BallData Magic8BallData { get; set; } = null;
+        private Magic8BallData Magic8BallData { get; set; } = null;
 
         private ElementReference QuestionInput;
+
+        private string AnswerStyle;
 
         protected override void OnInitialized()
         {
@@ -25,14 +27,23 @@ namespace Magic8Ball.WebApp.Pages
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
+            // Set focus on Question input textbox
             await QuestionInput.FocusAsync();
-
         }
 
         private async Task AskQuestion()
         {
             // Ask the Magic 8-Ball service the user's question
             await (Magic8BallData as IMagic8BallService).AskAsync(Magic8BallData.Question);
+            // Set Answer Style
+            var iType = Magic8BallData.Type;
+            AnswerStyle = iType switch
+            {
+                AnswerType.Positive => "alert-success",
+                AnswerType.Neutral => "alert-warning",
+                AnswerType.Negative => "alert-danger",
+                _ => "",
+            };
             // Refresh screen with Answer & Type
             StateHasChanged();
         }
