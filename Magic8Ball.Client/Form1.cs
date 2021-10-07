@@ -70,9 +70,9 @@ namespace Magic8Ball.WFClient
             // Initial list of Magic 8-Ball Services
             List<Magic8BallServiceDefinition> list = new();
             list.Add(new Magic8BallServiceDefinition("Classic 8-Ball Answers", 
-                typeof(Magic8Ball.Classic.ClassicMagic8Ball).AssemblyQualifiedName));
+                typeof(Classic.ClassicMagic8Ball).AssemblyQualifiedName));
             list.Add(new Magic8BallServiceDefinition("Delegator 8-Ball REST Service", 
-                typeof(Magic8Ball.Delegator.DelegatorMagic8Ball).AssemblyQualifiedName));
+                typeof(Delegator.DelegatorMagic8Ball).AssemblyQualifiedName));
             cboService.DataSource = list;
             cboService.ValueMember = "TypeName";
             cboService.DisplayMember = "DisplayName";
