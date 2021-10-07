@@ -2,29 +2,33 @@
 
 <h1>Magic 8-Ball</h1>
 
-<p>
-    <b>Instructions:</b><br />
-    1. (optional) Select a Magic 8-Ball Service to use (default is a local service with the classic Magic 8-Ball answers).<br />
-    2. Type a yes/no question to ask the Magic 8-Ball.<br />
-    3. Press Enter or click the Magic 8-Ball button to ask your question.<br />
-    4. Wait while the Magic 8-Ball ponders your question, and then the answer will be displayed.<br />
-    5. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
-</p>
-
 @if (Magic8BallData == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div>
-        <p><b>Question:</b></p>
-        <p>@Magic8BallData.Question</p>
-        <button class="btn btn-outline-light btn-magic8ball" @onclick="AskQuestion">
-            <img src="Magic 8-Ball.png" alt="Magic 8-Ball" style="width:100px;height:100px" class="img-magic8ball"/>
-        </button>
-        <p/>
+<EditForm Model="@Magic8BallData" OnSubmit="AskQuestion">
+    <div class="form-group">
+        <label class="font-weight-bold">Instructions:</label><br />
+        1. (optional) Select a Magic 8-Ball Service to use(default is a local service with the classic Magic 8-Ball answers).<br />
+        2. Type a yes/no question to ask the Magic 8-Ball.<br />
+        3. Press Enter or click the Magic 8-Ball button to ask your question.<br />
+        4. Wait while the Magic 8-Ball ponders your question, and then the answer will be displayed.<br />
+        5. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
     </div>
+    <div class="form-group">
+        <label for="question" class="font-weight-bold">Question:</label>
+        @*<InputText id="question" class="form-control" @bind-Value="@Magic8BallData.Question" placeholder="Enter question"></InputText>*@
+        <input @ref="QuestionInput" id="question" class="form-control" @bind="@Magic8BallData.Question" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-outline-light btn-magic8ball">
+            <img src="Magic 8-Ball.png" alt="Magic 8-Ball" style="width:100px;height:100px" class="img-magic8ball" />
+        </button>
+        <p />
+    </div>
+</EditForm>
     <div>
         <p><b>Answer:</b></p>
         <p>@Magic8BallData.Answer</p>

@@ -1,5 +1,6 @@
 ﻿using Magic8Ball.Classic;
 using Magic8Ball.Shared;
+using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
 namespace Magic8Ball.WebApp.Pages
@@ -7,6 +8,8 @@ namespace Magic8Ball.WebApp.Pages
     public partial class MagicPage
     {
         public Magic8BallData Magic8BallData { get; set; } = null;
+
+        private ElementReference QuestionInput;
 
         protected override void OnInitialized()
         {
@@ -18,6 +21,12 @@ namespace Magic8Ball.WebApp.Pages
             //var service = cboService.SelectedItem as Magic8BallService;
             //var oMagic8Ball = Activator.CreateInstance(Type.GetType(service.TypeName)) as Magic8BallBase;
             Magic8BallData = new ClassicMagic8Ball() { Question = question };
+        }
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            await QuestionInput.FocusAsync();
+
         }
 
         private async Task AskQuestion()
