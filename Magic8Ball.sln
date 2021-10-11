@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}"
 	ProjectSection(SolutionItems) = preProject
 		Images\Magic 8-Ball Blazor.png = Images\Magic 8-Ball Blazor.png
+		Images\Magic 8-Ball WinForm.png = Images\Magic 8-Ball WinForm.png
 		Images\Magic 8-Ball.ico = Images\Magic 8-Ball.ico
 		Images\Magic 8-Ball.png = Images\Magic 8-Ball.png
 	EndProjectSection
