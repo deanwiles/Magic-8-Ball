@@ -172,8 +172,8 @@ namespace Magic8Ball.WFClient
         public static void LogMsg(string Message)
         {
             // Log the text message to debug output
-            Debug.WriteLine($"{Utils.Title}: {Message}");
-            Debug.Flush();
+            Console.WriteLine($"{Utils.Title}: {Message}");
+            //Debug.Flush();
         }
 
         /// <summary>
@@ -184,16 +184,16 @@ namespace Magic8Ball.WFClient
         public static void LogErr(Exception Eek, string Message)
         {
             // Log a .NET exception and descriptive message to debug output
-            Debug.WriteLine($"{Utils.Title} Exception occurred: '{Message}'");
-            Debug.WriteLine($"Exception source: '{Eek.Source}', HRESULT: 0x{Eek.HResult:X}");
+            Console.WriteLine($"{Utils.Title} Exception occurred: '{Message}'");
+            Console.WriteLine($"Exception source: '{Eek.Source}', HRESULT: 0x{Eek.HResult:X}");
             Exception inner = Eek.InnerException;
             if (null != inner)
             {
-                Debug.WriteLine($"Inner exception: '{inner.Message}'");
-                Debug.WriteLine($"Inner exception source: '{inner.Source}', HRESULT: 0x{inner.HResult:X}");
+                Console.WriteLine($"Inner exception: '{inner.Message}'");
+                Console.WriteLine($"Inner exception source: '{inner.Source}', HRESULT: 0x{inner.HResult:X}");
             }
-            Debug.WriteLine($"Exception details: {Eek}");
-            Debug.Flush();
+            Console.WriteLine($"Exception details: {Eek}");
+            //Debug.Flush();
         }
     }
 }
