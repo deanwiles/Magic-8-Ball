@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 // This C# sample is used to test the Classic Magic 8-Ball class.
-namespace Magic8Ball.Client
+namespace Magic8Ball.WFClient
 {
     public partial class Form1 : Form
     {
@@ -34,15 +34,15 @@ namespace Magic8Ball.Client
                 txtAnswer.Text = string.Empty;
                 txtAnswer.BackColor = colorNoAnswer;
                 // Instantiate selected Magic 8-Ball service type
-                var service = cboService.SelectedItem as Magic8BallService;
-                var oMagic8Ball = Activator.CreateInstance(Type.GetType(service.TypeName)) as Magic8BallBase;
+                var service = cboService.SelectedItem as Magic8BallServiceDefinition;
+                var oMagic8BallService = Activator.CreateInstance(Type.GetType(service.TypeName)) as IMagic8BallService;
                 // Ask the Magic 8-Ball service the user's question
                 string sQuestion = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
-                string sAnswer = await oMagic8Ball.AskAsync(sQuestion);
+                var oMagic8BallData = await oMagic8BallService.AskAsync(sQuestion);
                 // Display and color code the answer
-                txtAnswer.Text = sAnswer;
-                var iType = oMagic8Ball.Type;
+                txtAnswer.Text = oMagic8BallData.Answer;
+                var iType = oMagic8BallData.Type;
                 txtAnswer.BackColor = iType switch
                 {
                     AnswerType.Positive => colorPositiveAnswer,
@@ -68,20 +68,22 @@ namespace Magic8Ball.Client
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initial list of Magic 8-Ball Services
-            List<Magic8BallService> list = new();
-            list.Add(new Magic8BallService("Classic 8-Ball Answers", "Magic8Ball.Classic.ClassicMagic8Ball, Magic8Ball.Classic"));
-            list.Add(new Magic8BallService("Delegator 8-Ball REST Service", "Magic8Ball.Delegator.DelegatorMagic8Ball, Magic8Ball.Delegator"));
+            List<Magic8BallServiceDefinition> list = new();
+            list.Add(new Magic8BallServiceDefinition("Classic 8-Ball Answers", 
+                typeof(Classic.ClassicMagic8Ball).AssemblyQualifiedName));
+            list.Add(new Magic8BallServiceDefinition("Delegator 8-Ball REST Service", 
+                typeof(Delegator.DelegatorMagic8Ball).AssemblyQualifiedName));
             cboService.DataSource = list;
             cboService.ValueMember = "TypeName";
             cboService.DisplayMember = "DisplayName";
         }
     }
 
-    public class Magic8BallService
+    public class Magic8BallServiceDefinition
     {
         public string DisplayName { get; set; }
         public string TypeName { get; set; }
-        public Magic8BallService(string DisplayName, string TypeName)
+        public Magic8BallServiceDefinition(string DisplayName, string TypeName)
         {
             this.DisplayName = DisplayName;
             this.TypeName = TypeName;

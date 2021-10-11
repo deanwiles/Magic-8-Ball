@@ -1,0 +1,47 @@
+﻿@page "/{Service}"
+@page "/"
+
+<h1>Magic 8-Ball (@Service)</h1>
+
+@if (ShowMessage)
+{
+    <div class="alert @StatusClass">@Message</div>
+}
+else
+{
+    @if (Magic8BallData == null)
+    {
+        <p><em>Loading magic...</em></p>
+    }
+    else
+    {
+        <EditForm Model="@Magic8BallData" OnSubmit="AskQuestion">
+            <div class="form-group">
+                <label class="font-weight-bold">Instructions:</label><br />
+                1. Type a yes/no question to ask the Magic 8-Ball.<br />
+                2. Press Enter or click the Magic 8-Ball button to ask your question.<br />
+                3. Wait while the Magic 8-Ball ponders your question, and then the answer will be displayed.<br />
+                4. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
+            </div>
+            <div class="form-group">
+                <label for="question" class="font-weight-bold">Question:</label>
+                @*<InputText id="question" class="form-control" @bind-Value="@Magic8BallData.Question" placeholder="Enter question"></InputText>*@
+                <input @ref="QuestionInput" id="question" class="form-control" @bind="@Magic8BallData.Question" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-light btn-magic8ball">
+                    <img src="Magic 8-Ball.png" alt="Magic 8-Ball" style="width:100px;height:100px" class="img-magic8ball" />
+                </button>
+                <p />
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Answer:</label>
+                <label class="form-control @AnswerStyle">@Magic8BallData.Answer</label>
+            </div>
+            @*<div class="form-group">
+                    <label class="font-weight-bold">Answer Type:</label>
+                    <label class="form-control">@Magic8BallData.Type.ToString()</label>
+                </div>*@
+        </EditForm>
+    }
+}

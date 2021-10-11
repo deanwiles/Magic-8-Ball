@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Magic8Ball.Client
+namespace Magic8Ball.WFClient
 {
     static class Program
     {
