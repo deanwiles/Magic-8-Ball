@@ -20,7 +20,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <PackageIcon>Magic 8-Ball.png</PackageIcon>
+    <PackageIcon>Magic 8 Ball.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -47,8 +47,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Images\Magic 8-Ball.ico" Link="Images\Magic 8-Ball.ico" />
-    <Content Include="..\Images\Magic 8-Ball.png" Link="Images\Magic 8-Ball.png" />
+    <Content Include="..\Images\Magic 8 Ball.ico" Link="Images\Magic 8 Ball.ico" />
+    <Content Include="..\Images\Magic 8 Ball.png" Link="Images\Magic 8 Ball.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />

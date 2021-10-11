@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-// This C# sample is used to test the Classic Magic 8-Ball class.
+// This C# sample is used to test the Classic Magic 8 Ball class.
 namespace Magic8Ball.WFClient
 {
     public partial class Form1 : Form
@@ -18,14 +18,14 @@ namespace Magic8Ball.WFClient
             InitializeComponent();
         }
 
-        // This Magic 8-Ball test demonstrates calling a Magic 8-Ball API.
-        // After the user enters a question and clicks the Magic 8-Ball button
+        // This Magic 8 Ball test demonstrates calling a Magic 8 Ball API.
+        // After the user enters a question and clicks the Magic 8 Ball button
         // it instantiates a class derived from the common Magic8BallBase
         // and calls the Ask method with the specified question.
         // The answer response is displayed and the response background color set to green, yellow or red
         // based on the type of response (affirmative, neutral or contrary).
         // If any errors occur, they are displayed in a message box.
-        // To force an error, leave the Question empty and click the Magic 8-Ball button.
+        // To force an error, leave the Question empty and click the Magic 8 Ball button.
         private async void BtnMagic8Ball_Click(object sender, EventArgs e)
         {
             try
@@ -33,10 +33,10 @@ namespace Magic8Ball.WFClient
                 // Reset response
                 txtAnswer.Text = string.Empty;
                 txtAnswer.BackColor = colorNoAnswer;
-                // Instantiate selected Magic 8-Ball service type
+                // Instantiate selected Magic 8 Ball service type
                 var service = cboService.SelectedItem as Magic8BallServiceDefinition;
                 var oMagic8BallService = Activator.CreateInstance(Type.GetType(service.TypeName)) as IMagic8BallService;
-                // Ask the Magic 8-Ball service the user's question
+                // Ask the Magic 8 Ball service the user's question
                 string sQuestion = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
                 var oMagic8BallData = await oMagic8BallService.AskAsync(sQuestion);
@@ -67,11 +67,11 @@ namespace Magic8Ball.WFClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Initial list of Magic 8-Ball Services
+            // Initial list of Magic 8 Ball Services
             List<Magic8BallServiceDefinition> list = new();
-            list.Add(new Magic8BallServiceDefinition("Classic 8-Ball Answers", 
+            list.Add(new Magic8BallServiceDefinition("Classic 8 Ball Answers", 
                 typeof(Classic.ClassicMagic8Ball).AssemblyQualifiedName));
-            list.Add(new Magic8BallServiceDefinition("Delegator 8-Ball REST Service", 
+            list.Add(new Magic8BallServiceDefinition("Delegator 8 Ball REST Service", 
                 typeof(Delegator.DelegatorMagic8Ball).AssemblyQualifiedName));
             cboService.DataSource = list;
             cboService.ValueMember = "TypeName";

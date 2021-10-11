@@ -7,7 +7,7 @@ namespace Magic8Ball.Classic
 {
     public class ClassicMagic8Ball : Magic8BallData, IMagic8BallService
     {
-        // Classic Magic 8-Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
+        // Classic Magic 8 Ball answers as listed in https://en.wikipedia.org/wiki/Magic_8-Ball
         private static readonly List<MagicAnswer> _answers = new()
         {
             new MagicAnswer(AnswerType.Negative, "Don't count on it"),
@@ -35,10 +35,10 @@ namespace Magic8Ball.Classic
         private static readonly Random _random = new();
 
         /// <summary>
-        /// Ask the Magic 8-Ball a Question
+        /// Ask the Magic 8 Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>This Magic 8-Ball object with resulting Question, Answer and Type</returns>
+        /// <returns>This Magic 8 Ball object with resulting Question, Answer and Type</returns>
         public async Task<Magic8BallData> AskAsync(string Question)
         {
             // Catch and log any errors
@@ -54,13 +54,13 @@ namespace Magic8Ball.Classic
                 this.Question = Question;
                 Type = answer.Type;
                 Answer = answer.Answer;
-                // Return this Magic 8-Ball object with resulting Question, Answer and Type
+                // Return this Magic 8 Ball object with resulting Question, Answer and Type
                 return await Task.FromResult(this);
             }
             catch (Exception eek)
             {
                 // Wrap and rethrow the error back to caller with some context
-                throw new Exception($"Failed asking the Magic 8-Ball '{Question}'", eek);
+                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'", eek);
             }
         }
     }

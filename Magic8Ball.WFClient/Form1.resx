@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbInstructions.Text" xml:space="preserve">
-    <value>1. (optional) Select a Magic 8-Ball Service to use (default is a local service with the classic Magic 8-Ball answers).
-2. Type a yes/no question to ask the Magic 8-Ball.
-3. Press Enter or click the Magic 8-Ball button to ask your question.
-4. Wait while the Magic 8-Ball ponders your question, and then the answer will be displayed.
+    <value>1. (optional) Select a Magic 8 Ball Service to use (default is a local service with the classic Magic 8 Ball answers).
+2. Type a yes/no question to ask the Magic 8 Ball.
+3. Press Enter or click the Magic 8 Ball button to ask your question.
+4. Wait while the Magic 8 Ball ponders your question, and then the answer will be displayed.
 5. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

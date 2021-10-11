@@ -65,7 +65,7 @@ namespace Magic8Ball.WFClient.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap Magic_8_Ball {
             get {
-                object obj = ResourceManager.GetObject("Magic 8-Ball", resourceCulture);
+                object obj = ResourceManager.GetObject("Magic 8 Ball", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -103,7 +103,7 @@
             this.lblService.Name = "lblService";
             this.lblService.Size = new System.Drawing.Size(116, 15);
             this.lblService.TabIndex = 0;
-            this.lblService.Text = "&Magic 8-Ball Service:";
+            this.lblService.Text = "&Magic 8 Ball Service:";
             // 
             // cboService
             // 
@@ -157,7 +157,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
-            this.Text = "Test Magic 8-Ball";
+            this.Text = "Test Magic 8 Ball";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

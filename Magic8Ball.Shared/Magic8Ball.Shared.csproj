@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Company>Access Computer Systems</Company>
-    <Product>Magic 8-Ball</Product>
+    <Product>Magic 8 Ball</Product>
     <Copyright>Copyright © 2020-2021 Access Computer Systems</Copyright>
   </PropertyGroup>
 

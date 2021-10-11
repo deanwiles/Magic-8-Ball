@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Magic 8-Ball WinForm Client")]
+[assembly: AssemblyTitle("Magic 8 Ball WinForm Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Access Computer Systems")]
-[assembly: AssemblyProduct("Magic 8-Ball")]
+[assembly: AssemblyProduct("Magic 8 Ball")]
 [assembly: AssemblyCopyright("Copyright © 2020-2021 Access Computer Systems")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -12,7 +12,7 @@
     <Content Include="..\Images\favicon_package_v0.16\favicon-32x32.png" Link="wwwroot\favicon-32x32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Images\Magic 8-Ball.png" Link="wwwroot\Magic 8-Ball.png">
+    <Content Include="..\Images\Magic 8 Ball.png" Link="wwwroot\Magic 8 Ball.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

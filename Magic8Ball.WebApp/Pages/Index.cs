@@ -31,7 +31,7 @@ namespace Magic8Ball.WebApp.Pages
             Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
             // Default to classic if Service not specified
             if (string.IsNullOrWhiteSpace(Service)) Service = "classic";
-            // Instantiate specified Magic 8-Ball service type
+            // Instantiate specified Magic 8 Ball service type
             Magic8BallData = Service.ToLower() switch
             {
                 "delegator" => new Delegator.DelegatorMagic8Ball(),
@@ -42,7 +42,7 @@ namespace Magic8Ball.WebApp.Pages
             if (Magic8BallData == null)
             {
                 // No, show error message
-                SetErrorMessage($"Unsupported Magic 8-Ball Service name '{Service}'");
+                SetErrorMessage($"Unsupported Magic 8 Ball Service name '{Service}'");
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Magic8Ball.WebApp.Pages
         {
             try
             {
-                // Ask the Magic 8-Ball service the user's question
+                // Ask the Magic 8 Ball service the user's question
                 await (Magic8BallData as IMagic8BallService).AskAsync(Magic8BallData.Question);
                 // Set Answer Style
                 var iType = Magic8BallData.Type;

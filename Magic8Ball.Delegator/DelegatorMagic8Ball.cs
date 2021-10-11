@@ -77,10 +77,10 @@ namespace Magic8Ball.Delegator
         private static readonly HttpClient _client = new();
 
         /// <summary>
-        /// Ask the Magic 8-Ball a Question
+        /// Ask the Magic 8 Ball a Question
         /// </summary>
         /// <param name="Question">Yes/No question to ask</param>
-        /// <returns>This Magic 8-Ball object with resulting Question, Answer and Type</returns>
+        /// <returns>This Magic 8 Ball object with resulting Question, Answer and Type</returns>
         public async Task<Magic8BallData> AskAsync(string Question)
         {
             // Catch and log any errors
@@ -94,13 +94,13 @@ namespace Magic8Ball.Delegator
                 this.Question = Question;
                 Type = magicResponse.Magic.Type;
                 Answer = magicResponse.Magic.Answer;
-                // Return this Magic 8-Ball object with resulting Question, Answer and Type
+                // Return this Magic 8 Ball object with resulting Question, Answer and Type
                 return this;
             }
             catch (Exception eek)
             {
                 // Wrap and rethrow the error back to caller with some context
-                throw new Exception($"Failed asking the Magic 8-Ball '{Question}'", eek);
+                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'", eek);
             }
         }
     }

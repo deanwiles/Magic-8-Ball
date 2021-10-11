@@ -8,6 +8,6 @@ Answers range from positive (“It is certain”) to negative (“Don’t count 
 
 You can learn about this classic toy's history, design and more in [Wikipedia](https://en.wikipedia.org/wiki/Magic_8-Ball).
 
-![Magic 8 Ball WinForm App](Images/Magic%208-Ball%20WinForm.png)
+![Magic 8 Ball WinForm App](Images/Magic%208%20Ball%20WinForm.png)
 
-![Magic 8 Ball Blazor App](Images/Magic%208-Ball%20Blazor.png)
+![Magic 8 Ball Blazor App](Images/Magic%208%20Ball%20Blazor.png)
