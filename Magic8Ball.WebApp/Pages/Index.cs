@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Magic8Ball.WebApp.Pages
 {
-    public partial class MagicPage
+    public partial class Index
     {
         [Parameter]
         public string Service { get; set; } = string.Empty;
