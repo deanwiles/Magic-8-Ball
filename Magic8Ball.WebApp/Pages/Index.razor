@@ -17,11 +17,18 @@ else
     {
         <EditForm Model="@Magic8BallData" OnSubmit="AskQuestion">
             <div class="form-group">
-                <label class="font-weight-bold">Instructions:</label><br />
-                1. Type a yes/no question to ask the Magic 8 Ball.<br />
-                2. Press Enter or click the Magic 8 Ball button to ask your question.<br />
-                3. Wait while the Magic 8 Ball ponders your question, and then the answer will be displayed.<br />
-                4. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
+                <div>
+                    <label class="font-weight-bold">Instructions:</label>
+                    <button class="btn btn-outline-secondary" @onclick="@ToggleInstructions">
+                        @(InstructionsCollapsed ? "+" : "-")
+                    </button>
+                </div>
+                <div class="@(InstructionsCollapsed? "collapse": "")">
+                    1. Type a yes/no question to ask the Magic 8 Ball.<br />
+                    2. Press Enter or click the Magic 8 Ball button to ask your question.<br />
+                    3. Wait while the Magic 8 Ball ponders your question, and then the answer will be displayed.<br />
+                    4. (optional) Repeat the above steps to ask another question (or if you didn't like the previous answer).<br />
+                </div>
             </div>
             <div class="form-group">
                 <label for="question" class="font-weight-bold">Question:</label>

@@ -21,6 +21,8 @@ namespace Magic8Ball.WebApp.Pages
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
 
+        protected bool InstructionsCollapsed { get; set; } = true; // hide by default
+
         protected override void OnInitialized()
         {
             Console.WriteLine("Entering OnInitialized()...");
@@ -49,6 +51,7 @@ namespace Magic8Ball.WebApp.Pages
                 // Yes, set default question
                 string question = "Will I win the lottery?";
                 Magic8BallData.Question = question;
+                AnswerStyle = string.Empty;
                 // Clear Message area
                 ClearMessage();
             }
@@ -93,6 +96,7 @@ namespace Magic8Ball.WebApp.Pages
             ShowMessage = false;
             Message = string.Empty;
             StatusClass = string.Empty;
+            StateHasChanged();
         }
 
         private void SetInfoMessage(string InfoMessage)
@@ -101,6 +105,7 @@ namespace Magic8Ball.WebApp.Pages
             ShowMessage = true;
             Message = InfoMessage;
             StatusClass = "alert-success";
+            StateHasChanged();
         }
 
         private void SetErrorMessage(string ErrorMessage)
@@ -109,6 +114,13 @@ namespace Magic8Ball.WebApp.Pages
             ShowMessage = true;
             Message = ErrorMessage;
             StatusClass = "alert-danger";
+            StateHasChanged();
+        }
+
+        private void ToggleInstructions()
+        {
+            InstructionsCollapsed = !InstructionsCollapsed;
+            StateHasChanged();
         }
     }
 }
