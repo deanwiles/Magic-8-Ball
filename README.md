@@ -1,7 +1,7 @@
 # Magic 8 Ball
 This Visual Studio solution contains granular C# .NET projects that implement Data, Services and User Interfaces for both a Windows Forms and Blazor Web App. These projects are an evolving test bed for protyping various .NET technologies used to implement a simple random-answer generator inspired by the original Magic 8 Ball. 
 
-Click [here](https://brave-flower-02517001e.azurestaticapps.net) to run the latest test version of the [Magic 8 Ball Blazor Web App](https://brave-flower-02517001e.azurestaticapps.net) hosted as a Azure Static Web App.
+Click [here](https://brave-sand-074cf3e1e.azurestaticapps.net/) to run the latest test version of the [Magic 8 Ball Blazor Web App](https://brave-sand-074cf3e1e.azurestaticapps.net/) hosted as a Azure Static Web App.
 
 If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://shop.mattel.com/shop/en-us/ms/magic-8-ball-retro-style-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
 
