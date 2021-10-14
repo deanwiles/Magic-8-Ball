@@ -49,10 +49,7 @@ namespace Magic8Ball.Api
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                }
+                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
             };
             var serializer = new JsonObjectSerializer(options);
             
