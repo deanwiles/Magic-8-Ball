@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "favicon_package", "favicon_
 		Images\favicon_package_v0.16\favicon-32x32.png = Images\favicon_package_v0.16\favicon-32x32.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.Api", "Magic8Ball.Api\Magic8Ball.Api.csproj", "{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -99,6 +99,7 @@ namespace Magic8Ball.WebApp.Pages
             StateHasChanged();
         }
 
+#if (false) // Not yet needed
         private void SetInfoMessage(string InfoMessage)
         {
             // Clear Message area
@@ -107,6 +108,7 @@ namespace Magic8Ball.WebApp.Pages
             StatusClass = "alert-success";
             StateHasChanged();
         }
+#endif
 
         private void SetErrorMessage(string ErrorMessage)
         {
