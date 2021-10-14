@@ -179,20 +179,20 @@ namespace Magic8Ball.WFClient
         /// <summary>
         /// Log a .NET exception and descriptive message to debug output
         /// </summary>
-        /// <param name="Eek">The .NET exception to log</param>
+        /// <param name="Ex">The .NET exception to log</param>
         /// <param name="Message">Descriptive text regarding the cause or operation that caused the exception</param>
-        public static void LogErr(Exception Eek, string Message)
+        public static void LogErr(Exception Ex, string Message)
         {
             // Log a .NET exception and descriptive message to debug output
             Console.WriteLine($"{Utils.Title} Exception occurred: '{Message}'");
-            Console.WriteLine($"Exception source: '{Eek.Source}', HRESULT: 0x{Eek.HResult:X}");
-            Exception inner = Eek.InnerException;
+            Console.WriteLine($"Exception source: '{Ex.Source}', HRESULT: 0x{Ex.HResult:X}");
+            Exception inner = Ex.InnerException;
             if (null != inner)
             {
                 Console.WriteLine($"Inner exception: '{inner.Message}'");
                 Console.WriteLine($"Inner exception source: '{inner.Source}', HRESULT: 0x{inner.HResult:X}");
             }
-            Console.WriteLine($"Exception details: {Eek}");
+            Console.WriteLine($"Exception details: {Ex}");
             //Debug.Flush();
         }
     }

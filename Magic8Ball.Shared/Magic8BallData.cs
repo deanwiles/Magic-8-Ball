@@ -25,14 +25,14 @@
     public class MagicAnswer
     {
         /// <summary>
-        /// Type of Magic 8 Ball Answer
-        /// </summary>
-        public AnswerType Type { get; set; }
-
-        /// <summary>
         /// Answer from Magic 8 Ball
         /// </summary>
         public string Answer { get; set; }
+
+        /// <summary>
+        /// Type of Magic 8 Ball Answer
+        /// </summary>
+        public AnswerType Type { get; set; }
 
         /// <summary>
         /// Magic 8 Ball Answer Default Constructor

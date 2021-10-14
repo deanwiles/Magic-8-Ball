@@ -1,19 +1,15 @@
+using Azure.Core.Serialization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
-using System.Threading.Tasks;
 using System.Text.Json;
-using System.IO;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Magic8Ball.Api
 {
-    public class MagicQuestion
-    {
-        public string Question { get; set; }
-    }
-
     public static class Magic8BallApi
     {
         [Function("Ask")]
@@ -21,43 +17,48 @@ namespace Magic8Ball.Api
             FunctionContext executionContext)
         {
             var logger = executionContext.GetLogger("Ask");
-            logger.LogInformation("C# HTTP trigger function processed an 'Ask' request.");
+            logger.LogInformation("C# HTTP trigger function processing an 'Ask' request...");
 
-            // Check for Question in GET query
-            string question;
+            // Check for Question in GET query or in POST body
+            string question = null;
             if (executionContext.BindingContext.BindingData.TryGetValue("question", out object value))
             {
                 // Yes, save the string value
                 question = value as string;
             }
-            else
-            {
-                // No, check for Question in POST body
-                try
-                {
-                    question = (await req.ReadFromJsonAsync<MagicQuestion>()).Question;
-                    //var body = await new StreamReader(req.Body).ReadToEndAsync();
-                    //question = JsonSerializer.Deserialize<MagicQuestion>(body)?.Question;
-                }
-                catch (Exception ex)
-                {
-                    // Return error back to caller with some context
-                    var error = req.CreateResponse(HttpStatusCode.BadRequest);
-                    await error.WriteStringAsync("Need Question as JSON");
-                    return error;
-                }
-            }
             logger.LogInformation($"Question = '{question}'.");
 
-            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            //dynamic data = JsonConvert.DeserializeObject(requestBody);
-            //question = question ?? data?.question;
+            // Ask the Classic Magic 8 Ball service the provided question
+            var magic8Ball = new Classic.ClassicMagic8Ball();
+            try
+            {
+                await magic8Ball.AskAsync(question);
+                logger.LogInformation($"Answer = '{magic8Ball.Answer}', Type = '{magic8Ball.Type}'.");
+            }
+            catch (Exception ex)
+            {
+                // Return error message
+                string msg = ex.Message;
+                if (null != ex.InnerException) msg += $"{Environment.NewLine}{ex.InnerException.Message}";
+                var error = req.CreateResponse(HttpStatusCode.BadRequest);
+                await error.WriteStringAsync(msg);
+                return error;
+            }
 
-            // TODO: call ClassicMagic8Ball to get answer and return object
+            // Create JSON serializer that handles enumerations
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Converters =
+                {
+                    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                }
+            };
+            var serializer = new JsonObjectSerializer(options);
+            
+            // Return Magic8Ball object as JSON
             var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-            response.WriteString($"Question = '{question}'{Environment.NewLine}Answer is soon to come...");
+            await response.WriteAsJsonAsync(magic8Ball, serializer);
 
             return response;
         }

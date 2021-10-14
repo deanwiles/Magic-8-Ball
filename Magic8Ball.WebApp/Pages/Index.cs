@@ -18,7 +18,7 @@ namespace Magic8Ball.WebApp.Pages
 
         //used to store state of screen
         protected bool ShowMessage;
-        protected string Message = string.Empty;
+        protected MarkupString Message = new();
         protected string StatusClass = string.Empty;
 
         protected bool InstructionsCollapsed { get; set; } = true; // hide by default
@@ -86,7 +86,9 @@ namespace Magic8Ball.WebApp.Pages
             catch (Exception ex)
             {
                 // Display error message
-                SetErrorMessage(ex.Message);
+                string msg = ex.Message;
+                if (null != ex.InnerException) msg += $"<br>{ex.InnerException.Message}";
+                SetErrorMessage(msg);
             }
         }
 
@@ -94,7 +96,7 @@ namespace Magic8Ball.WebApp.Pages
         {
             // Clear Message area
             ShowMessage = false;
-            Message = string.Empty;
+            Message = new();
             StatusClass = string.Empty;
             StateHasChanged();
         }
@@ -114,7 +116,7 @@ namespace Magic8Ball.WebApp.Pages
         {
             // Clear Message area
             ShowMessage = true;
-            Message = ErrorMessage;
+            Message = new(ErrorMessage);
             StatusClass = "alert-danger";
             StateHasChanged();
         }

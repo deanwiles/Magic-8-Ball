@@ -35,14 +35,14 @@ namespace Magic8Ball.WFClient
                 txtAnswer.BackColor = colorNoAnswer;
                 // Instantiate selected Magic 8 Ball service type
                 var service = cboService.SelectedItem as Magic8BallServiceDefinition;
-                var oMagic8BallService = Activator.CreateInstance(Type.GetType(service.TypeName)) as IMagic8BallService;
+                var magic8BallService = Activator.CreateInstance(Type.GetType(service.TypeName)) as IMagic8BallService;
                 // Ask the Magic 8 Ball service the user's question
-                string sQuestion = txtQuestion.Text;
+                string question = txtQuestion.Text;
                 Cursor = Cursors.WaitCursor;
-                var oMagic8BallData = await oMagic8BallService.AskAsync(sQuestion);
+                var magic8BallData = await magic8BallService.AskAsync(question);
                 // Display and color code the answer
-                txtAnswer.Text = oMagic8BallData.Answer;
-                var iType = oMagic8BallData.Type;
+                txtAnswer.Text = magic8BallData.Answer;
+                var iType = magic8BallData.Type;
                 txtAnswer.BackColor = iType switch
                 {
                     AnswerType.Positive => colorPositiveAnswer,
@@ -51,11 +51,11 @@ namespace Magic8Ball.WFClient
                     _ => colorNoAnswer,
                 };
             }
-            catch (Exception eek)
+            catch (Exception ex)
             {
                 // Error occurred; display message box with error details
-                string msg = eek.Message;
-                if (null != eek.InnerException) msg += $"{Environment.NewLine}{eek.InnerException.Message}";
+                string msg = ex.Message;
+                if (null != ex.InnerException) msg += $"{Environment.NewLine}{ex.InnerException.Message}";
                 MessageBox.Show(msg, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
