@@ -1,0 +1,75 @@
+﻿{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "proxyHomePage": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/"
+    },
+    "proxyManifest": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/manifest.json"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/manifest.json"
+    },
+    "proxyAppCss": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/Magic8Ball.WebApp.styles.css"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/Magic8Ball.WebApp.styles.css"
+    },
+    "proxyServiceWorker": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/service-worker.js"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker.js"
+    },
+    "proxyServiceWorkerPublished": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/service-worker.published.js"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker.published.js"
+    },
+    "proxyCss": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/css/{*restOfPath}"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/css/{restOfPath}"
+    },
+    "proxyBootstrap": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/css/bootstrap/{*restOfPath}"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/css/bootstrap/{restOfPath}"
+    },
+    "proxyOpenIconic": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/css/open-iconic-bootstrap/{*restOfPath}"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/css/open-iconic-bootstrap/{restOfPath}"
+    },
+    "proxyFramework": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/_framework/{*restOfPath}"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/_framework/{restOfPath}"
+    },
+    "proxyContent": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/content/{*restOfPath}"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/content/{restOfPath}"
+    }
+  }
+}
