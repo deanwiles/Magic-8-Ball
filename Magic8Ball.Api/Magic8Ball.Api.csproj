@@ -10,6 +10,9 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.5.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

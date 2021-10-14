@@ -4,9 +4,16 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.IO;
 
 namespace Magic8Ball.Api
 {
+    public class MagicQuestion
+    {
+        public string Question { get; set; }
+    }
+
     public static class Magic8BallApi
     {
         [Function("Ask")]
@@ -16,10 +23,30 @@ namespace Magic8Ball.Api
             var logger = executionContext.GetLogger("Ask");
             logger.LogInformation("C# HTTP trigger function processed an 'Ask' request.");
 
-            string question = null;
+            // Check for Question in GET query
+            string question;
             if (executionContext.BindingContext.BindingData.TryGetValue("question", out object value))
+            {
+                // Yes, save the string value
                 question = value as string;
-            // TODO: else check for POST body as json
+            }
+            else
+            {
+                // No, check for Question in POST body
+                try
+                {
+                    question = (await req.ReadFromJsonAsync<MagicQuestion>()).Question;
+                    //var body = await new StreamReader(req.Body).ReadToEndAsync();
+                    //question = JsonSerializer.Deserialize<MagicQuestion>(body)?.Question;
+                }
+                catch (Exception ex)
+                {
+                    // Return error back to caller with some context
+                    var error = req.CreateResponse(HttpStatusCode.BadRequest);
+                    await error.WriteStringAsync("Need Question as JSON");
+                    return error;
+                }
+            }
             logger.LogInformation($"Question = '{question}'.");
 
             //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
