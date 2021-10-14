@@ -29,6 +29,13 @@
       },
       "backendUri": "%Magic8Ball_WebApp_URL%/service-worker.js"
     },
+    "proxyServiceWorkerAssets": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/service-worker-assets.js"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker-assets.js"
+    },
     "proxyServiceWorkerPublished": {
       "matchCondition": {
         "methods": [ "GET" ],
@@ -43,20 +50,6 @@
       },
       "backendUri": "%Magic8Ball_WebApp_URL%/css/{restOfPath}"
     },
-    "proxyBootstrap": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/css/bootstrap/{*restOfPath}"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/css/bootstrap/{restOfPath}"
-    },
-    "proxyOpenIconic": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/css/open-iconic-bootstrap/{*restOfPath}"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/css/open-iconic-bootstrap/{restOfPath}"
-    },
     "proxyFramework": {
       "matchCondition": {
         "methods": [ "GET" ],
@@ -70,6 +63,20 @@
         "route": "/content/{*restOfPath}"
       },
       "backendUri": "%Magic8Ball_WebApp_URL%/content/{restOfPath}"
+    },
+    "proxyClassic": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/classic"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/classic"
+    },
+    "proxyDelegator": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/delegator"
+      },
+      "backendUri": "%Magic8Ball_WebApp_URL%/delegator"
     }
   }
 }
