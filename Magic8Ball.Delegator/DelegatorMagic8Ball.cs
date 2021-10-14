@@ -97,10 +97,10 @@ namespace Magic8Ball.Delegator
                 // Return this Magic 8 Ball object with resulting Question, Answer and Type
                 return this;
             }
-            catch (Exception eek)
+            catch (Exception ex)
             {
                 // Wrap and rethrow the error back to caller with some context
-                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'", eek);
+                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'.", ex);
             }
         }
     }

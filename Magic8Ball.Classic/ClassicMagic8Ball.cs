@@ -28,7 +28,7 @@ namespace Magic8Ball.Classic
             new MagicAnswer(AnswerType.Positive, "Signs point to yes"),
             new MagicAnswer(AnswerType.Positive, "Without a doubt"),
             new MagicAnswer(AnswerType.Positive, "Yes"),
-            new MagicAnswer(AnswerType.Positive, "Yes – definitely"),
+            new MagicAnswer(AnswerType.Positive, "Yes, definitely"),
             new MagicAnswer(AnswerType.Positive, "You may rely on it")
         };
 
@@ -57,10 +57,10 @@ namespace Magic8Ball.Classic
                 // Return this Magic 8 Ball object with resulting Question, Answer and Type
                 return await Task.FromResult(this);
             }
-            catch (Exception eek)
+            catch (Exception ex)
             {
                 // Wrap and rethrow the error back to caller with some context
-                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'", eek);
+                throw new Exception($"Failed asking the Magic 8 Ball '{Question}'.", ex);
             }
         }
     }
