@@ -2,7 +2,7 @@ name: Build and deploy .NET Core Function App to Azure functions app
 on:
   push:
     branches:
-    - AzureFunction
+    - master
 env:
   AZURE_FUNCTIONAPP_NAME: Magic-8-Ball
   AZURE_FUNCTIONAPP_PACKAGE_PATH: Magic8Ball.Api/publish
