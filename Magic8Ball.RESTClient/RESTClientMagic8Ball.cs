@@ -12,7 +12,7 @@ namespace Magic8Ball.RESTClient
     /// </summary>
     /// <remarks>
     /// This class represents the JSON object returned from a HTTP GET call to
-    /// http://magic-8-ball.azurewebsites.net/api?question={question}
+    /// https://magic-8-ball.azurewebsites.net/api/ask?question={question}
     /// </remarks>
     public class MagicResponse
     {
@@ -50,7 +50,7 @@ namespace Magic8Ball.RESTClient
 
     public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
     {
-        const string BaseUrl = "http://magic-8-ball.azurewebsites.net/api";
+        const string BaseUrl = "https://magic-8-ball.azurewebsites.net/api";
 
         private static readonly HttpClient _client = new();
 
@@ -66,7 +66,7 @@ namespace Magic8Ball.RESTClient
             {
                 // Send HTTP GET request and parse JSON response
                 // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
-                string url = Uri.EscapeUriString($"{BaseUrl}/ask/?question={Question}");
+                string url = Uri.EscapeUriString($"{BaseUrl}/ask?question={Question}");
                 var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url);
                 // Save question, answer and type
                 this.Question = Question;
