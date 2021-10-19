@@ -5,35 +5,16 @@ using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Magic8Ball.Delegator
+namespace Magic8Ball.RESTClient
 {
     /// <summary>
-    /// Magic 8 Ball Response class
+    /// Magic 8 Ball Question and Answer Response class
     /// </summary>
     /// <remarks>
     /// This class represents the JSON object returned from a HTTP GET call to
-    /// https://8ball.delegator.com/magic/json/{question}
+    /// http://magic-8-ball.azurewebsites.net/api?question={question}
     /// </remarks>
     public class MagicResponse
-    {
-        /// <summary>
-        /// Magic 8 Ball Question and Answer class
-        /// </summary>
-        /// <remarks>
-        /// This class represents the JSON object returned from a HTTP GET call to
-        /// https://8ball.delegator.com/magic/json/{question}
-        /// </remarks>
-        [JsonPropertyName("magic")]
-        public InnerMagic Magic { get; set; }
-    }
-
-    /// <summary>
-    /// Magic 8 Ball Question and Answer class
-    /// </summary>
-    /// <remarks>
-    /// This class represents the inner JSON object in the MagicResponse class
-    /// </remarks>
-    public class InnerMagic
     {
         /// <summary>
         /// Question asked of Magic 8 Ball
@@ -58,21 +39,18 @@ namespace Magic8Ball.Delegator
         {
             get
             {
-                var type = (TypeName.ToLower()) switch
-                {
-                    "negative" or "contrary" => AnswerType.Negative,
-                    "affirmative" or "positive" => AnswerType.Positive,
-                    _ => AnswerType.Neutral,
-                };
+                // Parse and return Answer TypeName as AnswerType
+                if (!Enum.TryParse<AnswerType>(TypeName, true, out AnswerType type))
+                    type = AnswerType.Neutral;
                 return type;
             }
         }
 
     }
 
-    public class DelegatorMagic8Ball : Magic8BallData, IMagic8BallService
+    public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
     {
-        const string BaseUrl = "https://8ball.delegator.com/magic";
+        const string BaseUrl = "http://magic-8-ball.azurewebsites.net/api";
 
         private static readonly HttpClient _client = new();
 
@@ -87,13 +65,13 @@ namespace Magic8Ball.Delegator
             try
             {
                 // Send HTTP GET request and parse JSON response
-                // NOTE: If no question, an error will occur, which will demonstrate inner exception handling
-                string url = Uri.EscapeUriString($"{BaseUrl}/json/{Question}");
+                // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
+                string url = Uri.EscapeUriString($"{BaseUrl}/ask/?question={Question}");
                 var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url);
                 // Save question, answer and type
                 this.Question = Question;
-                Type = magicResponse.Magic.Type;
-                Answer = magicResponse.Magic.Answer;
+                Type = magicResponse.Type;
+                Answer = magicResponse.Answer;
                 // Return this Magic 8 Ball object with resulting Question, Answer and Type
                 return this;
             }
