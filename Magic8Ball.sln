@@ -29,9 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "favicon_package", "favicon_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Api", "Magic8Ball.Api\Magic8Ball.Api.csproj", "{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.RESTClient", "Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj", "{D9FE7425-E1EE-4479-88F3-F88DD14ED063}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.OpenApi", "Magic8Ball.OpenApi\Magic8Ball.OpenApi.csproj", "{8C5BE7F7-6DFB-4524-A766-3F8CA5F86B24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.RESTClient", "Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj", "{D9FE7425-E1EE-4479-88F3-F88DD14ED063}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +65,6 @@ Global
 		{D9FE7425-E1EE-4479-88F3-F88DD14ED063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9FE7425-E1EE-4479-88F3-F88DD14ED063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9FE7425-E1EE-4479-88F3-F88DD14ED063}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C5BE7F7-6DFB-4524-A766-3F8CA5F86B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C5BE7F7-6DFB-4524-A766-3F8CA5F86B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C5BE7F7-6DFB-4524-A766-3F8CA5F86B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C5BE7F7-6DFB-4524-A766-3F8CA5F86B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
