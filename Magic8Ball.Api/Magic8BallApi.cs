@@ -59,5 +59,20 @@ namespace Magic8Ball.Api
 
             return response;
         }
+
+        [Function("App")]
+        public static HttpResponseData App([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
+            FunctionContext executionContext)
+        {
+            var logger = executionContext.GetLogger("App");
+            logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
+
+            // Redirect to Magic 8 Ball Azure Static Web App
+            string Url = Environment.GetEnvironmentVariable("Magic8Ball_WebApp_URL");
+            var response = req.CreateResponse(HttpStatusCode.Moved);
+            response.Headers.Add("Location", Url);
+
+            return response;
+        }
     }
 }

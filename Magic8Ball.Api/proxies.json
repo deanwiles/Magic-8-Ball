@@ -1,82 +1,18 @@
 ﻿{
   "$schema": "http://json.schemastore.org/proxies",
   "proxies": {
-    "proxyHomePage": {
+    //"proxyWebApp": {
+    //  "matchCondition": {
+    //    "route": "/{*restOfPath}"
+    //  },
+    //  "backendUri": "%Magic8Ball_WebApp_URL%/{restOfPath}"
+    //},
+    "proxyAppRedirect": {
       "matchCondition": {
         "methods": [ "GET" ],
-        "route": "/"
+        "route": "/app"
       },
-      "backendUri": "%Magic8Ball_WebApp_URL%/"
-    },
-    "proxyManifest": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/manifest.json"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/manifest.json"
-    },
-    "proxyAppCss": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/Magic8Ball.WebApp.styles.css"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/Magic8Ball.WebApp.styles.css"
-    },
-    "proxyServiceWorker": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/service-worker.js"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker.js"
-    },
-    "proxyServiceWorkerAssets": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/service-worker-assets.js"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker-assets.js"
-    },
-    "proxyServiceWorkerPublished": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/service-worker.published.js"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/service-worker.published.js"
-    },
-    "proxyCss": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/css/{*restOfPath}"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/css/{restOfPath}"
-    },
-    "proxyFramework": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/_framework/{*restOfPath}"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/_framework/{restOfPath}"
-    },
-    "proxyContent": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/content/{*restOfPath}"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/content/{restOfPath}"
-    },
-    "proxyClassic": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/classic"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/classic"
-    },
-    "proxyDelegator": {
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/delegator"
-      },
-      "backendUri": "%Magic8Ball_WebApp_URL%/delegator"
+      "backendUri": "http://%WEBSITE_HOSTNAME%/api/app"
     }
   }
 }
