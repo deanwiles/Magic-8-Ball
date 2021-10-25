@@ -1,6 +1,7 @@
 ﻿using Magic8Ball.Shared;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Magic8Ball.WebApp.Pages
@@ -11,9 +12,10 @@ namespace Magic8Ball.WebApp.Pages
         public string Service { get; set; } = string.Empty;
 
         private Magic8BallData Magic8BallData { get; set; } = null;
+        private string Question { get; set; }
+        private string Answer { get; set; }
 
         private ElementReference QuestionInput;
-
         private ElementReference SubmitButton;
 
         private string AnswerStyle;
@@ -53,10 +55,9 @@ namespace Magic8Ball.WebApp.Pages
             else
             {
                 // Yes, set default question
-                string question = "Will I win the lottery?";
-                Magic8BallData.Question = question;
-                AnswerStyle = string.Empty;
-                // Clear Message area
+                Question = "Will I win the lottery?";
+                // Clear Answer and Message area
+                ClearAnswer();
                 ClearMessage();
             }
         }
@@ -73,10 +74,21 @@ namespace Magic8Ball.WebApp.Pages
         {
             try
             {
-                // Ask the Magic 8 Ball service the user's question
+                // Indicate that we're waiting for the Magic 8 Ball to answer
                 ShowBusy(true);
-                await (Magic8BallData as IMagic8BallService).AskAsync(Magic8BallData.Question);
-                // Set Answer Style
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+                // Clear any previous answer
+                ClearAnswer();
+                // Ask the Magic 8 Ball service the user's question
+                await (Magic8BallData as IMagic8BallService).AskAsync(Question);
+                // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
+                stopWatch.Stop();
+                double magicDelay = 500 - stopWatch.Elapsed.TotalMilliseconds;  // 1/2 second
+                if (magicDelay > 0)
+                    await Task.Delay(Convert.ToInt32(magicDelay));
+                // Save Answer and set Answer Style
+                Answer = Magic8BallData.Answer;
                 var iType = Magic8BallData.Type;
                 AnswerStyle = iType switch
                 {
@@ -96,6 +108,14 @@ namespace Magic8Ball.WebApp.Pages
                 if (null != ex.InnerException) msg += $"<br>{ex.InnerException.Message}";
                 SetErrorMessage(msg);
             }
+        }
+
+        private void ClearAnswer()
+        {
+            // Clear Answer text and style
+            Answer = string.Empty;
+            AnswerStyle = string.Empty;
+            StateHasChanged();
         }
 
         private void ClearMessage()
