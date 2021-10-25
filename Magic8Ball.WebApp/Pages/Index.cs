@@ -24,6 +24,7 @@ namespace Magic8Ball.WebApp.Pages
         protected string StatusClass = string.Empty;
 
         protected bool InstructionsCollapsed { get; set; } = true; // hide by default
+        protected bool IsBusy { get; set; } = false; // true when waiting for Magic 8 Ball to answer
 
         protected override void OnInitialized()
         {
@@ -73,6 +74,7 @@ namespace Magic8Ball.WebApp.Pages
             try
             {
                 // Ask the Magic 8 Ball service the user's question
+                ShowBusy(true);
                 await (Magic8BallData as IMagic8BallService).AskAsync(Magic8BallData.Question);
                 // Set Answer Style
                 var iType = Magic8BallData.Type;
@@ -85,7 +87,7 @@ namespace Magic8Ball.WebApp.Pages
                 };
                 // Refresh screen with Answer & Type
                 ClearMessage();
-                StateHasChanged();
+                ShowBusy(false);
             }
             catch (Exception ex)
             {
@@ -128,6 +130,12 @@ namespace Magic8Ball.WebApp.Pages
         private void ToggleInstructions()
         {
             InstructionsCollapsed = !InstructionsCollapsed;
+            StateHasChanged();
+        }
+
+        private void ShowBusy(bool IsBusy)
+        {
+            this.IsBusy = IsBusy;
             StateHasChanged();
         }
     }

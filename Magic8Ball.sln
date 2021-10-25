@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD314
 		Images\Magic 8 Ball WinForm.png = Images\Magic 8 Ball WinForm.png
 		Images\Magic 8 Ball.ico = Images\Magic 8 Ball.ico
 		Images\Magic 8 Ball.png = Images\Magic 8 Ball.png
+		Images\Rotating Magic 8 Ball.gif = Images\Rotating Magic 8 Ball.gif
+		Images\Rotating Magic 8 Ball.xcf = Images\Rotating Magic 8 Ball.xcf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "favicon_package", "favicon_package", "{8CFEB513-61EE-4513-AB46-8D6638C32316}"
