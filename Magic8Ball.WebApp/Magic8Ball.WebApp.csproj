@@ -15,6 +15,9 @@
     <Content Include="..\Images\Magic 8 Ball.png" Link="wwwroot\content\Magic 8 Ball.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\Images\Rotating Magic 8 Ball.gif" Link="wwwroot\content\Rotating Magic 8 Ball.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
