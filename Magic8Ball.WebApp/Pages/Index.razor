@@ -36,7 +36,7 @@ else
                 <input @ref="QuestionInput" id="question" class="form-control" @bind="@Magic8BallData.Question" />
             </div>
             <div>
-                <button type="submit" class="btn btn-outline-light btn-magic8ball">
+                <button @ref="SubmitButton" type="submit" class="btn btn-outline-light btn-magic8ball">
                     <img src="content/Magic 8 Ball.png" alt="Magic 8 Ball" style="width:100px;height:100px" class="img-magic8ball" />
                 </button>
                 <p />

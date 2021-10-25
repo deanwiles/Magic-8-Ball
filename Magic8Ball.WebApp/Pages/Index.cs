@@ -14,6 +14,8 @@ namespace Magic8Ball.WebApp.Pages
 
         private ElementReference QuestionInput;
 
+        private ElementReference SubmitButton;
+
         private string AnswerStyle;
 
         //used to store state of screen
@@ -62,7 +64,8 @@ namespace Magic8Ball.WebApp.Pages
         {
             // Set focus on Question input textbox (if present)
             if (!ShowMessage && QuestionInput.Context != null)
-                await QuestionInput.FocusAsync();
+                //    await QuestionInput.FocusAsync();
+                await SubmitButton.FocusAsync();
         }
 
         private async Task AskQuestion()
