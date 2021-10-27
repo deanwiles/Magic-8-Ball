@@ -33,6 +33,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Api", "Magic8Bal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.RESTClient", "Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj", "{D9FE7425-E1EE-4479-88F3-F88DD14ED063}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportFiles", "SupportFiles", "{29C41E60-F9AE-4A16-8158-D6ACF6ADDBEB}"
+	ProjectSection(SolutionItems) = preProject
+		Magic 8 Ball Answers.csv = Magic 8 Ball Answers.csv
+		Magic 8 Ball Answers.xlsx = Magic 8 Ball Answers.xlsx
+		Magic 8 Ball.docx = Magic 8 Ball.docx
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

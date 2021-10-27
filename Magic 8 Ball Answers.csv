@@ -1,0 +1,21 @@
+PartitionKey,RowKey,Type,Answer
+Classic,1,Negative,Don't count on it
+Classic,2,Negative,My reply is no
+Classic,3,Negative,My sources say no
+Classic,4,Negative,Outlook not so good
+Classic,5,Negative,Very doubtful
+Classic,6,Neutral,Ask again later
+Classic,7,Neutral,Better not tell you now
+Classic,8,Neutral,Cannot predict now
+Classic,9,Neutral,Concentrate and ask again
+Classic,10,Neutral,"Reply hazy, try again"
+Classic,11,Positive,"As I see it, yes"
+Classic,12,Positive,It is certain
+Classic,13,Positive,It is decidedly so
+Classic,14,Positive,Most likely
+Classic,15,Positive,Outlook good
+Classic,16,Positive,Signs point to yes
+Classic,17,Positive,Without a doubt
+Classic,18,Positive,Yes
+Classic,19,Positive,"Yes, definitely"
+Classic,20,Positive,You may rely on it
