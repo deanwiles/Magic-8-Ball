@@ -1,0 +1,21 @@
+PartitionKey,RowKey,Type,Answer,Translation
+French,1,Negative,C'est non,It's no
+French,2,Negative,Peu probable,Unlikely
+French,3,Negative,Faut pas rêver,Don't dream
+French,4,Negative,N'y compte pas,Don't count on it
+French,5,Negative,Impossible,Impossible
+French,6,Neutral,Essaye plus tard,Try later
+French,7,Neutral,Essaye encore,Try again
+French,8,Neutral,Pas d'avis,No opinion
+French,9,Neutral,Une chance sur deux,One chance in two
+French,10,Neutral,Repose ta question,Ask your question again
+French,11,Positive,D'après moi oui,In my opinion yes
+French,12,Positive,C'est certain,That's for sure
+French,13,Positive,Oui absolument,Yes absolutely
+French,14,Positive,Tu peux compter dessus,You can count on it
+French,15,Positive,Sans aucun doute,Without a doubt
+French,16,Positive,Très probable,Very likely
+French,17,Positive,Oui,Yes
+French,18,Positive,C'est bien parti,It's off to a good start
+French,19,Positive,C'est ton destin,This is your destiny
+French,20,Positive,Le sort en est jeté,The fate is cast
