@@ -42,8 +42,8 @@ namespace Magic8Ball.WebApp.Pages
             Magic8BallData = Service.ToLower() switch
             {
                 "classic" => new Classic.ClassicMagic8Ball(),
-                "azure" => new RESTClient.RESTClientMagic8Ball(),
-                "delegator" => new Delegator.DelegatorMagic8Ball(),
+                "azurefunc" => new RESTClient.RESTClientMagic8Ball(),
+                "azuretable" => new TableClient.TableClientMagic8Ball(),
                 _ => null,
             };
             // Check if service created
@@ -107,6 +107,7 @@ namespace Magic8Ball.WebApp.Pages
                 string msg = ex.Message;
                 if (null != ex.InnerException) msg += $"<br>{ex.InnerException.Message}";
                 SetErrorMessage(msg);
+                ShowBusy(false);
             }
         }
 

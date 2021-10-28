@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
-    <ProjectReference Include="..\Magic8Ball.Delegator\Magic8Ball.Delegator.csproj" />
     <ProjectReference Include="..\Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj" />
+    <ProjectReference Include="..\Magic8Ball.TableClient\Magic8Ball.TableClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
