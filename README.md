@@ -5,7 +5,7 @@ Click [here](https://brave-sand-074cf3e1e.azurestaticapps.net/) to run the lates
 
 The Magic 8 Ball service is available as a local .NET 5.0 library named `Magic8Ball.Classic` or as an Azure Function, which can be accessed via a [REST API](https://magic-8-ball.azurewebsites.net/api/ask?question=Will%20I%20win%20the%20lottery?) or via the `Magic8Ball.RESTClient` library.
 
-If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://shop.mattel.com/shop/en-us/ms/magic-8-ball-retro-style-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
+If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://www.mattel.com/products/magic-8-ball-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
 
 The concept is simple: After “asking the ball” a yes or no question, turn the toy upside-down and wait for your answer to be revealed through the window.
 Answers range from positive (“It is certain”) to negative (“Don’t count on it”) to neutral (“Ask again later”).
