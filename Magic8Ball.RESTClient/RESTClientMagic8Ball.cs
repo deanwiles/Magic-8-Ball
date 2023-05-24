@@ -66,7 +66,7 @@ namespace Magic8Ball.RESTClient
             {
                 // Send HTTP GET request and parse JSON response
                 // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
-                string url = Uri.EscapeDataString($"{BaseUrl}/ask?question={Question}");
+                string url = $"{BaseUrl}/ask?question={Uri.EscapeDataString(Question)}";
                 var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url);
                 // Save question, answer and type
                 this.Question = Question;
