@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Access Computer Systems")]
 [assembly: AssemblyProduct("Magic 8 Ball")]
-[assembly: AssemblyCopyright("Copyright © 2020-2021 Access Computer Systems")]
+[assembly: AssemblyCopyright("Copyright © 2020-2023 Access Computer Systems")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
