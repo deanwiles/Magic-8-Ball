@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Shared", "Magic8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Classic", "Magic8Ball.Classic\Magic8Ball.Classic.csproj", "{4874DECE-0506-41EE-B701-8E787AD95108}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Delegator", "Magic8Ball.Delegator\Magic8Ball.Delegator.csproj", "{CD0B9730-8144-4960-9567-69B3504705D5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.WebApp", "Magic8Ball.WebApp\Magic8Ball.WebApp.csproj", "{42ED3460-F1F8-4190-940C-8BCD93D95AE9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Api", "Magic8Ball.Api\Magic8Ball.Api.csproj", "{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}"
@@ -44,10 +42,6 @@ Global
 		{4874DECE-0506-41EE-B701-8E787AD95108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4874DECE-0506-41EE-B701-8E787AD95108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4874DECE-0506-41EE-B701-8E787AD95108}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD0B9730-8144-4960-9567-69B3504705D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD0B9730-8144-4960-9567-69B3504705D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD0B9730-8144-4960-9567-69B3504705D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD0B9730-8144-4960-9567-69B3504705D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42ED3460-F1F8-4190-940C-8BCD93D95AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -43,7 +43,6 @@ namespace Magic8Ball.WebApp.Pages
             {
                 "classic" => new Classic.ClassicMagic8Ball(),
                 "azure" => new RESTClient.RESTClientMagic8Ball(),
-                "delegator" => new Delegator.DelegatorMagic8Ball(),
                 _ => null,
             };
             // Check if service created

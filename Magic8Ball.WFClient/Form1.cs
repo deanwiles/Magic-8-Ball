@@ -73,8 +73,6 @@ namespace Magic8Ball.WFClient
                 typeof(Classic.ClassicMagic8Ball).AssemblyQualifiedName));
             list.Add(new Magic8BallServiceDefinition("Azure Function Magic 8 Ball REST Service",
                 typeof(RESTClient.RESTClientMagic8Ball).AssemblyQualifiedName));
-            list.Add(new Magic8BallServiceDefinition("Delegator Magic 8 Ball REST Service", 
-                typeof(Delegator.DelegatorMagic8Ball).AssemblyQualifiedName));
             cboService.DataSource = list;
             cboService.ValueMember = "TypeName";
             cboService.DisplayMember = "DisplayName";
