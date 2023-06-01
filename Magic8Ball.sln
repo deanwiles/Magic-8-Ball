@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.WFClient", "Magic8Ball.WFClient\Magic8Ball.WFClient.csproj", "{9AF893D6-42E0-46E3-818D-A55CF01A8C2F}"
 EndProject
@@ -13,33 +13,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Delegator", "Mag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.WebApp", "Magic8Ball.WebApp\Magic8Ball.WebApp.csproj", "{42ED3460-F1F8-4190-940C-8BCD93D95AE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}"
-	ProjectSection(SolutionItems) = preProject
-		Images\Magic 8 Ball Blazor.png = Images\Magic 8 Ball Blazor.png
-		Images\Magic 8 Ball WinForm.png = Images\Magic 8 Ball WinForm.png
-		Images\Magic 8 Ball.ico = Images\Magic 8 Ball.ico
-		Images\Magic 8 Ball.png = Images\Magic 8 Ball.png
-		Images\Rotating Magic 8 Ball.gif = Images\Rotating Magic 8 Ball.gif
-		Images\Rotating Magic 8 Ball.xcf = Images\Rotating Magic 8 Ball.xcf
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "favicon_package", "favicon_package", "{8CFEB513-61EE-4513-AB46-8D6638C32316}"
-	ProjectSection(SolutionItems) = preProject
-		Images\favicon_package_v0.16\favicon-16x16.png = Images\favicon_package_v0.16\favicon-16x16.png
-		Images\favicon_package_v0.16\favicon-32x32.png = Images\favicon_package_v0.16\favicon-32x32.png
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.Api", "Magic8Ball.Api\Magic8Ball.Api.csproj", "{29A2DB6B-949F-4F09-836D-E3EA5E6F33DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.RESTClient", "Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj", "{D9FE7425-E1EE-4479-88F3-F88DD14ED063}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportFiles", "SupportFiles", "{29C41E60-F9AE-4A16-8158-D6ACF6ADDBEB}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Images", "Images\Images.shproj", "{9E89D194-DCF6-4611-87AA-088CC3E78C89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81529013-6B87-40DF-9022-A2CA1A8E22F1}"
 	ProjectSection(SolutionItems) = preProject
-		Magic 8 Ball Answers.csv = Magic 8 Ball Answers.csv
-		Magic 8 Ball Answers.xlsx = Magic 8 Ball Answers.xlsx
-		Magic 8 Ball.docx = Magic 8 Ball.docx
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SupportFiles", "SupportFiles\SupportFiles.shproj", "{67D47A2D-D974-4A67-BDE7-CA340C3C2115}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,10 +64,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8CFEB513-61EE-4513-AB46-8D6638C32316} = {2DD3145B-DBBE-4E0F-B19C-FB5ACE1DAECC}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0CCDCE3-FD78-47C8-A32E-DE01676F9D21}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SupportFiles\SupportFiles.projitems*{67d47a2d-d974-4a67-bde7-ca340c3c2115}*SharedItemsImports = 13
+		Images\Images.projitems*{9e89d194-dcf6-4611-87aa-088cc3e78c89}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

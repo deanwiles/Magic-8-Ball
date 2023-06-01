@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9e89d194-dcf6-4611-87aa-088cc3e78c89</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Images</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\android-chrome-192x192.png" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\android-chrome-512x512.png" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\apple-touch-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\browserconfig.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\favicon-16x16.png" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\favicon-32x32.png" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\favicon.ico" />
+    <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\mstile-150x150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball Blazor.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball WinForm.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball.ico" />
+    <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Rotating Magic 8 Ball.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)favicon_package_v0.16.zip" />
+    <None Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\safari-pinned-tab.svg" />
+    <None Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\site.webmanifest" />
+    <None Include="$(MSBuildThisFileDirectory)Rotating Magic 8 Ball.xcf" />
+  </ItemGroup>
+</Project>
