@@ -1,4 +1,4 @@
-﻿using Magic8Ball.Shared;
+using Magic8Ball.Shared;
 
 // This C# sample is used to test the Classic Magic 8 Ball class.
 namespace Magic8Ball.WFClient;
