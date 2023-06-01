@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Company>Access Computer Systems</Company>
+    <Product>Magic 8 Ball</Product>
+    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
