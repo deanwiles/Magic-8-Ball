@@ -30,11 +30,11 @@ public partial class Form1 : Form
             txtAnswer.Text = string.Empty;
             txtAnswer.BackColor = colorNoAnswer;
             // Instantiate selected Magic 8 Ball service type
-            var service = cboService.SelectedItem as Magic8BallServiceDefinition 
+            var service = cboService.SelectedItem as Magic8BallServiceDefinition
                 ?? throw new Exception("No Magic 8 Ball Service selected");
-            var magic8BallType = Type.GetType(service.TypeName) 
+            var magic8BallType = Type.GetType(service.TypeName)
                 ?? throw new Exception($"Unrecognized Magic 8 Ball Service type '{service.TypeName}'");
-            var magic8BallService = Activator.CreateInstance(magic8BallType) as IMagic8BallService 
+            var magic8BallService = Activator.CreateInstance(magic8BallType) as IMagic8BallService
                 ?? throw new Exception($"Could not create Magic 8 Ball Service type '{service.TypeName}'");
             // Ask the Magic 8 Ball service the user's question
             string question = txtQuestion.Text;
