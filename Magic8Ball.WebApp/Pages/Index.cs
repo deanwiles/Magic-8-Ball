@@ -143,6 +143,7 @@ namespace Magic8Ball.WebApp.Pages
             ShowMessage = true;
             Message = new(ErrorMessage);
             StatusClass = "alert-danger";
+            IsBusy = false;
             StateHasChanged();
         }
 
