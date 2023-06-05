@@ -5,11 +5,26 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#03173d",
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "content/Magic 8 Ball.png",
+      "src": "/inages/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/Magic 8 Ball.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/favicon.ico",
+      "type": "image/x-icon"
     }
   ]
 }
