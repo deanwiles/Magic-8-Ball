@@ -1,6 +1,6 @@
 {
-  "name": "Magic8Ball.WebApp",
-  "short_name": "Magic8Ball.WebApp",
+  "name": "Magic 8 Ball",
+  "short_name": "Magic8Ball",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -14,7 +14,8 @@
     },
     {
       "src": "/images/favicon.ico",
-      "type": "image/x-icon"
+      "type": "image/x-icon",
+      "sizes":  "16x16 32x32 48x48"
     }
   ]
 }
