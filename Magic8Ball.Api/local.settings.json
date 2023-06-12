@@ -1,11 +1,11 @@
 {
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL": "false",
-    "Magic8Ball_WebApp_URL_Prod": "https://brave-sand-074cf3e1e.azurestaticapps.net",
-    "Magic8Ball_WebApp_URL_Dev": "https://localhost:44343",
-    "Magic8Ball_WebApp_URL": "https://localhost:44343"
-  }
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL": "false",
+        "Magic8Ball_WebApp_URL_Prod": "https://jolly-water-0879a521e.3.azurestaticapps.net",
+        "Magic8Ball_WebApp_URL_Dev": "https://localhost:44312",
+        "Magic8Ball_WebApp_URL": "https://localhost:44312"
+    }
 }
