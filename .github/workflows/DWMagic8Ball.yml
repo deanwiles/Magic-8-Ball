@@ -5,7 +5,7 @@ on:
     - refresh
 env:
   AZURE_FUNCTIONAPP_NAME: DWMagic8Ball
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: Magic8Ball.Api\.
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: Magic8Ball.Api/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: Magic8Ball.Api
@@ -47,11 +47,11 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        publish-profile: ${{ secrets.DWMagic8Ball_C4DC }}
+        publish-profile: ${{ secrets.DWMagic8Ball_7A58 }}
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.MAGIC_8_BALL_SPN }}
+        creds: ${{ secrets.Magic8BallApi_SPN }}
     - name: Import API into Azure API Management
       run: az apim api import --path "${{ env.AZURE_APIM_RESOURCE_PATH }}" --resource-group ${{ env.AZURE_APIM_RESOURCEGROUP }} --service-name ${{ env.AZURE_APIM_SERVICENAME }} --api-id ${{ env.AZURE_APIM_API_ID }} --specification-url "${{ env.AZURE_APIM_SWAGGERURL }}" --specification-format OpenApi --subscription-required false
