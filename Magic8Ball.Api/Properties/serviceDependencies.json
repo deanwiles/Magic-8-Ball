@@ -3,6 +3,9 @@
     "appInsights1": {
       "type": "appInsights"
     },
+    "apis1": {
+      "type": "apis"
+    },
     "storage1": {
       "type": "storage",
       "connectionId": "AzureWebJobsStorage"
