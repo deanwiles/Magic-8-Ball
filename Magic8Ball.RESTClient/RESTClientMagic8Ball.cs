@@ -9,7 +9,7 @@ namespace Magic8Ball.RESTClient;
 /// </summary>
 /// <remarks>
 /// This class represents the JSON object returned from a HTTP GET call to
-/// https://magic-8-ball.azurewebsites.net/api/ask?question={question}
+/// https://dwmagic8ball.azurewebsites.net/api/ask?question={question}
 /// </remarks>
 public class MagicResponse
 {
@@ -47,7 +47,7 @@ public class MagicResponse
 
 public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
 {
-    const string BaseUrl = "https://magic-8-ball.azurewebsites.net/api";
+    const string BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
 
     private static readonly HttpClient _client = new();
 

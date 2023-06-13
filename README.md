@@ -1,9 +1,9 @@
 # Magic 8 Ball
 This Visual Studio solution contains granular C# .NET projects that implement Data, Services and User Interfaces for both a Windows Forms and Blazor Web App. These projects are an evolving test bed for protyping various .NET technologies used to implement a simple random-answer generator inspired by the original Magic 8 Ball. 
 
-Click [here](https://brave-sand-074cf3e1e.azurestaticapps.net/) to run the latest test version of the [Magic 8 Ball Blazor Web App](https://brave-sand-074cf3e1e.azurestaticapps.net/) hosted as a Azure Static Web App.
+Click [here](https://jolly-water-0879a521e.3.azurestaticapps.net/) to run the latest test version of the [Magic 8 Ball Blazor Web App](https://jolly-water-0879a521e.3.azurestaticapps.net/) hosted as a Azure Static Web App.
 
-The Magic 8 Ball service is available as a local .NET 5.0 library named `Magic8Ball.Classic` or as an Azure Function, which can be accessed via a [REST API](https://magic-8-ball.azurewebsites.net/api/ask?question=Will%20I%20win%20the%20lottery?) or via the `Magic8Ball.RESTClient` library.
+The Magic 8 Ball service is available as a local .NET 6.0 library named `Magic8Ball.Classic` or as an Azure Function, which can be accessed via a [REST API](https://dwmagic8ball.azurewebsites.net/api/ask?question=Will%20I%20win%20the%20lottery?) or via the `Magic8Ball.RESTClient` library.
 
 If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://www.mattel.com/products/magic-8-ball-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
 
