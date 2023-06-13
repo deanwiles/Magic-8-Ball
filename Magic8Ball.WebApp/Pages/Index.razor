@@ -20,7 +20,7 @@ else
         <EditForm Model="@Magic8BallData" OnSubmit="AskQuestion">
             <div class="form-group">
                 <div>
-                    <label class="font-weight-bold">Instructions:</label>
+                    <label><strong>Instructions:</strong></label>
                     <button type="button" class="btn btn-outline-secondary" @onclick="@ToggleInstructions">
                         @(InstructionsCollapsed ? "+" : "-")
                     </button>
@@ -33,23 +33,24 @@ else
                 </div>
             </div>
             <div class="form-group">
-                <label for="question" class="font-weight-bold">Question:</label>
+                <label for="question"><strong>Question:</strong></label>
                 @*<InputText id="question" class="form-control" @bind-Value="@Question" placeholder="Enter question"></InputText>*@
                 <input @ref="QuestionInput" id="question" class="form-control" @bind="@Question" />
             </div>
             <div>
+                <p/>
                 <button @ref="SubmitButton" type="submit" class="btn btn-outline-light btn-magic8ball">
                     <img src="/images/Magic 8 Ball.png" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "d-none": "")" />
                     <img src="/images/Rotating Magic 8 Ball.gif" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "": "d-none")" />
                 </button>
-                <p />
+                <p/>
             </div>
             <div class="form-group">
-                <label class="font-weight-bold">Answer:</label>
+                <label><strong>Answer:</strong></label>
                 <label class="form-control @AnswerStyle">@Answer</label>
             </div>
             @*<div class="form-group">
-                    <label class="font-weight-bold">Answer Type:</label>
+                    <label><strong>Answer Type:</strong></label>
                     <label class="form-control">@Magic8BallData.Type.ToString()</label>
                 </div>*@
         </EditForm>
