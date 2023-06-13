@@ -79,6 +79,7 @@ public class Magic8BallApi
 
         // Redirect to Magic 8 Ball Azure Static Web App
         string Url = Environment.GetEnvironmentVariable(Environment.UserInteractive ? "Magic8Ball_WebApp_URL_Dev" : "Magic8Ball_WebApp_URL");
+        _logger.LogInformation($"Redirecting to Url = \"{Url}\"...");
         return new RedirectResult(Url);
     }
 }
