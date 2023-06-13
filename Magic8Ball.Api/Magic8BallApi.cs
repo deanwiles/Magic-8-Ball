@@ -60,10 +60,11 @@ public class Magic8BallApi
             return new BadRequestObjectResult(msg);
         }
 
-        // Create JSON serializer that handles enumerations
+        // Create JSON serializer that indents and uses camelCase property names and enumerations
         var settings = new JsonSerializerSettings
         {
             Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
             Converters = { new StringEnumConverter(new CamelCaseNamingStrategy()) }
         };
 
@@ -72,7 +73,7 @@ public class Magic8BallApi
     }
 
     [FunctionName("App")]
-    public IActionResult App([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest request)
+    public IActionResult App([HttpTrigger(AuthorizationLevel.Anonymous)] HttpRequest request)
     {
         _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
 

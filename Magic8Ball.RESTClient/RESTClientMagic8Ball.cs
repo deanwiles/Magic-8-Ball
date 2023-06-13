@@ -1,5 +1,6 @@
 ﻿using Magic8Ball.Shared;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Magic8Ball.RESTClient;
@@ -64,7 +65,7 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
             // Send HTTP GET request and parse JSON response
             // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
             string url = $"{BaseUrl}/ask?question={Uri.EscapeDataString(Question)}";
-            var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url) 
+            var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web)) 
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Save question, answer and type
             this.Question = Question;

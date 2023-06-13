@@ -78,8 +78,7 @@ public partial class Index
             // Clear any previous answer
             ClearAnswer();
             // Ask the Magic 8 Ball service the user's question
-            var service = Magic8BallData as IMagic8BallService;
-            if (Magic8BallData == null || service == null)
+            if (Magic8BallData == null || Magic8BallData is not IMagic8BallService service)
                 throw new Exception("Magic 8 Ball Service not initialized");
             await service.AskAsync(Question);
             // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
