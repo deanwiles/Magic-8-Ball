@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Function App DWMagic8Ball
 on:
   push:
     branches:
-    - refresh
+    - master
 env:
   AZURE_FUNCTIONAPP_NAME: DWMagic8Ball
   AZURE_FUNCTIONAPP_PACKAGE_PATH: Magic8Ball.Api/publish
