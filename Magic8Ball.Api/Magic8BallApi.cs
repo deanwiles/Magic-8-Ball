@@ -1,78 +1,90 @@
-using Azure.Core.Serialization;
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System;
+using System.IO;
 using System.Net;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Magic8Ball.Api
+namespace Magic8Ball.Api;
+
+public class Magic8BallApi
 {
-    public static class Magic8BallApi
+    private readonly ILogger<Magic8BallApi> _logger;
+
+    public Magic8BallApi(ILogger<Magic8BallApi> log)
     {
-        [Function("Ask")]
-        public static async Task<HttpResponseData> Ask([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-            FunctionContext executionContext)
+        _logger = log;
+    }
+
+    [FunctionName("Ask")]
+    [OpenApiOperation(operationId: "Ask", tags: new[] { "Magic8Ball" }, Description = "Ask the Magic 8 Ball a question")]
+    [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string), 
+        Description = "The Yes/No question to ask of the Magic 8 Ball")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", 
+        bodyType: typeof(Classic.ClassicMagic8Ball), Description = "The Magic 8 Ball's response")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", 
+        bodyType: typeof(string), Description = "The error response message")]
+    public async Task<IActionResult> Ask(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request)
+    {
+        _logger.LogInformation("C# HTTP trigger function processed an 'Ask' request...");
+
+        // Check for Question in GET query or in POST body
+        string question = request.Query["question"];
+        if (StringValues.IsNullOrEmpty(question))
         {
-            var logger = executionContext.GetLogger("Ask");
-            logger.LogInformation("C# HTTP trigger function processing an 'Ask' request...");
+            string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
+            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            question = data?.question;
+        }
+        _logger.LogInformation($"Question = \"{question}\".");
 
-            // Check for Question in GET query or in POST body
-            string question = null;
-            if (executionContext.BindingContext.BindingData.TryGetValue("question", out object value))
-            {
-                // Yes, save the string value
-                question = value as string;
-            }
-            logger.LogInformation($"Question = '{question}'.");
-
-            // Ask the Classic Magic 8 Ball service the provided question
-            var magic8Ball = new Classic.ClassicMagic8Ball();
-            try
-            {
-                await magic8Ball.AskAsync(question);
-                logger.LogInformation($"Answer = '{magic8Ball.Answer}', Type = '{magic8Ball.Type}'.");
-            }
-            catch (Exception ex)
-            {
-                // Return error message
-                string msg = ex.Message;
-                if (null != ex.InnerException) msg += $"{Environment.NewLine}{ex.InnerException.Message}";
-                var error = req.CreateResponse(HttpStatusCode.BadRequest);
-                await error.WriteStringAsync(msg);
-                return error;
-            }
-
-            // Create JSON serializer that handles enumerations
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
-            };
-            var serializer = new JsonObjectSerializer(options);
-            
-            // Return Magic8Ball object as JSON
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            await response.WriteAsJsonAsync(magic8Ball, serializer);
-
-            return response;
+        // Ask the Classic Magic 8 Ball service the provided question
+        var magic8Ball = new Classic.ClassicMagic8Ball();
+        try
+        {
+            await magic8Ball.AskAsync(question);
+            _logger.LogInformation($"Answer = \"{magic8Ball.Answer}\", Type = \"{magic8Ball.Type}\".");
+        }
+        catch (Exception ex)
+        {
+            // Return error message
+            string msg = ex.Message;
+            if (null != ex.InnerException) msg += $"{Environment.NewLine}{ex.InnerException.Message}";
+            _logger.LogInformation($"Error = \"{msg}\".");
+            return new BadRequestObjectResult(msg);
         }
 
-        [Function("App")]
-        public static HttpResponseData App([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
-            FunctionContext executionContext)
+        // Create JSON serializer that indents and uses camelCase property names and enumerations
+        var settings = new JsonSerializerSettings
         {
-            var logger = executionContext.GetLogger("App");
-            logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
+            Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
+            Converters = { new StringEnumConverter(new CamelCaseNamingStrategy()) }
+        };
 
-            // Redirect to Magic 8 Ball Azure Static Web App
-            string Url = Environment.GetEnvironmentVariable("Magic8Ball_WebApp_URL");
-            var response = req.CreateResponse(HttpStatusCode.Moved);
-            response.Headers.Add("Location", Url);
+        // Return Magic8Ball object as JSON
+        return new JsonResult(magic8Ball, settings);
+    }
 
-            return response;
-        }
+    [FunctionName("App")]
+    public IActionResult App([HttpTrigger(AuthorizationLevel.Anonymous)] HttpRequest request)
+    {
+        _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
+
+        // Redirect to Magic 8 Ball Azure Static Web App
+        string Url = Environment.GetEnvironmentVariable(Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL");
+        _logger.LogInformation($"Redirecting to Url = \"{Url}\"...");
+        return new RedirectResult(Url);
     }
 }
+

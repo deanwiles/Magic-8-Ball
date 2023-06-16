@@ -6,6 +6,9 @@
                 "isEnabled": true,
                 "excludedTypes": "Request"
             }
+        },
+        "logLevel": {
+            "Magic8Ball.Api.Magic8BallApi": "Information"
         }
     }
 }
