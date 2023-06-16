@@ -26,9 +26,13 @@ public class Magic8BallApi
     }
 
     [FunctionName("Ask")]
-    [OpenApiOperation(operationId: "Ask", tags: new[] { "Magic8Ball" })]
-    [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The Yes/No question to ask")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
+    [OpenApiOperation(operationId: "Ask", tags: new[] { "Magic8Ball" }, Description = "Ask the Magic 8 Ball a question")]
+    [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string), 
+        Description = "The Yes/No question to ask of the Magic 8 Ball")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", 
+        bodyType: typeof(Classic.ClassicMagic8Ball), Description = "The Magic 8 Ball's response")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", 
+        bodyType: typeof(string), Description = "The error response message")]
     public async Task<IActionResult> Ask(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request)
     {
@@ -78,7 +82,7 @@ public class Magic8BallApi
         _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
 
         // Redirect to Magic 8 Ball Azure Static Web App
-        string Url = Environment.GetEnvironmentVariable(Environment.UserInteractive ? "Magic8Ball_WebApp_URL_Dev" : "Magic8Ball_WebApp_URL");
+        string Url = Environment.GetEnvironmentVariable(Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL");
         _logger.LogInformation($"Redirecting to Url = \"{Url}\"...");
         return new RedirectResult(Url);
     }
