@@ -35,7 +35,7 @@ public partial class Index
     {
         Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
         // Default to classic if Service not specified
-        if (string.IsNullOrWhiteSpace(Service)) Service = "classic";
+        if (string.IsNullOrWhiteSpace(Service)) Service = "Classic";
         // Instantiate specified Magic 8 Ball service type
         Magic8BallData = Service.ToLower() switch
         {
