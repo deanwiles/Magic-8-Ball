@@ -2,6 +2,9 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Google.Ai.Generativelanguage.V1Beta2;
+using Google.Api.Gax.Grpc;
+using Google.Apis.Auth.OAuth2;
 
 namespace Magic8Ball.AIClient;
 
