@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <Company>Access Computer Systems</Company>
     <Product>Magic 8 Ball</Product>
-    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
+    <Copyright>Copyright © 2020-2024 Access Computer Systems</Copyright>
   </PropertyGroup>
 
 </Project>

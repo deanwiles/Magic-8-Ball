@@ -9,7 +9,7 @@
     <Title>Magic 8 Ball WinForm Client</Title>
     <Company>Access Computer Systems</Company>
     <Product>Magic 8 Ball</Product>
-    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
+    <Copyright>Copyright © 2020-2024 Access Computer Systems</Copyright>
     <PackageIcon>Magic 8 Ball.png</PackageIcon>
   </PropertyGroup>
 
@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.AIClient\Magic8Ball.AIClient.csproj" />
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj" />
   </ItemGroup>

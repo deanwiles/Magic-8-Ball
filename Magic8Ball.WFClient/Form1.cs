@@ -74,7 +74,9 @@ public partial class Form1 : Form
             new Magic8BallServiceDefinition("Classic Magic 8 Ball Answers",
                 GetAssemblyQualifiedName(typeof(Classic.ClassicMagic8Ball))),
             new Magic8BallServiceDefinition("Azure Function Magic 8 Ball REST Service",
-                GetAssemblyQualifiedName(typeof(RESTClient.RESTClientMagic8Ball)))
+                GetAssemblyQualifiedName(typeof(RESTClient.RESTClientMagic8Ball))),
+            new Magic8BallServiceDefinition("Artificial Intelligence Magic 8 Ball Service",
+                GetAssemblyQualifiedName(typeof(AIClient.AIClientMagic8Ball)))
         };
         cboService.DataSource = list;
         cboService.ValueMember = "TypeName";

@@ -41,6 +41,7 @@ public partial class Index
         {
             "classic" => new Classic.ClassicMagic8Ball(),
             "azure" => new RESTClient.RESTClientMagic8Ball(),
+            "ai" => new AIClient.AIClientMagic8Ball(),
             _ => null,
         };
         // Check if service created
