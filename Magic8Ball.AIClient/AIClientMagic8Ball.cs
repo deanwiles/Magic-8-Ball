@@ -1,6 +1,7 @@
 ﻿using Google.Ai.Generativelanguage.V1Beta2;
 using Google.Api.Gax.Grpc;
 using Google.Apis.Auth.OAuth2;
+using Google.Protobuf.Collections;
 using Magic8Ball.Shared;
 
 namespace Magic8Ball.AIClient;
@@ -73,35 +74,32 @@ public class AIClientMagic8Ball : Magic8BallData, IMagic8BallService
             var apiKey = "AIzaSyBNvpP3kciiZd0bmSoTT8zm-x4wa5Z1c54";
             var callSettings = CallSettings.FromHeader("x-goog-api-key", apiKey);
 
-            // Setup Text service call
+            // Setup GenerateText service call
             var textServiceClientBuilder = new TextServiceClientBuilder()
             {
                 GoogleCredential = GoogleCredential.FromAccessToken(null),
-                Settings = new TextServiceSettings()
-                {
-                    CallSettings = callSettings,
-                }
+                Settings = new TextServiceSettings() { CallSettings = callSettings }
             };
-
             var textServiceClient = textServiceClientBuilder.Build();
-
-            var textPrompt = new TextPrompt 
-            { 
-                Text = promptText 
-            };
-
             var textRequest = new GenerateTextRequest
             {
                 ModelAsModelName = ModelName.FromModel("text-bison-001"),
-                Prompt = textPrompt,
+                Prompt = new TextPrompt { Text = promptText },
                 Temperature = 0.7F,
-                TopK = 40, 
+                TopK = 40,
                 TopP = 0.95F,
                 CandidateCount = 1,
                 MaxOutputTokens = 80
-                // TODO: Add SafetySettings
-                // [{'category':'HARM_CATEGORY_DEROGATORY','threshold':1},{'category':'HARM_CATEGORY_TOXICITY','threshold':1{'category':'HARM_CATEGORY_VIOLENCE','threshold':1},{'category':'HARM_CATEGORY_SEXUAL','threshold':2},{'category':'HARM_CATEGORY_MEDICAL','threshold':2},{'category':'HARM_CATEGORY_DANGEROUS','threshold':1}]
             };
+            textRequest.SafetySettings.AddRange(new RepeatedField<SafetySetting>
+            {
+                new SafetySetting { Category = HarmCategory.Derogatory, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new SafetySetting { Category = HarmCategory.Toxicity, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new SafetySetting { Category = HarmCategory.Violence, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new SafetySetting { Category = HarmCategory.Sexual, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new SafetySetting { Category = HarmCategory.Medical, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockMediumAndAbove },
+                new SafetySetting { Category = HarmCategory.Dangerous, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove }
+            });
 
             // Generate contextual and toned answer text
             GenerateTextResponse textResponse = await textServiceClient.GenerateTextAsync(textRequest);
