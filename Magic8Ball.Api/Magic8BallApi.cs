@@ -76,6 +76,57 @@ public class Magic8BallApi
         return new JsonResult(magic8Ball, settings);
     }
 
+    [FunctionName("AskAI")]
+    [OpenApiOperation(operationId: "AskAI", tags: new[] { "Magic8Ball" }, Description = "Ask the Artificially Intelligent Magic 8 Ball a question")]
+    [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string),
+        Description = "The Yes/No question to ask of the AI Magic 8 Ball")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json",
+        bodyType: typeof(AIClient.AIClientMagic8Ball), Description = "The AI Magic 8 Ball's response")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain",
+        bodyType: typeof(string), Description = "The error response message")]
+    public async Task<IActionResult> AskAI(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request)
+    {
+        _logger.LogInformation("C# HTTP trigger function processed an 'AskAI' request...");
+
+        // Check for Question in GET query or in POST body
+        string question = request.Query["question"];
+        if (StringValues.IsNullOrEmpty(question))
+        {
+            string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
+            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            question = data?.question;
+        }
+        _logger.LogInformation($"Question = \"{question}\".");
+
+        // Ask the AI Magic 8 Ball service the provided question
+        var magic8Ball = new AIClient.AIClientMagic8Ball();
+        try
+        {
+            await magic8Ball.AskAsync(question);
+            _logger.LogInformation($"Answer = \"{magic8Ball.Answer}\", Type = \"{magic8Ball.Type}\".");
+        }
+        catch (Exception ex)
+        {
+            // Return error message
+            string msg = ex.Message;
+            if (null != ex.InnerException) msg += $"{Environment.NewLine}{ex.InnerException.Message}";
+            _logger.LogInformation($"Error = \"{msg}\".");
+            return new BadRequestObjectResult(msg);
+        }
+
+        // Create JSON serializer that indents and uses camelCase property names and enumerations
+        var settings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
+            Converters = { new StringEnumConverter(new CamelCaseNamingStrategy()) }
+        };
+
+        // Return Magic8Ball object as JSON
+        return new JsonResult(magic8Ball, settings);
+    }
+
     [FunctionName("App")]
     public IActionResult App([HttpTrigger(AuthorizationLevel.Anonymous)] HttpRequest request)
     {
