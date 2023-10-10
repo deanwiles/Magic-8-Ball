@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.Shared\Magic8Ball.Shared.csproj" />
   </ItemGroup>
 
