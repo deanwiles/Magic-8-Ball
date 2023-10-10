@@ -109,7 +109,7 @@ public class AIClientMagic8Ball : Magic8BallData, IMagic8BallService
             // Save question, answer and type
             this.Question = Question;
             Type = magic8Ball.Type;
-            Answer = textResponse.Candidates[0].Output;
+            Answer = textResponse.Candidates[0].Output.Trim('"');
 
             // Return this Magic 8 Ball object with resulting Question, Answer and Type
             return this;

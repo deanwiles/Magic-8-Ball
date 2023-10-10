@@ -46,14 +46,14 @@
             txtQuestion.Location = new Point(18, 98);
             txtQuestion.Margin = new Padding(4, 3, 4, 3);
             txtQuestion.Name = "txtQuestion";
-            txtQuestion.Size = new Size(468, 23);
+            txtQuestion.Size = new Size(485, 23);
             txtQuestion.TabIndex = 3;
             txtQuestion.Text = "Will I win the lottery?";
             // 
             // lblQuestion
             // 
             lblQuestion.AutoSize = true;
-            lblQuestion.Location = new Point(14, 78);
+            lblQuestion.Location = new Point(18, 80);
             lblQuestion.Margin = new Padding(4, 0, 4, 0);
             lblQuestion.Name = "lblQuestion";
             lblQuestion.Size = new Size(58, 15);
@@ -65,14 +65,16 @@
             txtAnswer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtAnswer.Location = new Point(18, 157);
             txtAnswer.Margin = new Padding(4, 3, 4, 3);
+            txtAnswer.Multiline = true;
             txtAnswer.Name = "txtAnswer";
-            txtAnswer.Size = new Size(468, 23);
+            txtAnswer.ScrollBars = ScrollBars.Both;
+            txtAnswer.Size = new Size(595, 51);
             txtAnswer.TabIndex = 6;
             // 
             // lblAnswer
             // 
             lblAnswer.AutoSize = true;
-            lblAnswer.Location = new Point(14, 137);
+            lblAnswer.Location = new Point(18, 139);
             lblAnswer.Margin = new Padding(4, 0, 4, 0);
             lblAnswer.Name = "lblAnswer";
             lblAnswer.Size = new Size(49, 15);
@@ -85,10 +87,10 @@
             btnMagic8Ball.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnMagic8Ball.BackgroundImage = Properties.Resources.Magic_8_Ball;
             btnMagic8Ball.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMagic8Ball.Location = new Point(511, 38);
+            btnMagic8Ball.Location = new Point(530, 38);
             btnMagic8Ball.Margin = new Padding(4, 3, 4, 3);
             btnMagic8Ball.Name = "btnMagic8Ball";
-            btnMagic8Ball.Size = new Size(142, 142);
+            btnMagic8Ball.Size = new Size(83, 83);
             btnMagic8Ball.TabIndex = 4;
             btnMagic8Ball.UseVisualStyleBackColor = true;
             btnMagic8Ball.Click += BtnMagic8Ball_Click;
@@ -96,7 +98,7 @@
             // lblService
             // 
             lblService.AutoSize = true;
-            lblService.Location = new Point(14, 19);
+            lblService.Location = new Point(18, 20);
             lblService.Margin = new Padding(4, 0, 4, 0);
             lblService.Name = "lblService";
             lblService.Size = new Size(114, 15);
@@ -110,16 +112,16 @@
             cboService.FormattingEnabled = true;
             cboService.Location = new Point(18, 38);
             cboService.Name = "cboService";
-            cboService.Size = new Size(468, 23);
+            cboService.Size = new Size(485, 23);
             cboService.TabIndex = 1;
             // 
             // rtbInstructions
             // 
             rtbInstructions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            rtbInstructions.Location = new Point(18, 221);
+            rtbInstructions.Location = new Point(18, 248);
             rtbInstructions.Name = "rtbInstructions";
             rtbInstructions.ReadOnly = true;
-            rtbInstructions.Size = new Size(636, 84);
+            rtbInstructions.Size = new Size(595, 86);
             rtbInstructions.TabIndex = 8;
             rtbInstructions.TabStop = false;
             rtbInstructions.Text = resources.GetString("rtbInstructions.Text");
@@ -127,7 +129,7 @@
             // lblInstructions
             // 
             lblInstructions.AutoSize = true;
-            lblInstructions.Location = new Point(18, 203);
+            lblInstructions.Location = new Point(18, 230);
             lblInstructions.Margin = new Padding(4, 0, 4, 0);
             lblInstructions.Name = "lblInstructions";
             lblInstructions.Size = new Size(72, 15);
@@ -139,7 +141,7 @@
             AcceptButton = btnMagic8Ball;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(674, 320);
+            ClientSize = new Size(633, 357);
             Controls.Add(lblInstructions);
             Controls.Add(rtbInstructions);
             Controls.Add(cboService);
