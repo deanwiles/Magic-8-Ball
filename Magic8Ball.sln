@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SupportFiles", "SupportFiles\SupportFiles.shproj", "{67D47A2D-D974-4A67-BDE7-CA340C3C2115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.AIClient", "Magic8Ball.AIClient\Magic8Ball.AIClient.csproj", "{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.AI", "Magic8Ball.AI\Magic8Ball.AI.csproj", "{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

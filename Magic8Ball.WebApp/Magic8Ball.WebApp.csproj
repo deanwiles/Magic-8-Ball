@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Magic8Ball.AIClient\Magic8Ball.AIClient.csproj" />
+    <ProjectReference Include="..\Magic8Ball.AI\Magic8Ball.AI.csproj" />
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj" />
   </ItemGroup>

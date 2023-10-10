@@ -4,9 +4,9 @@ using Google.Apis.Auth.OAuth2;
 using Google.Protobuf.Collections;
 using Magic8Ball.Shared;
 
-namespace Magic8Ball.AIClient;
+namespace Magic8Ball.AI;
 
-public class AIClientMagic8Ball : Magic8BallData, IMagic8BallService
+public class AIMagic8Ball : Magic8BallData, IMagic8BallService
 {
     private static readonly string _negativePrompt = "negative";
     private static readonly string _neutralPrompt = "neutral";

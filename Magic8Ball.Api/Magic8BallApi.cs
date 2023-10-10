@@ -81,7 +81,7 @@ public class Magic8BallApi
     [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string),
         Description = "The Yes/No question to ask of the AI Magic 8 Ball")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json",
-        bodyType: typeof(AIClient.AIClientMagic8Ball), Description = "The AI Magic 8 Ball's response")]
+        bodyType: typeof(AI.AIMagic8Ball), Description = "The AI Magic 8 Ball's response")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain",
         bodyType: typeof(string), Description = "The error response message")]
     public async Task<IActionResult> AskAI(
@@ -100,7 +100,7 @@ public class Magic8BallApi
         _logger.LogInformation($"Question = \"{question}\".");
 
         // Ask the AI Magic 8 Ball service the provided question
-        var magic8Ball = new AIClient.AIClientMagic8Ball();
+        var magic8Ball = new AI.AIMagic8Ball();
         try
         {
             await magic8Ball.AskAsync(question);
