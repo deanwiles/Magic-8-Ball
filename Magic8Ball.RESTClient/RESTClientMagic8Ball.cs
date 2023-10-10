@@ -53,7 +53,7 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
     private static readonly HttpClient _client = new();
 
     /// <summary>
-    /// Ask the Magic 8 Ball a Question
+    /// Ask the Classic Magic 8 Ball a Question
     /// </summary>
     /// <param name="Question">Yes/No question to ask</param>
     /// <returns>This Magic 8 Ball object with resulting Question, Answer and Type</returns>
@@ -66,6 +66,35 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
             // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
             string url = $"{BaseUrl}/ask?question={Uri.EscapeDataString(Question)}";
             var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web)) 
+                ?? throw new Exception("No Magic 8 Ball response received");
+            // Save question, answer and type
+            this.Question = Question;
+            Type = magicResponse.Type;
+            Answer = magicResponse.Answer;
+            // Return this Magic 8 Ball object with resulting Question, Answer and Type
+            return this;
+        }
+        catch (Exception ex)
+        {
+            // Wrap and rethrow the error back to caller with some context
+            throw new Exception($"Failed asking the Magic 8 Ball '{Question}'.", ex);
+        }
+    }
+
+    /// <summary>
+    /// Ask the Artificially Intelligent Magic 8 Ball a Question
+    /// </summary>
+    /// <param name="Question">Yes/No question to ask</param>
+    /// <returns>This Magic 8 Ball object with resulting Question, Answer and Type</returns>
+    public async Task<Magic8BallData> AskAIAsync(string Question)
+    {
+        // Catch and log any errors
+        try
+        {
+            // Send HTTP GET request and parse JSON response
+            // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
+            string url = $"{BaseUrl}/askai?question={Uri.EscapeDataString(Question)}";
+            var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web))
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Save question, answer and type
             this.Question = Question;
