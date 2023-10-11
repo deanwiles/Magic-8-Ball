@@ -41,7 +41,9 @@ public partial class Index
         {
             "classic" => new Classic.ClassicMagic8Ball(),
             "azure" => new RESTClient.RESTClientMagic8Ball(),
-            "ai" => new AI.AIMagic8Ball(),
+            // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
+            // "ai" => new AI.AIMagic8Ball(),
+            "ai" => new RESTClient.RESTClientMagic8Ball(),
             _ => null,
         };
         // Check if service created
@@ -78,10 +80,15 @@ public partial class Index
             stopWatch.Start();
             // Clear any previous answer
             ClearAnswer();
-            // Ask the Magic 8 Ball service the user's question
+            // Verify we have a valid Magic 8 Ball service
             if (Magic8BallData == null || Magic8BallData is not IMagic8BallService service)
                 throw new Exception("Magic 8 Ball Service not initialized");
-            await service.AskAsync(Question);
+            // Ask the Magic 8 Ball service the user's question
+            // Note that for the AI service, we'll call it indirectly via the Azure function
+            if ((string.Compare(Service, "ai", true) == 0) && (Magic8BallData is RESTClient.RESTClientMagic8Ball restService))
+                await restService.AskAIAsync(Question);
+            else
+                await service.AskAsync(Question);
             // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
             stopWatch.Stop();
             double magicDelay = 500 - stopWatch.Elapsed.TotalMilliseconds;  // 1/2 second
