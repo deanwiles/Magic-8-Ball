@@ -5,10 +5,10 @@ on:
     - AI
 env:
   AZURE_FUNCTIONAPP_NAME: DWMagic8BallTest
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: .\.
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: Magic8Ball.Api/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: .
+  WORKING_DIRECTORY: Magic8Ball.Api
 jobs:
   build:
     runs-on: windows-latest
