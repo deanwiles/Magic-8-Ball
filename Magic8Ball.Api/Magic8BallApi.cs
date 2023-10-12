@@ -40,11 +40,11 @@ public class Magic8BallApi
         _logger.LogInformation("C# HTTP trigger function processed an 'Ask' request...");
 
         // Check for Question in GET query or in POST body
-        string question = request.Query["question"];
-        if (StringValues.IsNullOrEmpty(question))
+        string? question = request.Query["question"];
+        if (string.IsNullOrEmpty(question))
         {
             string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic? data = JsonConvert.DeserializeObject(requestBody);
             question = data?.question;
         }
         _logger.LogInformation($"Question = \"{question}\"");
@@ -53,6 +53,8 @@ public class Magic8BallApi
         var magic8Ball = new Classic.ClassicMagic8Ball();
         try
         {
+            if (string.IsNullOrEmpty(question))
+                throw new Exception("The Magic 8 Ball can only provide an Answer when a Question is asked.");
             await magic8Ball.AskAsync(question);
             _logger.LogInformation($"Answer = \"{magic8Ball.Answer}\"");
             _logger.LogInformation($"Type = \"{magic8Ball.Type}\"");
@@ -92,11 +94,11 @@ public class Magic8BallApi
         _logger.LogInformation("C# HTTP trigger function processed an 'AskAI' request...");
 
         // Check for Question in GET query or in POST body
-        string question = request.Query["question"];
-        if (StringValues.IsNullOrEmpty(question))
+        string? question = request.Query["question"];
+        if (string.IsNullOrEmpty(question))
         {
             string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic? data = JsonConvert.DeserializeObject(requestBody);
             question = data?.question;
         }
         _logger.LogInformation($"Question = \"{question}\"");
@@ -105,6 +107,8 @@ public class Magic8BallApi
         var magic8Ball = new AI.AIMagic8Ball();
         try
         {
+            if (string.IsNullOrEmpty(question))
+                throw new Exception("The Magic 8 Ball can only provide an Answer when a Question is asked.");
             await magic8Ball.AskAsync(question);
             _logger.LogInformation($"Answer = \"{magic8Ball.Answer}\"");
             _logger.LogInformation($"Type = \"{magic8Ball.Type}\"");
@@ -136,7 +140,13 @@ public class Magic8BallApi
         _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
 
         // Redirect to Magic 8 Ball Azure Static Web App
-        string Url = Environment.GetEnvironmentVariable(Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL");
+        string setting = Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL";
+        string? Url = Environment.GetEnvironmentVariable(setting);
+        if (Url == null)
+        {
+            _logger.LogInformation($"Error: Missing environment variable \"{setting}\"");
+            return new NotFoundResult();
+        }
         _logger.LogInformation($"Redirecting to Url = \"{Url}\"...");
         return new RedirectResult(Url);
     }

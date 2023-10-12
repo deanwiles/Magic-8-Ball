@@ -3,6 +3,7 @@ using Google.Api.Gax.Grpc;
 using Google.Apis.Auth.OAuth2;
 using Google.Protobuf.Collections;
 using Magic8Ball.Shared;
+using System;
 
 namespace Magic8Ball.AI;
 
@@ -71,7 +72,10 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
 
             // Get PaLM API key
             // TODO: move the API key to a private location
-            var apiKey = "AIzaSyBNvpP3kciiZd0bmSoTT8zm-x4wa5Z1c54";
+            string setting = "Magic8Ball_PaLM_API_Key";
+            string? apiKey = Environment.GetEnvironmentVariable(setting);
+            if (string.IsNullOrEmpty(apiKey))
+                throw new Exception($"Error: Missing environment variable \"{setting}\"");
             var callSettings = CallSettings.FromHeader("x-goog-api-key", apiKey);
 
             // Setup GenerateText service call
