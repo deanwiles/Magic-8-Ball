@@ -71,7 +71,6 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             string promptText = $"provide a {promptType}﻿ contextual response, speaking as a friend in ﻿﻿{tone}﻿ tone, to the question \"﻿{Question}\"";
 
             // Get PaLM API key
-            // TODO: move the API key to a private location
             string setting = "Magic8Ball_PaLM_API_Key";
             string? apiKey = Environment.GetEnvironmentVariable(setting);
             if (string.IsNullOrEmpty(apiKey))

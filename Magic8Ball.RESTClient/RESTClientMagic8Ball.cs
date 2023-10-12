@@ -48,8 +48,8 @@ public class MagicResponse
 
 public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
 {
-    const string BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
-    const string TestUrl = "http://localhost:7138/api";
+    //private readonly string BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
+    private readonly string BaseUrl = "https://dwmagic8balltest.azurewebsites.net/api";
 
     private static readonly HttpClient _client = new();
 
@@ -65,8 +65,7 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
         {
             // Send HTTP GET request and parse JSON response
             // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
-            //string url = $"{BaseUrl}/ask?question={Uri.EscapeDataString(Question)}";
-            string url = $"{TestUrl}/ask?question={Uri.EscapeDataString(Question)}";
+            string url = $"{BaseUrl}/ask?question={Uri.EscapeDataString(Question)}";
             var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web)) 
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Save question, answer and type
@@ -95,7 +94,7 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
         {
             // Send HTTP GET request and parse JSON response
             // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
-            string url = $"{TestUrl}/askai?question={Uri.EscapeDataString(Question)}";
+            string url = $"{BaseUrl}/askai?question={Uri.EscapeDataString(Question)}";
             var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web))
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Save question, answer and type
