@@ -48,6 +48,7 @@ public class MagicResponse
 
 public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
 {
+    // TODO: Need a configurable way to specify Test Api Url
     //private readonly string BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
     private readonly string BaseUrl = "https://dwmagic8balltest.azurewebsites.net/api";
 
