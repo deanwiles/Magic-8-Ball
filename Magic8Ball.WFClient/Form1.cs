@@ -69,13 +69,14 @@ public partial class Form1 : Form
             // Ask the Magic 8 Ball service the user's question
             string question = txtQuestion.Text;
             Cursor = Cursors.WaitCursor;
-            //// Note that for the AI service, we'll call it indirectly via the Azure function
-            //if ((string.Compare(Service, "ai", true) == 0) && (Magic8BallData is RESTClient.RESTClientMagic8Ball restService))
-            //    await restService.AskAIAsync(Question);
-            //else
-            //    await service.AskAsync(Question);
-            var magic8BallData = await magic8BallService.AskAsync(question)
-                ?? throw new Exception("No Magic 8 Ball response received");
+            // Note that for the AI service, we'll call it indirectly via the Azure function
+            Magic8BallData magic8BallData;
+            if ((string.Compare(service.ShortName, "ai-azure", true) == 0) && (magic8BallService is RESTClient.RESTClientMagic8Ball restService))
+                magic8BallData = await restService.AskAIAsync(question);
+            else
+                magic8BallData = await magic8BallService.AskAsync(question);
+            if (magic8BallData == null)
+                throw new Exception("No Magic 8 Ball response received");
             // Display and color code the answer
             txtAnswer.Text = magic8BallData.Answer;
             var iType = magic8BallData.Type;
