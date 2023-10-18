@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 
 namespace Magic8Ball.WFClient
 {
@@ -10,12 +9,13 @@ namespace Magic8Ball.WFClient
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static void Main()
         {
             // To register all default providers:
-            var host = Host.CreateDefaultBuilder(args).Build();
+            string? environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT"); ;
             var builder = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true);
             Configuration = builder.Build();
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.

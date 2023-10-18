@@ -48,8 +48,9 @@ public partial class Form1 : Form
             {
                 case "classic": // Classic Magic 8 Ball Service
                     // Check for Custom Answers
-                    var customAnswers = Program.Configuration?.GetSection("CustomAnswers").Get<GroupedMagicAnswers>();
-                    var predefinedAnswers = (customAnswers?.ToPredefinedMagicAnswers()) ?? PredefinedMagicAnswers.ClassicAnswers;
+                    var customAnswers = Program.Configuration?["ClassicMagic8Ball:CustomAnswers"];
+                    var customAnswerSet = Program.Configuration?.GetSection($"ClassicMagic8Ball:{customAnswers}").Get<GroupedMagicAnswers>();
+                    var predefinedAnswers = (customAnswerSet?.ToPredefinedMagicAnswers()) ?? PredefinedMagicAnswers.ClassicAnswers;
                     magic8BallService = new ClassicMagic8Ball(predefinedAnswers);
                     break;
                 case "azure":   // "Azure Function Magic 8 Ball REST Service"

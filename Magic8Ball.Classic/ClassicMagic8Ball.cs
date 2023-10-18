@@ -83,8 +83,6 @@ public class GroupedMagicAnswers
     /// </summary>
     public List<string> Positive { get; set; } = new();
 
-    private MagicAnswer ToMagicAnswer(AnswerType Type, string Answer) => new MagicAnswer(Type, Answer);
-
     /// <summary>
     /// Return the Collection of Magic 8 Ball Answers grouped by AnswerType as a Predefined List of MagicAnswers
     /// </summary>
