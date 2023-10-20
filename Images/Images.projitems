@@ -17,6 +17,7 @@
     <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\favicon-32x32.png" />
     <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\favicon.ico" />
     <Content Include="$(MSBuildThisFileDirectory)favicon_package_v0.16\mstile-150x150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball Blazor AI.png" />
     <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball Blazor.png" />
     <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball WinForm.png" />
     <Content Include="$(MSBuildThisFileDirectory)Magic 8 Ball.ico" />
