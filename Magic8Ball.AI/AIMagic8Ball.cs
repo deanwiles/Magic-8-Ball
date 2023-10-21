@@ -92,7 +92,7 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
                 TopK = 40,
                 TopP = 0.95F,
                 CandidateCount = 1,
-                MaxOutputTokens = 64
+                MaxOutputTokens = 80
             };
             textRequest.SafetySettings.AddRange(new RepeatedField<SafetySetting>
             {
