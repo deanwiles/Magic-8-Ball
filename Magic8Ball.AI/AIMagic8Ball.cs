@@ -68,7 +68,7 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             // Get random tone
             var tone = tones[_random.Next(tones.Count)];
 
-            string promptText = $"provide a {promptType}﻿ contextual response, speaking as a friend in ﻿﻿{tone}﻿ tone, to the question \"﻿{Question}\"";
+            string promptText = $"Provide a {promptType}﻿ contextual response, speaking as a friend in ﻿﻿{tone}﻿ tone, to the question \"﻿{Question}\"";
 
             // Get PaLM API key
             string setting = "Magic8Ball_PaLM_API_Key";
@@ -92,7 +92,7 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
                 TopK = 40,
                 TopP = 0.95F,
                 CandidateCount = 1,
-                MaxOutputTokens = 80
+                MaxOutputTokens = 64
             };
             textRequest.SafetySettings.AddRange(new RepeatedField<SafetySetting>
             {

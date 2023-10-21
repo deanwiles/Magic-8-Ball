@@ -140,9 +140,7 @@ public class Magic8BallApi
         _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
 
         // Redirect to Magic 8 Ball Azure Static Web App
-        // TODO: Need a configurable way to specify Test App Url
-        //string setting = Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL";
-        string setting = Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL_TEST";
+        string setting = Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL";
         string? Url = Environment.GetEnvironmentVariable(setting);
         if (Url == null)
         {

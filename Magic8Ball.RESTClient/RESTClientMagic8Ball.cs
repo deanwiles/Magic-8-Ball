@@ -48,11 +48,33 @@ public class MagicResponse
 
 public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
 {
-    // TODO: Need a configurable way to specify Test Api Url
-    //private readonly string BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
-    private readonly string BaseUrl = "https://dwmagic8balltest.azurewebsites.net/api";
+    // Default to Production Base Url for Magic 8 Ball API
+    private readonly string BaseUrl;
 
     private static readonly HttpClient _client = new();
+
+    /// <summary>
+    /// Construct RESTClientMagic8Ball with Default Base Url for Magic 8 Ball API
+    /// </summary>
+    public RESTClientMagic8Ball()
+    {
+        // Use Default Base Url for Magic 8 Ball API
+        this.BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
+    }
+
+    /// <summary>
+    /// Construct RESTClientMagic8Ball with specified Base Url for Magic 8 Ball API
+    /// </summary>
+    /// <param name="BaseUrl">Base Url for Magic 8 Ball API</param>
+    /// <exception cref="ArgumentException">Base Url for Magic 8 Ball API is not well-formed</exception>
+    public RESTClientMagic8Ball(string BaseUrl)
+    {
+        // Verify that Url is well-formed
+        if (!Uri.IsWellFormedUriString(BaseUrl, UriKind.Absolute))
+            throw new ArgumentException($"Base Url for Magic 8 Ball API is not well-formed: '{BaseUrl}'", nameof(BaseUrl));
+        // Save specified Base Url for Magic 8 Ball API
+        this.BaseUrl = BaseUrl;
+    }
 
     /// <summary>
     /// Ask the Classic Magic 8 Ball a Question
