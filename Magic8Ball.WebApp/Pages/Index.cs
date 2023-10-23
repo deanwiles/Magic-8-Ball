@@ -43,7 +43,9 @@ public partial class Index
             "azure" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
             // "ai" => new AI.AIMagic8Ball(),
-            "ai" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
+            // TODO: Check for way to identify Dev/Test vs Prod in Azure
+            //"ai" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
+            "ai" => new RESTClient.RESTClientMagic8Ball("https://dwmagic8balltest.azurewebsites.net/api"),
             _ => null,
         };
         // Check if service created
