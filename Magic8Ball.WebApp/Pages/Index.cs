@@ -1,6 +1,7 @@
 ﻿using Magic8Ball.Shared;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
+using System.Text;
 
 namespace Magic8Ball.WebApp.Pages;
 
@@ -26,6 +27,8 @@ public partial class Index
     protected bool InstructionsCollapsed { get; set; } = true; // hide by default
     protected bool IsBusy { get; set; } = false; // true when waiting for Magic 8 Ball to answer
 
+    private StringBuilder DebugInfo { get; set; } = new StringBuilder();
+
     protected override void OnInitialized()
     {
         Console.WriteLine("Entering OnInitialized()...");
@@ -46,6 +49,16 @@ public partial class Index
             "ai" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
             _ => null,
         };
+        // TEST code
+        DebugInfo.Clear();
+        foreach (var x in Configuration!.GetChildren())
+        {
+            DebugInfo.AppendLine($"'{x.Path}'='{x.Value}' <br />");
+            foreach (var y in x.GetChildren())
+            {
+                DebugInfo.AppendLine($"'{y.Path}'='{y.Value}' <br />");
+            }
+        }
         // Check if service created
         if (Magic8BallData == null)
         {
