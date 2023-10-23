@@ -58,10 +58,7 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
     /// </summary>
     public RESTClientMagic8Ball()
     {
-        // TODO: Check for way to identify Dev/Test vs Prod
-        // Use Default Base Url for Magic 8 Ball API
-        //this.BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
-        this.BaseUrl = "https://dwmagic8balltest.azurewebsites.net/api";
+        this.BaseUrl = "https://dwmagic8ball.azurewebsites.net/api";
     }
 
     /// <summary>

@@ -40,10 +40,10 @@ public partial class Index
         Magic8BallData = Service.ToLower() switch
         {
             "classic" => new Classic.ClassicMagic8Ball(),
-            "azure" => new RESTClient.RESTClientMagic8Ball(),
+            "azure" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
             // "ai" => new AI.AIMagic8Ball(),
-            "ai" => new RESTClient.RESTClientMagic8Ball(),
+            "ai" => new RESTClient.RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty),
             _ => null,
         };
         // Check if service created

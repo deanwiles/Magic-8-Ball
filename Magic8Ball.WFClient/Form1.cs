@@ -55,7 +55,7 @@ public partial class Form1 : Form
                     break;
                 case "azure":   // "Azure Function Magic 8 Ball REST Service"
                     // Check for Custom BaseUrl
-                    string baseUrl = Program.Configuration?[$"RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
+                    string baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
                     magic8BallService = new RESTClientMagic8Ball(baseUrl);
                     break;
                 case "ai-local":    // Artificially Intelligent Magic 8 Ball Service (Local)
@@ -63,7 +63,7 @@ public partial class Form1 : Form
                     break;
                 case "ai-azure":    // Artificially Intelligent Magic 8 Ball Service (Azure)
                     // Check for Custom BaseUrl
-                    baseUrl = Program.Configuration?[$"RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
+                    baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
                     magic8BallService = new RESTClientMagic8Ball(baseUrl);
                     break;
                 default:
