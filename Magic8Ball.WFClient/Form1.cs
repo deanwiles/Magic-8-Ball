@@ -54,17 +54,17 @@ public partial class Form1 : Form
                     magic8BallService = new ClassicMagic8Ball(predefinedAnswers);
                     break;
                 case "azure":   // "Azure Function Magic 8 Ball REST Service"
-                    // Check for Custom BaseUrl
+                    // Get environment-specific BaseUrl
                     string baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
-                    magic8BallService = new RESTClientMagic8Ball(baseUrl);
+                    magic8BallService = new RESTClientMagic8Ball(baseUrl, ServiceType.Classic);
                     break;
                 case "ai-local":    // Artificially Intelligent Magic 8 Ball Service (Local)
                     magic8BallService = new AIMagic8Ball();
                     break;
                 case "ai-azure":    // Artificially Intelligent Magic 8 Ball Service (Azure)
-                    // Check for Custom BaseUrl
+                    // Get environment-specific BaseUrl
                     baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
-                    magic8BallService = new RESTClientMagic8Ball(baseUrl);
+                    magic8BallService = new RESTClientMagic8Ball(baseUrl, ServiceType.AI);
                     break;
                 default:
                     throw new Exception($"Unsupported Magic 8 Ball Service name '{service.ShortName}'");
@@ -73,13 +73,8 @@ public partial class Form1 : Form
             string question = txtQuestion.Text;
             Cursor = Cursors.WaitCursor;
             // Note that for the AI service, we'll call it indirectly via the Azure function
-            Magic8BallData magic8BallData;
-            if ((string.Compare(service.ShortName, "ai-azure", true) == 0) && (magic8BallService is RESTClient.RESTClientMagic8Ball restService))
-                magic8BallData = await restService.AskAIAsync(question);
-            else
-                magic8BallData = await magic8BallService.AskAsync(question);
-            if (magic8BallData == null)
-                throw new Exception("No Magic 8 Ball response received");
+            Magic8BallData magic8BallData = await magic8BallService.AskAsync(question) 
+                ?? throw new Exception("No Magic 8 Ball response received");
             // Display and color code the answer
             txtAnswer.Text = magic8BallData.Answer;
             var iType = magic8BallData.Type;

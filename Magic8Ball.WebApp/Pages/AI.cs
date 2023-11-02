@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Magic8Ball.WebApp.Pages;
 
-public partial class Index
+public partial class AI
 {
     [Parameter]
     public string Service { get; set; } = string.Empty;
@@ -35,8 +35,8 @@ public partial class Index
     protected override void OnParametersSet()
     {
         Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
-        // Default to classic if Service not specified
-        if (string.IsNullOrWhiteSpace(Service)) Service = "Classic";
+        // Default to AI if Service not specified
+        if (string.IsNullOrWhiteSpace(Service)) Service = "AI";
         // Instantiate specified Magic 8 Ball service type
         Magic8BallData = Service.ToLower() switch
         {

@@ -107,7 +107,7 @@ public class Magic8BallApi
         var magic8Ball = new AI.AIMagic8Ball();
         try
         {
-            if (string.IsNullOrEmpty(question))
+            if (string.IsNullOrWhiteSpace(question))
                 throw new Exception("The Magic 8 Ball can only provide an Answer when a Question is asked.");
             await magic8Ball.AskAsync(question);
             _logger.LogInformation($"Answer = \"{magic8Ball.Answer}\"");

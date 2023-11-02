@@ -1,7 +1,5 @@
-﻿@* @page "/{Service}"
- *@
-@page "/Classic"
-@page "/"
+﻿@page "/AI"
+@page "/Azure"
 
 @inject IConfiguration Configuration
 @inject IWebAssemblyHostEnvironment HostEnvironment
@@ -40,15 +38,15 @@ else
             <div class="form-group">
                 <label for="question"><strong>Question:</strong></label>
                 @*<InputText id="question" class="form-control" @bind-Value="@Question" placeholder="Enter question"></InputText>*@
-                <input @ref="QuestionInput" id="question" class="form-control" @bind="@Question" placeholder="Enter your question for the Magic 8 Ball"/>
+                <input @ref="QuestionInput" id="question" class="form-control" @bind="@Question" placeholder="Enter your question for the Magic 8 Ball" />
             </div>
             <div>
-                <p/>
+                <p />
                 <button @ref="SubmitButton" type="submit" class="btn btn-outline-light btn-magic8ball">
                     <img src="/images/Magic 8 Ball.png" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "d-none": "")" />
                     <img src="/images/Rotating Magic 8 Ball.gif" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "": "d-none")" />
                 </button>
-                <p/>
+                <p />
             </div>
             <div class="form-group">
                 <label><strong>Answer:</strong></label>
