@@ -63,36 +63,34 @@ public class MagicResponse
 
 public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
 {
-    // Base Url for Magic 8 Ball API
-    private readonly string BaseUrl;
+    // Static HttpClient used for all requests
+    private static readonly HttpClient _client = new();
+
+    // Base Address Uri for Magic 8 Ball API
+    private readonly Uri BaseAddress;
 
     // Magic 8 Ball Service Type
     private readonly ServiceType ServiceType;
 
-    private static readonly HttpClient _client = new();
-
     /// <summary>
-    /// Construct RESTClientMagic8Ball with Default Base Url and Classic Service for Magic 8 Ball API
+    /// Construct RESTClientMagic8Ball with Default Base Address Uri and Classic Service for Magic 8 Ball API
     /// </summary>
     public RESTClientMagic8Ball()
     {
-        this.BaseUrl = "https://jolly-water-0879a521e.3.azurestaticapps.net/api";
+        this.BaseAddress = new Uri("https://jolly-water-0879a521e.3.azurestaticapps.net");
         this.ServiceType = ServiceType.Classic;
     }
 
     /// <summary>
-    /// Construct RESTClientMagic8Ball with specified Base Url and Service Type for Magic 8 Ball API
+    /// Construct RESTClientMagic8Ball with specified Base Address Uri and Service Type for Magic 8 Ball API
     /// </summary>
-    /// <param name="BaseUrl">Base Url for Magic 8 Ball API</param>
+    /// <param name="BaseAddress">Base Address Uri for Magic 8 Ball API</param>
     /// <param name="ServiceType">Magic 8 Ball Service Type</param>
-    /// <exception cref="ArgumentException">Base Url for Magic 8 Ball API is not well-formed</exception>
-    public RESTClientMagic8Ball(string BaseUrl, ServiceType ServiceType /*= ServiceType.Classic*/)
+    /// <exception cref="UriFormatException">Base Address Uri for Magic 8 Ball API is not well-formed</exception>
+    public RESTClientMagic8Ball(string BaseAddress, ServiceType ServiceType /*= ServiceType.Classic*/)
     {
-        // Verify that Url is well-formed
-        if (!Uri.IsWellFormedUriString(BaseUrl, UriKind.Absolute))
-            throw new ArgumentException($"Base Url for Magic 8 Ball API is not well-formed: '{BaseUrl}'", nameof(BaseUrl));
-        // Save specified Base Url and Service Type for Magic 8 Ball API
-        this.BaseUrl = BaseUrl;
+        // Save specified Base Address Uri and Service Type for Magic 8 Ball API
+        this.BaseAddress = new Uri(BaseAddress);
         this.ServiceType = ServiceType;
     }
 
@@ -110,8 +108,8 @@ public class RESTClientMagic8Ball : Magic8BallData, IMagic8BallService
             // Send HTTP GET request and parse JSON response
             // NOTE: If no question, an error may occur, which will demonstrate inner exception handling
             string func = ServiceType == ServiceType.Classic ? "ask" : "askai";
-            string url = $"{BaseUrl}/{func}?question={Uri.EscapeDataString(Question)}";
-            var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(url, new JsonSerializerOptions(JsonSerializerDefaults.Web)) 
+            Uri uri = new(BaseAddress, $"api/{func}?question={Uri.EscapeDataString(Question)}");
+            var magicResponse = await _client.GetFromJsonAsync<MagicResponse>(uri, new JsonSerializerOptions(JsonSerializerDefaults.Web)) 
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Save question, answer and type
             this.Question = Question;

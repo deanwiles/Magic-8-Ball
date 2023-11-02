@@ -1,6 +1,10 @@
 {
     "navigationFallback": {
         "rewrite": "index.html",
-        "exclude": [ "/_framework/*", "/css/*", "/images/*", "/Classic", "/Azure", "/AI", "/api/*" ]
+        "exclude": [ "/_framework/*", "/css/*", "/images/*" ]
+    },
+    "globalHeaders": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS"
     }
 }

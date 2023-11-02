@@ -54,17 +54,17 @@ public partial class Form1 : Form
                     magic8BallService = new ClassicMagic8Ball(predefinedAnswers);
                     break;
                 case "azure":   // "Azure Function Magic 8 Ball REST Service"
-                    // Get environment-specific BaseUrl
-                    string baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
-                    magic8BallService = new RESTClientMagic8Ball(baseUrl, ServiceType.Classic);
+                    // Get environment-specific Base Address
+                    string baseAddress = Program.Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? string.Empty;
+                    magic8BallService = new RESTClientMagic8Ball(baseAddress, ServiceType.Classic);
                     break;
                 case "ai-local":    // Artificially Intelligent Magic 8 Ball Service (Local)
                     magic8BallService = new AIMagic8Ball();
                     break;
                 case "ai-azure":    // Artificially Intelligent Magic 8 Ball Service (Azure)
-                    // Get environment-specific BaseUrl
-                    baseUrl = Program.Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? string.Empty;
-                    magic8BallService = new RESTClientMagic8Ball(baseUrl, ServiceType.AI);
+                    // Get environment-specific Base Address
+                    baseAddress = Program.Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? string.Empty;
+                    magic8BallService = new RESTClientMagic8Ball(baseAddress, ServiceType.AI);
                     break;
                 default:
                     throw new Exception($"Unsupported Magic 8 Ball Service name '{service.ShortName}'");

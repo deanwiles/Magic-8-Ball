@@ -42,10 +42,10 @@ public partial class AI
         {
             "classic" => new Magic8Ball.Classic.ClassicMagic8Ball(),
             // For Azure/AI api client, check for local config override (e.g. during Development), else assume static web app's api route
-            "azure" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.Classic),
+            "azure" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.Classic),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
             // "ai" => new AI.AIMagic8Ball(),
-            "ai" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseUrl"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.AI),
+            "ai" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.AI),
             _ => null,
         };
         // Check if service created
