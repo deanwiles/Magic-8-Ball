@@ -9,6 +9,8 @@ The Classic Magic 8 Ball service is available as a local .NET 6.0 library named 
 
 The Artificially Intelligent (AI) Magic 8 Ball service is also available as a local .NET 6.0 library named `Magic8Ball.AI` or via the Azure Function, which can be accessed via the [REST API](https://jolly-water-0879a521e.3.azurestaticapps.net/api/askai?question=Will%20I%20win%20the%20lottery?), the [Swagger UI](https://jolly-water-0879a521e.3.azurestaticapps.net/api/swagger/ui), or the `Magic8Ball.RESTClient` library. The AI version uses [Google's PaLM API](https://developers.generativeai.google/guide) and a little of the Classic Magic 8 Ball's magic to generate a contextual response.
 
+Note: The REST APIs support Open API and the [Swagger UI](https://jolly-water-0879a521e.3.azurestaticapps.net/api/swagger/ui), however under the Free Azure Subscription, CORS is not configurable for the Azure Static Web Site and Api, which prevents full Swagger UI capabilities.
+
 If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://www.mattel.com/products/magic-8-ball-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
 
 The concept is simple: After “asking the ball” a yes or no question, click the Magic 8 Ball button and wait for your answer to be revealed on the screen.
