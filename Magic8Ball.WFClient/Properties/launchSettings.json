@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Magic8Ball.WFClient": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

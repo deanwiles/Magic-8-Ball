@@ -9,9 +9,23 @@
     <Title>Magic 8 Ball WinForm Client</Title>
     <Company>Access Computer Systems</Company>
     <Product>Magic 8 Ball</Product>
-    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
+    <Copyright>Copyright © 2020-2024 Access Computer Systems</Copyright>
     <PackageIcon>Magic 8 Ball.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\Images\Magic 8 Ball.png">
@@ -21,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.AI\Magic8Ball.AI.csproj" />
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.RESTClient\Magic8Ball.RESTClient.csproj" />
   </ItemGroup>

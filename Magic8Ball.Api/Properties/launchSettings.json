@@ -2,7 +2,7 @@
   "profiles": {
     "Magic8Ball.Api": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7138",
+      "commandLineArgs": "--port 7138 --cors *",
       "launchBrowser": false
     }
   }
