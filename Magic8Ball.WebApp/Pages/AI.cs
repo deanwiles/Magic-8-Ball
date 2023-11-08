@@ -14,7 +14,6 @@ public partial class AI
     private string Question { get; set; } = string.Empty;
     private string Answer { get; set; } = string.Empty;
 
-    private ElementReference QuestionInput;
     private ElementReference SubmitButton;
 
     private string AnswerStyle = string.Empty;
@@ -66,9 +65,8 @@ public partial class AI
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-        // Set focus on Question input textbox (if present)
-        if (!ShowMessage && QuestionInput.Context != null)
-            //    await QuestionInput.FocusAsync();
+        // Set focus on Submit button (if present)
+        if (!ShowMessage && SubmitButton.Context != null)
             await SubmitButton.FocusAsync();
     }
 

@@ -14,7 +14,6 @@ public partial class Index
     private string Question { get; set; } = string.Empty;
     private string Answer { get; set; } = string.Empty;
 
-    private ElementReference QuestionInput;
     private ElementReference SubmitButton;
 
     private string AnswerStyle = string.Empty;
@@ -35,7 +34,7 @@ public partial class Index
     protected override void OnParametersSet()
     {
         Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
-        // Default to classic if Service not specified
+        // Default to Classic if Service not specified
         if (string.IsNullOrWhiteSpace(Service)) Service = "Classic";
         // Instantiate specified Magic 8 Ball service type
         Magic8BallData = Service.ToLower() switch
@@ -66,9 +65,8 @@ public partial class Index
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-        // Set focus on Question input textbox (if present)
-        if (!ShowMessage && QuestionInput.Context != null)
-            //    await QuestionInput.FocusAsync();
+        // Set focus on Submit button (if present)
+        if (!ShowMessage && SubmitButton.Context != null)
             await SubmitButton.FocusAsync();
     }
 
