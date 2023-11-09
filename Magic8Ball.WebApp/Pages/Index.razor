@@ -1,6 +1,4 @@
-﻿@* @page "/{Service}"
- *@
-@page "/Classic"
+﻿@page "/Classic"
 @page "/"
 
 @inject IConfiguration Configuration
@@ -39,8 +37,7 @@ else
             </div>
             <div class="form-group">
                 <label for="question"><strong>Question:</strong></label>
-                @*<InputText id="question" class="form-control" @bind-Value="@Question" placeholder="Enter question"></InputText>*@
-                <input @ref="QuestionInput" id="question" class="form-control" @bind="@Question" placeholder="Enter your question for the Magic 8 Ball"/>
+                <InputText id="question" class="form-control" @bind-Value="@Question" placeholder="Enter your question for the Magic 8 Ball" onClick="this.select();" />
             </div>
             <div>
                 <p/>
