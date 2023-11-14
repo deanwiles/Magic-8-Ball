@@ -29,6 +29,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SupportFiles", "SupportFile
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.AI", "Magic8Ball.AI\Magic8Ball.AI.csproj", "{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Ai.Generativelanguage.V1Beta3", "Google.Ai.Generativelanguage.V1Beta3\Google.Ai.Generativelanguage.V1Beta3.csproj", "{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B9DF271-75F7-4E04-83A9-82AC6E326CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

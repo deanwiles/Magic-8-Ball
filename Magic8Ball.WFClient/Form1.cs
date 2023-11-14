@@ -73,7 +73,7 @@ public partial class Form1 : Form
             string question = txtQuestion.Text;
             Cursor = Cursors.WaitCursor;
             // Note that for the AI service, we'll call it indirectly via the Azure function
-            Magic8BallData magic8BallData = await magic8BallService.AskAsync(question) 
+            Magic8BallData magic8BallData = await magic8BallService.AskAsync(question)
                 ?? throw new Exception("No Magic 8 Ball response received");
             // Display and color code the answer
             txtAnswer.Text = magic8BallData.Answer;
@@ -123,6 +123,13 @@ public partial class Form1 : Form
     {
         return type.AssemblyQualifiedName
             ?? throw new Exception($"Unknown assembly qualified name for '{type.FullName}'");
+    }
+
+    private void TxtQuestion_Enter(object sender, EventArgs e)
+    {
+        // Select Question text upon entry
+        var textBox = sender as TextBox;
+        textBox?.BeginInvoke(new Action(textBox.SelectAll));
     }
 }
 

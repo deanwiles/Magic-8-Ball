@@ -49,6 +49,7 @@
             txtQuestion.Size = new Size(485, 23);
             txtQuestion.TabIndex = 3;
             txtQuestion.Text = "Will I win the lottery?";
+            txtQuestion.Enter += TxtQuestion_Enter;
             // 
             // lblQuestion
             // 
