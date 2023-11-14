@@ -1,4 +1,4 @@
-﻿using Google.Ai.Generativelanguage.V1Beta2;
+﻿using Google.Ai.Generativelanguage.V1Beta3;
 using Google.Api.Gax.Grpc;
 using Google.Apis.Auth.OAuth2;
 using Google.Protobuf.Collections;
@@ -86,7 +86,7 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             var textServiceClient = textServiceClientBuilder.Build();
             var textRequest = new GenerateTextRequest
             {
-                ModelAsModelName = ModelName.FromModel("text-bison-001"),
+                Model = "models/text-bison-001",
                 Prompt = new TextPrompt { Text = promptText },
                 Temperature = 0.7F,
                 TopK = 40,

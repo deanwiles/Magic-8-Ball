@@ -10,10 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PaLM" Version="0.9.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Google.Ai.Generativelanguage.V1Beta3\Google.Ai.Generativelanguage.V1Beta3.csproj" />
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.Shared\Magic8Ball.Shared.csproj" />
   </ItemGroup>
