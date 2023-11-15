@@ -1,4 +1,6 @@
-﻿namespace Magic8Ball.Shared;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Magic8Ball.Shared;
 
 /// <summary>
 /// Type of Magic 8 Ball Answer
@@ -65,6 +67,7 @@ public abstract class Magic8BallData : MagicAnswer
     /// <summary>
     /// Question asked of Magic 8 Ball
     /// </summary>
+    [Required(ErrorMessage = "You must ask a Question to get an Answer!")]
     public string Question { get; set; } = string.Empty;
 
     /// <summary>
