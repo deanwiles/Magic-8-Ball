@@ -11,8 +11,6 @@ public partial class AI
     public string Service { get; set; } = string.Empty;
 
     private Magic8BallData? Magic8BallData { get; set; } = null;
-    private string Question { get; set; } = string.Empty;
-    private string Answer { get; set; } = string.Empty;
 
     private ElementReference SubmitButton;
 
@@ -56,7 +54,7 @@ public partial class AI
         else
         {
             // Yes, set default question (if configured)
-            Question = Configuration?[$"{Service}:Question"] ?? string.Empty;
+            Magic8BallData.Question = Configuration?[$"{Service}:Question"] ?? string.Empty;
             // Clear Answer and Message area
             ClearAnswer();
             ClearMessage();
@@ -85,14 +83,13 @@ public partial class AI
                 throw new Exception("Magic 8 Ball Service not initialized");
             // Ask the Magic 8 Ball service the user's question
             // Note that for the AI service, we'll call it indirectly via the Azure function
-            await service.AskAsync(Question);
+            await service.AskAsync(Magic8BallData.Question);
             // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
             stopWatch.Stop();
             double magicDelay = 500 - stopWatch.Elapsed.TotalMilliseconds;  // 1/2 second
             if (magicDelay > 0)
                 await Task.Delay(Convert.ToInt32(magicDelay));
             // Save Answer and set Answer Style
-            Answer = Magic8BallData.Answer;
             var iType = Magic8BallData.Type;
             AnswerStyle = iType switch
             {
@@ -117,7 +114,7 @@ public partial class AI
     private void ClearAnswer()
     {
         // Clear Answer text and style
-        Answer = string.Empty;
+        if (Magic8BallData != null) Magic8BallData.Answer = string.Empty;
         AnswerStyle = string.Empty;
         StateHasChanged();
     }
