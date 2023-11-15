@@ -55,8 +55,8 @@ public partial class AI
         }
         else
         {
-            // Yes, set default question
-            Question = "Will I win the lottery?";
+            // Yes, set default question (if configured)
+            Question = Configuration?[$"{Service}:Question"] ?? string.Empty;
             // Clear Answer and Message area
             ClearAnswer();
             ClearMessage();
