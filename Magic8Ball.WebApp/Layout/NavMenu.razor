@@ -1,40 +1,41 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Magic8Ball.WebApp</a>
+        <a class="navbar-brand" href="">Magic 8 Ball</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+@* 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+ *@
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Classic">
-                <span class="oi oi-target" aria-hidden="true"></span> Classic Magic 8 Ball
+            <NavLink class="nav-link" href="Classic">
+                <span class="bi bi-8-circle-fill-nav-menu" aria-hidden="true"></span> Classic Magic 8 Ball
             </NavLink>
         </div>
         @* Running AI locally doesn't currently work due to issues with Grpc.Core, so just replace Azure option with AI call via Azure  *@
-        @*
-        <div class="nav-item px-3">
+@*         <div class="nav-item px-3">
             <NavLink class="nav-link" href="Azure">
-                <span class="oi oi-cloud" aria-hidden="true"></span> Azure Magic 8 Ball
+                <span class="bi bi-cloud-fill-nav-menu" aria-hidden="true"></span> Azure Magic 8 Ball
             </NavLink>
         </div>
-        *@
+ *@
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/AI">
-                <span class="oi oi-sun" aria-hidden="true"></span> AI Magic 8 Ball
+            <NavLink class="nav-link" href="AI">
+                <span class="bi bi-chat-square-text-fill-nav-menu" aria-hidden="true"></span> AI Magic 8 Ball
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="https://github.com/deanwiles/Magic-8-Ball" target="_blank">
-                <span class="oi oi-question-mark" aria-hidden="true"></span> About
+                <span class="bi bi-question-square-fill-nav-menu" aria-hidden="true"></span> About
             </NavLink>
         </div>
     </nav>
