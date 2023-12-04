@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <Nullable>enable</Nullable>
-	  <Company>Access Computer Systems</Company>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Company>Access Computer Systems</Company>
+    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
     <Product>Magic 8 Ball</Product>
-	<Copyright>Copyright © 2020-2024 Access Computer Systems</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
