@@ -1,35 +1,30 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using System;
+using System.Net;
 
 namespace Magic8Ball.Api;
 
-public class App
+public class App(ILogger<App> log)
 {
-    private readonly ILogger<App> _logger;
-
-    public App(ILogger<App> log)
+    [Function("App")]
+    public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous)] HttpRequestData request)
     {
-        _logger = log;
-    }
-
-    [FunctionName("App")]
-    public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous)] HttpRequest request)
-    {
-        _logger.LogInformation("C# HTTP trigger function processing an 'App' request...");
+        log.LogInformation("C# HTTP trigger function processing an 'App' request...");
 
         // Redirect to Magic 8 Ball Azure Static Web App
+        var response = request.CreateResponse();
         string setting = Environment.UserInteractive ? "MAGIC8BALL_WEBAPP_URL_DEV" : "MAGIC8BALL_WEBAPP_URL";
         string? Url = Environment.GetEnvironmentVariable(setting);
         if (Url == null)
         {
-            _logger.LogInformation($"Error: Missing environment variable \"{setting}\"");
-            return new NotFoundResult();
+            log.LogInformation($"Error: Missing environment variable \"{setting}\"");
+            response.StatusCode = HttpStatusCode.NotFound;
+            return response;
         }
-        _logger.LogInformation($"Redirecting to Url = \"{Url}\"...");
-        return new RedirectResult(Url);
+        log.LogInformation($"Redirecting to Url = \"{Url}\"...");
+        response.StatusCode = HttpStatusCode.Redirect;
+        response.Headers.Add("Location", Url);
+        return response;
     }
 }

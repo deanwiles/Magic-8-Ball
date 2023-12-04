@@ -2,12 +2,12 @@
     "IsEncrypted": false,
     "Values": {
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
         "AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL": "false",
         //"MAGIC8BALL_WEBAPP_URL": "https://jolly-water-0879a521e.3.azurestaticapps.net", // Azure Production (master branch)
         //"MAGIC8BALL_WEBAPP_URL": "https://lively-plant-00f92b71e.3.azurestaticapps.net/", // Temp
-        "MAGIC8BALL_WEBAPP_URL": "https://jolly-water-0879a521e-ai.westus2.3.azurestaticapps.net", // Azure Development (AI branch)
-        //"MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:44312" // IIS Express
-        "MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:7031" // WebApp
+        "MAGIC8BALL_WEBAPP_URL": "https://jolly-water-0879a521e-dev.westus2.3.azurestaticapps.net", // Azure Development (Dev branch)
+        //"MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:44308" // IIS Express
+        "MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:7151" // WebApp
     }
 }
