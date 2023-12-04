@@ -7,14 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Ask.cs" />
-    <Compile Remove="AskAI.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Ask.cs" />
-    <None Include="AskAI.cs" />
-  </ItemGroup>
-  <ItemGroup>
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Azure.Core" Version="1.36.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.20.0" />
@@ -32,6 +24,7 @@
     <PackageReference Include="System.Memory.Data" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magic8Ball.AI\Magic8Ball.AI.csproj" />
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.Shared\Magic8Ball.Shared.csproj" />
   </ItemGroup>
