@@ -1,12 +1,9 @@
 using Magic8Ball.Classic;
 using Magic8Ball.Shared;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -26,16 +23,9 @@ public class Ask
         _logger = log;
     }
 
-    [FunctionName("Ask")]
-    [OpenApiOperation(operationId: "Ask", tags: new[] { "Magic8Ball" }, Description = "Ask the Classic Magic 8 Ball a question")]
-    [OpenApiParameter(name: "question", In = ParameterLocation.Query, Required = true, Type = typeof(string), 
-        Description = "The Yes/No question to ask of the Magic 8 Ball")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", 
-        bodyType: typeof(Magic8BallData), Description = "The Magic 8 Ball's response")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", 
-        bodyType: typeof(string), Description = "The error response message")]
+    [Function("Ask")]
     public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequestData request)
     {
         _logger.LogInformation("C# HTTP trigger function processed an 'Ask' request...");
 
