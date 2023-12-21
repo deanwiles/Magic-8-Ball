@@ -3,6 +3,7 @@
 
 @inject IConfiguration Configuration
 @inject IWebAssemblyHostEnvironment HostEnvironment
+@inject ILogger<AI> Logger
 
 <PageTitle>Magic 8 Ball</PageTitle>
 
@@ -27,10 +28,10 @@ else
                 <div>
                     <label><strong>Instructions:</strong></label>
                     <button type="button" class="btn btn-light" @onclick="@ToggleInstructions">
-                        <b>@(InstructionsCollapsed ? "+" : "-")</b>
+                        <b>@(ShowInstructions ? "-" : "+")</b>
                     </button>
                 </div>
-                <div class="m-3 @(InstructionsCollapsed? "collapse": "")">
+                <div class="m-3 @(ShowInstructions? "": "collapse")">
                     1. Type a yes/no question to ask the Magic 8 Ball.<br />
                     2. Press Enter or click the Magic 8 Ball button to ask your question.<br />
                     3. Wait while the Magic 8 Ball ponders your question, and then the answer will be displayed.<br />
@@ -49,7 +50,10 @@ else
                     <img src="/images/Magic 8 Ball.png" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "d-none": "")" />
                     <img src="/images/Rotating Magic 8 Ball.gif" alt="Magic 8 Ball" class="img-magic8ball @(IsBusy? "": "d-none")" />
                 </button>
-                <p/>
+                <div class="text-start @(ShowPleaseWait? "": "collapse")">
+                    Please wait a moment while the Magic 8 Ball service is started...
+                </div>
+                <p />
             </div>
             <div class="form-group">
                 <label><strong>Answer:</strong></label>

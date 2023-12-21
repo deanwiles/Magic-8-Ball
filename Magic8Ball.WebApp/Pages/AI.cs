@@ -16,22 +16,26 @@ public partial class AI
 
     private string AnswerStyle = string.Empty;
 
-    //used to store state of screen
+    // used to store state of screen
     protected bool ShowMessage;
     protected MarkupString Message = new();
     protected string StatusClass = string.Empty;
 
-    protected bool InstructionsCollapsed { get; set; } = true; // hide by default
+    protected bool ShowInstructions { get; set; } = false; // hide by default
+    private static DateTime? lastRequest = null; // last time an api request was sent
     protected bool IsBusy { get; set; } = false; // true when waiting for Magic 8 Ball to answer
+    protected bool ShowPleaseWait { get; set; } = false; // hide by default
+
+    private string GetApiBaseAddress() => Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api";
 
     protected override void OnInitialized()
     {
-        Console.WriteLine("Entering OnInitialized()...");
+        Logger.LogInformation("Entering OnInitialized()...");
     }
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
+        Logger.LogInformation("Entering OnParametersSet(Service='{Service}')...", Service);
         // Default to AI if Service not specified
         if (string.IsNullOrWhiteSpace(Service)) Service = "AI";
         // Instantiate specified Magic 8 Ball service type
@@ -39,10 +43,10 @@ public partial class AI
         {
             "classic" => new Magic8Ball.Classic.ClassicMagic8Ball(),
             // For Azure/AI api client, check for local config override (e.g. during Development), else assume static web app's api route
-            "azure" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.Classic),
+            "azure" => new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.Classic),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
             // "ai" => new AI.AIMagic8Ball(),
-            "ai" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.AI),
+            "ai" => new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.AI),
             _ => null,
         };
         // Check if service created
@@ -59,19 +63,47 @@ public partial class AI
             ClearAnswer();
             ClearMessage();
         }
+        Logger.LogInformation("Exiting OnParametersSet");
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
+        Logger.LogInformation("Entering OnAfterRenderAsync(firstRender={firstRender})...", firstRender);
         // Set focus on Submit button (if present)
         if (!ShowMessage && SubmitButton.Context != null)
             await SubmitButton.FocusAsync();
+        // Check if we have done an api request recently (e.g. last 20 minutes)
+        if (!HadRecentRequest())
+        {
+            // No, ask a Classic Azure Magic 8 Ball question to fire up the Azure Function now in case it had shutdown
+            // This will save a little response time once the user submits a question
+            var azure = new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.Classic);
+            try 
+            {
+                await azure.AskAsync("Are you awake?");
+            }
+            catch 
+            {
+                // Ignore any error for now
+            }
+        }
+        Logger.LogInformation("Exiting OnAfterRenderAsync");
+    }
+
+    protected bool HadRecentRequest()
+    {
+        // Return true if we sent an api request recently (e.g. last 20 minutes)
+        //Logger.LogInformation("Entering HadRecentRequest(), lastRequest={lastRequest}, Now={Now}...", lastRequest, DateTime.Now);
+        bool result = lastRequest?.AddMinutes(20).CompareTo(DateTime.Now) > 0;
+        //Logger.LogInformation("Exiting HadRecentRequest() = {result}", result);
+        return result;
     }
 
     private async Task AskQuestion()
     {
         try
         {
+            Logger.LogInformation("Entering AskQuestion(), Question='{Question}'...", Magic8BallData?.Question);
             // Indicate that we're waiting for the Magic 8 Ball to answer
             ShowBusy(true);
             var stopWatch = new Stopwatch();
@@ -83,6 +115,7 @@ public partial class AI
                 throw new Exception("Magic 8 Ball Service not initialized");
             // Ask the Magic 8 Ball service the user's question
             // Note that for the AI service, we'll call it indirectly via the Azure function
+            lastRequest = DateTime.Now;
             await service.AskAsync(Magic8BallData.Question);
             // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
             stopWatch.Stop();
@@ -101,12 +134,14 @@ public partial class AI
             // Refresh screen with Answer & Type
             ClearMessage();
             ShowBusy(false);
+            Logger.LogInformation("Exiting AskQuestion, Type='{Type}', Answer='{Answer}'", Magic8BallData?.Type, Magic8BallData?.Answer);
         }
         catch (Exception ex)
         {
             // Display error message
             string msg = ex.Message;
             if (null != ex.InnerException) msg += $"<br>{ex.InnerException.Message}";
+            Logger.LogInformation(ex, "Error occurred in AskQuestion, Message='{Message}'", msg);
             SetErrorMessage(msg);
         }
     }
@@ -146,18 +181,20 @@ public partial class AI
         Message = new(ErrorMessage);
         StatusClass = "alert-danger";
         IsBusy = false;
+        ShowPleaseWait = false;
         StateHasChanged();
     }
 
     private void ToggleInstructions()
     {
-        InstructionsCollapsed = !InstructionsCollapsed;
+        ShowInstructions = !ShowInstructions;
         StateHasChanged();
     }
 
     private void ShowBusy(bool IsBusy)
     {
         this.IsBusy = IsBusy;
+        ShowPleaseWait = IsBusy && !HadRecentRequest();
         StateHasChanged();
     }
 }
