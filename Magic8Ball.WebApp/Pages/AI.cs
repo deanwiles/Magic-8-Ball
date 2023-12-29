@@ -80,6 +80,7 @@ public partial class AI
             var azure = new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.Classic);
             try 
             {
+                Logger.LogInformation("Sending Wake Up call to Magic 8 Ball service");
                 await azure.AskAsync("Are you awake?");
             }
             catch 
@@ -93,9 +94,9 @@ public partial class AI
     protected bool HadRecentRequest()
     {
         // Return true if we sent an api request recently (e.g. last 20 minutes)
-        //Logger.LogInformation("Entering HadRecentRequest(), lastRequest={lastRequest}, Now={Now}...", lastRequest, DateTime.Now);
+        Logger.LogInformation("Entering HadRecentRequest(), lastRequest={lastRequest}, Now={Now}...", lastRequest, DateTime.Now);
         bool result = lastRequest?.AddMinutes(20).CompareTo(DateTime.Now) > 0;
-        //Logger.LogInformation("Exiting HadRecentRequest() = {result}", result);
+        Logger.LogInformation("Exiting HadRecentRequest() = {result}", result);
         return result;
     }
 
