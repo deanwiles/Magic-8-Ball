@@ -10,11 +10,11 @@ public partial class AI
     [Parameter]
     public string Service { get; set; } = string.Empty;
 
-    private Magic8BallData? Magic8BallData { get; set; } = null;
+    protected Magic8BallData? Magic8BallData { get; set; } = null;
 
-    private ElementReference SubmitButton;
+    protected ElementReference SubmitButton;
 
-    private string AnswerStyle = string.Empty;
+    protected string AnswerStyle = string.Empty;
 
     // used to store state of screen
     protected bool ShowMessage;
@@ -22,11 +22,11 @@ public partial class AI
     protected string StatusClass = string.Empty;
 
     protected bool ShowInstructions { get; set; } = false; // hide by default
-    private static DateTime? lastRequest = null; // last time an api request was sent
     protected bool IsBusy { get; set; } = false; // true when waiting for Magic 8 Ball to answer
     protected bool ShowPleaseWait { get; set; } = false; // hide by default
+    protected static bool requestPending = false; // api request sent and awaiting response
 
-    private string GetApiBaseAddress() => Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api";
+    protected string GetApiBaseAddress() => Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api";
 
     protected override void OnInitialized()
     {
@@ -72,8 +72,8 @@ public partial class AI
         // Set focus on Submit button (if present)
         if (!ShowMessage && SubmitButton.Context != null)
             await SubmitButton.FocusAsync();
-        // Check if we have done an api request recently (e.g. last 20 minutes)
-        if (!HadRecentRequest())
+        // Check if we have done an api request yet
+        if (firstRender)
         {
             // No, ask a Classic Azure Magic 8 Ball question to fire up the Azure Function now in case it had shutdown
             // This will save a little response time once the user submits a question
@@ -81,7 +81,9 @@ public partial class AI
             try 
             {
                 Logger.LogInformation("Sending Wake Up call to Magic 8 Ball service");
+                requestPending = true;
                 await azure.AskAsync("Are you awake?");
+                requestPending = false;
             }
             catch 
             {
@@ -91,16 +93,7 @@ public partial class AI
         Logger.LogInformation("Exiting OnAfterRenderAsync");
     }
 
-    protected bool HadRecentRequest()
-    {
-        // Return true if we sent an api request recently (e.g. last 20 minutes)
-        Logger.LogInformation("Entering HadRecentRequest(), lastRequest={lastRequest}, Now={Now}...", lastRequest, DateTime.Now);
-        bool result = lastRequest?.AddMinutes(20).CompareTo(DateTime.Now) > 0;
-        Logger.LogInformation("Exiting HadRecentRequest() = {result}", result);
-        return result;
-    }
-
-    private async Task AskQuestion()
+    protected async Task AskQuestion()
     {
         try
         {
@@ -116,8 +109,9 @@ public partial class AI
                 throw new Exception("Magic 8 Ball Service not initialized");
             // Ask the Magic 8 Ball service the user's question
             // Note that for the AI service, we'll call it indirectly via the Azure function
-            lastRequest = DateTime.Now;
+            requestPending = true;
             await service.AskAsync(Magic8BallData.Question);
+            requestPending = false;
             // Check if Magic 8 Ball answered too fast; we should wait at least the minimum time to enhance the magic effect
             stopWatch.Stop();
             double magicDelay = 500 - stopWatch.Elapsed.TotalMilliseconds;  // 1/2 second
@@ -147,7 +141,7 @@ public partial class AI
         }
     }
 
-    private void ClearAnswer()
+    protected void ClearAnswer()
     {
         // Clear Answer text and style
         if (Magic8BallData != null) Magic8BallData.Answer = string.Empty;
@@ -155,7 +149,7 @@ public partial class AI
         StateHasChanged();
     }
 
-    private void ClearMessage()
+    protected void ClearMessage()
     {
         // Clear Message area
         ShowMessage = false;
@@ -165,7 +159,7 @@ public partial class AI
     }
 
 #if (false) // Not yet needed
-    private void SetInfoMessage(string InfoMessage)
+    protected void SetInfoMessage(string InfoMessage)
     {
         // Clear Message area
         ShowMessage = true;
@@ -175,7 +169,7 @@ public partial class AI
     }
 #endif
 
-    private void SetErrorMessage(string ErrorMessage)
+    protected void SetErrorMessage(string ErrorMessage)
     {
         // Clear Message area
         ShowMessage = true;
@@ -186,16 +180,16 @@ public partial class AI
         StateHasChanged();
     }
 
-    private void ToggleInstructions()
+    protected void ToggleInstructions()
     {
         ShowInstructions = !ShowInstructions;
         StateHasChanged();
     }
 
-    private void ShowBusy(bool IsBusy)
+    protected void ShowBusy(bool IsBusy)
     {
         this.IsBusy = IsBusy;
-        ShowPleaseWait = IsBusy && !HadRecentRequest();
+        ShowPleaseWait = IsBusy && requestPending;
         StateHasChanged();
     }
 }
