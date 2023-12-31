@@ -21,3 +21,6 @@ Magic 8 Ball Windows Form App sample question and answer:
 
 [Magic 8 Ball Blazor Web App](https://jolly-water-0879a521e.3.azurestaticapps.net/) sample question and AI answer:
 ![Magic 8 Ball Blazor App](Images/Magic%208%20Ball%20Blazor%20AI.png)
+
+Kudos:
+Many thanks to the staff at [CODE Group](https://codemag.com/) and countless developers in the open source community, who have shared their knowledge and experiences, providing invaluable insights into the new and evolving technologies used herein.
