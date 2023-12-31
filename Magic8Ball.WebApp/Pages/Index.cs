@@ -16,22 +16,24 @@ public partial class Index
 
     private string AnswerStyle = string.Empty;
 
-    //used to store state of screen
+    // used to store state of screen
     protected bool ShowMessage;
     protected MarkupString Message = new();
     protected string StatusClass = string.Empty;
 
-    protected bool InstructionsCollapsed { get; set; } = true; // hide by default
+    protected bool ShowInstructions { get; set; } = false; // hide by default
     protected bool IsBusy { get; set; } = false; // true when waiting for Magic 8 Ball to answer
+
+    private string GetApiBaseAddress() => Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api";
 
     protected override void OnInitialized()
     {
-        Console.WriteLine("Entering OnInitialized()...");
+        Logger.LogInformation("Entering OnInitialized()...");
     }
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"Entering OnParametersSet(Service='{Service}')...");
+        Logger.LogInformation("Entering OnParametersSet(Service='{Service}')...", Service);
         // Default to Classic if Service not specified
         if (string.IsNullOrWhiteSpace(Service)) Service = "Classic";
         // Instantiate specified Magic 8 Ball service type
@@ -39,10 +41,10 @@ public partial class Index
         {
             "classic" => new Magic8Ball.Classic.ClassicMagic8Ball(),
             // For Azure/AI api client, check for local config override (e.g. during Development), else assume static web app's api route
-            "azure" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.Classic),
+            "azure" => new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.Classic),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure
             // "ai" => new AI.AIMagic8Ball(),
-            "ai" => new RESTClientMagic8Ball(Configuration?["RESTClientMagic8Ball:BaseAddress"] ?? $"{HostEnvironment.BaseAddress}api", ServiceType.AI),
+            "ai" => new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.AI),
             _ => null,
         };
         // Check if service created
@@ -59,6 +61,7 @@ public partial class Index
             ClearAnswer();
             ClearMessage();
         }
+        Logger.LogInformation("Exiting OnParametersSet");
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -151,7 +154,7 @@ public partial class Index
 
     private void ToggleInstructions()
     {
-        InstructionsCollapsed = !InstructionsCollapsed;
+        ShowInstructions = !ShowInstructions;
         StateHasChanged();
     }
 
