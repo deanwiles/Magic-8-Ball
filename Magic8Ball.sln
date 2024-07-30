@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magic8Ball.AI", "Magic8Ball
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Ai.Generativelanguage.V1Beta3", "Google.Ai.Generativelanguage.V1Beta3\Google.Ai.Generativelanguage.V1Beta3.csproj", "{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.ClassicTests", "Magic8Ball.ClassicTests\Magic8Ball.ClassicTests.csproj", "{3D5ECF45-FC33-41FB-AC6A-ACDFE2118CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic8Ball.AITests", "Magic8Ball.AITests\Magic8Ball.AITests.csproj", "{E0D32219-7EFA-4A37-B83D-EFEE3C5DEC8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CD33C9A-1ED3-4B6F-84BD-D72DCEA75185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D5ECF45-FC33-41FB-AC6A-ACDFE2118CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D5ECF45-FC33-41FB-AC6A-ACDFE2118CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D5ECF45-FC33-41FB-AC6A-ACDFE2118CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D5ECF45-FC33-41FB-AC6A-ACDFE2118CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D32219-7EFA-4A37-B83D-EFEE3C5DEC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D32219-7EFA-4A37-B83D-EFEE3C5DEC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D32219-7EFA-4A37-B83D-EFEE3C5DEC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D32219-7EFA-4A37-B83D-EFEE3C5DEC8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,10 +13,10 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
     private static readonly string _neutralPrompt = "neutral";
     private static readonly string _positivePrompt = "positive, committed";
 
-    private static readonly List<string> _negativeTones = new() { "empathetic", "apologetic", "disappointed" };
-    private static readonly List<string> _neutralTones = new() { "wishy-washy", "apathetic", "sanguine" };
-    private static readonly List<string> _positiveTones = new() { "happy", "ecstatic", "optimistic" };
-    // private static readonly List<string> _invalidTones = new() { "witty", "surprised", "sarcastic" };
+    private static readonly List<string> _negativeTones = ["empathetic", "apologetic", "disappointed"];
+    private static readonly List<string> _neutralTones = ["wishy-washy", "apathetic", "sanguine"];
+    private static readonly List<string> _positiveTones = ["happy", "ecstatic", "optimistic"];
+    // private static readonly List<string> _invalidTones = ["witty", "surprised", "sarcastic"];
 
     private static readonly Random _random = new();
 
@@ -95,15 +95,15 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
                 CandidateCount = 1,
                 MaxOutputTokens = 128
             };
-            textRequest.SafetySettings.AddRange(new RepeatedField<SafetySetting>
-            {
-                new SafetySetting { Category = HarmCategory.Derogatory, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new SafetySetting { Category = HarmCategory.Toxicity, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new SafetySetting { Category = HarmCategory.Violence, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new SafetySetting { Category = HarmCategory.Sexual, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new SafetySetting { Category = HarmCategory.Medical, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockMediumAndAbove },
-                new SafetySetting { Category = HarmCategory.Dangerous, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove }
-            });
+            textRequest.SafetySettings.AddRange(
+            [
+                new() { Category = HarmCategory.Derogatory, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new() { Category = HarmCategory.Toxicity, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new() { Category = HarmCategory.Violence, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new() { Category = HarmCategory.Sexual, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
+                new() { Category = HarmCategory.Medical, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockMediumAndAbove },
+                new() { Category = HarmCategory.Dangerous, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove }
+            ]);
 
             // Generate contextual and toned answer text
             GenerateTextResponse textResponse = await textServiceClient.GenerateTextAsync(textRequest);
