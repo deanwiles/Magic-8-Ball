@@ -135,7 +135,8 @@ public partial class AI
         {
             // Display error message
             string msg = ex.Message;
-            if (null != ex.InnerException) msg += $"<br>{ex.InnerException.Message}";
+            if (null != ex.InnerException) msg += $"<br>&nbsp;{ex.InnerException.Message}";
+            msg += "<br>Sometimes the AI Engine needs to think twice. Please click &lt;Reset&gt; and try again.";
             Logger.LogInformation(ex, "Error occurred in AskQuestion, Message='{Message}'", msg);
             SetErrorMessage(msg);
         }
