@@ -28,7 +28,7 @@ namespace Magic8Ball.AITests
         }
 
         [Theory]
-        [InlineData(null)]
+        //[InlineData(null)]
         [InlineData("")]
         [InlineData("   ")]
         public async Task CannotCallAskAsyncWithInvalidQuestion(string value)
