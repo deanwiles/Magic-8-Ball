@@ -103,8 +103,8 @@ public partial class Form1 : Form
     private void Form1_Load(object sender, EventArgs e)
     {
         // Initial list of Magic 8 Ball Services
-        List<Magic8BallServiceDefinition> list = new()
-        {
+        List<Magic8BallServiceDefinition> list =
+        [
             new Magic8BallServiceDefinition("classic", "Classic Magic 8 Ball Answers",
                 GetAssemblyQualifiedName(typeof(Classic.ClassicMagic8Ball))),
             new Magic8BallServiceDefinition("azure", "Azure Function Magic 8 Ball REST Service",
@@ -113,7 +113,7 @@ public partial class Form1 : Form
                 GetAssemblyQualifiedName(typeof(AI.AIMagic8Ball))),
             new Magic8BallServiceDefinition("ai-azure", "Artificially Intelligent Magic 8 Ball Service (Azure)",
                 GetAssemblyQualifiedName(typeof(AI.AIMagic8Ball)))
-        };
+        ];
         cboService.DataSource = list;
         cboService.ValueMember = "ShortName";
         cboService.DisplayMember = "DisplayName";
@@ -133,15 +133,9 @@ public partial class Form1 : Form
     }
 }
 
-public class Magic8BallServiceDefinition
+public class Magic8BallServiceDefinition(string ShortName, string DisplayName, string TypeName)
 {
-    public string ShortName { get; set; }
-    public string DisplayName { get; set; }
-    public string TypeName { get; set; }
-    public Magic8BallServiceDefinition(string ShortName, string DisplayName, string TypeName)
-    {
-        this.ShortName = ShortName;
-        this.DisplayName = DisplayName;
-        this.TypeName = TypeName;
-    }
+    public string ShortName { get; set; } = ShortName;
+    public string DisplayName { get; set; } = DisplayName;
+    public string TypeName { get; set; } = TypeName;
 }
