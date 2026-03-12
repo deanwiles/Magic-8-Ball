@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Company>Access Computer Systems</Company>
-    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
+    <Copyright>Copyright © 2020-2026 Access Computer Systems</Copyright>
     <Product>Magic 8 Ball</Product>
   </PropertyGroup>
 
