@@ -39,7 +39,7 @@ public partial class Index
         // Instantiate specified Magic 8 Ball service type
         Magic8BallData = Service.ToLower() switch
         {
-            "classic" => new Magic8Ball.Classic.ClassicMagic8Ball(),
+            "classic" => new Classic.ClassicMagic8Ball(),
             // For Azure/AI api client, check for local config override (e.g. during Development), else assume static web app's api route
             "azure" => new RESTClientMagic8Ball(GetApiBaseAddress(), ServiceType.Classic),
             // Running AI locally doesn't currently work due to issues with Grpc.Core and the PaLM client, so just replace Azure option with AI call via Azure

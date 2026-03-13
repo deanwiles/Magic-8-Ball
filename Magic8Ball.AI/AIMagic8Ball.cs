@@ -1,9 +1,6 @@
-﻿using Google.Ai.Generativelanguage.V1Beta3;
-using Google.Api.Gax.Grpc;
-using Google.Apis.Auth.OAuth2;
-using Google.Protobuf.Collections;
-using Magic8Ball.Shared;
-using System;
+﻿using Magic8Ball.Shared;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Magic8Ball.AI;
 
@@ -71,47 +68,68 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             string promptText = $"Provide a {promptType}﻿ contextual response in five or less sentences, " +
                 $"speaking as a friend in ﻿﻿{tone}﻿ tone, to the question \"﻿{Question}\"";
 
-            // Get PaLM API key
-            string setting = "Magic8Ball_PaLM_API_Key";
+            // Get Gemini API key
+            string setting = "Magic8Ball_Gemini_API_Key";
             string? apiKey = Environment.GetEnvironmentVariable(setting);
             if (string.IsNullOrEmpty(apiKey))
                 throw new Exception($"Error: Missing environment variable \"{setting}\"");
-            var callSettings = CallSettings.FromHeader("x-goog-api-key", apiKey);
 
-            // Setup GenerateText service call
-            var textServiceClientBuilder = new TextServiceClientBuilder()
-            {
-                GoogleCredential = GoogleCredential.FromAccessToken(null),
-                Settings = new TextServiceSettings() { CallSettings = callSettings }
-            };
-            var textServiceClient = textServiceClientBuilder.Build();
-            var textRequest = new GenerateTextRequest
-            {
-                Model = "models/text-bison-001",
-                Prompt = new TextPrompt { Text = promptText },
-                Temperature = 0.7F,
-                TopK = 40,
-                TopP = 0.95F,
-                CandidateCount = 1,
-                MaxOutputTokens = 128
-            };
-            textRequest.SafetySettings.AddRange(
-            [
-                new() { Category = HarmCategory.Derogatory, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new() { Category = HarmCategory.Toxicity, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new() { Category = HarmCategory.Violence, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new() { Category = HarmCategory.Sexual, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove },
-                new() { Category = HarmCategory.Medical, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockMediumAndAbove },
-                new() { Category = HarmCategory.Dangerous, Threshold = SafetySetting.Types.HarmBlockThreshold.BlockLowAndAbove }
-            ]);
+            // Call Gemini API via REST endpoint
+            string model = "gemini-1.5-flash";
+            string endpoint = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent";
 
-            // Generate contextual and toned answer text
-            GenerateTextResponse textResponse = await textServiceClient.GenerateTextAsync(textRequest);
+            using var http = new HttpClient();
+            http.DefaultRequestHeaders.Add("x-goog-api-key", apiKey);
+
+            var payload = new
+            {
+                contents = new[]
+                {
+                    new
+                    {
+                        parts = new[] { new { text = promptText } }
+                    }
+                },
+                generationConfig = new
+                {
+                    temperature = 0.7,
+                    topK = 40,
+                    topP = 0.95,
+                    maxOutputTokens = 128,
+                    candidateCount = 1
+                }
+            };
+
+            var httpResponse = await http.PostAsJsonAsync(endpoint, payload);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                var err = await httpResponse.Content.ReadAsStringAsync();
+                throw new Exception($"Gemini API request failed: {httpResponse.StatusCode} - {err}");
+            }
+
+            using var stream = await httpResponse.Content.ReadAsStreamAsync();
+            using var doc = await JsonDocument.ParseAsync(stream);
+            // Expecting JSON like: { "candidates": [ { "content": { "parts": [ { "text": "..." } ] } } ] }
+            string output = string.Empty;
+            if (doc.RootElement.TryGetProperty("candidates", out var candidates) && candidates.GetArrayLength() > 0)
+            {
+                var first = candidates[0];
+                if (first.TryGetProperty("content", out var content) &&
+                    content.TryGetProperty("parts", out var parts) && parts.GetArrayLength() > 0)
+                {
+                    var firstPart = parts[0];
+                    if (firstPart.TryGetProperty("text", out var textProp))
+                        output = textProp.GetString() ?? string.Empty;
+                }
+            }
+
+            if (string.IsNullOrEmpty(output))
+                throw new Exception("Gemini API returned no output.");
 
             // Save question, answer and type
             this.Question = Question;
             Type = magic8Ball.Type;
-            Answer = textResponse.Candidates[0].Output.Trim('"');
+            Answer = output.Trim('"', '\n', '\r', ' ');
 
             // Return this Magic 8 Ball object with resulting Question, Answer and Type
             return this;
