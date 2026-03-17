@@ -75,7 +75,7 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
                 throw new Exception($"Error: Missing environment variable \"{setting}\"");
 
             // Call Gemini API via REST endpoint
-            string model = "gemini-2.0-flash";
+            string model = "gemini-2.5-flash-lite";
             string endpoint = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent";
 
             using var http = new HttpClient();
