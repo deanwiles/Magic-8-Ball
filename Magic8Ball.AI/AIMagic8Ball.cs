@@ -1,6 +1,7 @@
 ﻿using Magic8Ball.Shared;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Magic8Ball.AI;
 
@@ -16,6 +17,17 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
     // private static readonly List<string> _invalidTones = ["witty", "surprised", "sarcastic"];
 
     private static readonly Random _random = new();
+    
+    private readonly IConfiguration? _configuration;
+
+    public AIMagic8Ball()
+    {
+    }
+
+    public AIMagic8Ball(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
 
     /// <summary>
     /// Ask the Magic 8 Ball a Question
@@ -74,16 +86,17 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             if (string.IsNullOrEmpty(apiKey))
                 throw new Exception($"Error: Missing environment variable \"{setting}\"");
 
-            // Call Gemini API via REST endpoint
-            string model = "gemini-2.5-flash-lite";
-            string endpoint = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent";
+            // Get model and base URL from configuration or environment variables
+            string model = GetConfigValue("Gemini_Model") ?? "gemini-2.5-flash-lite";
+            string baseUrl = GetConfigValue("Gemini_BaseUrl") ?? "https://generativelanguage.googleapis.com/v1beta";
+            string endpoint = $"{baseUrl}/models/{model}:generateContent";
 
             using var http = new HttpClient();
             http.DefaultRequestHeaders.Add("x-goog-api-key", apiKey);
 
             var payload = new
             {
-                contents = new[]
+                contents = new []
                 {
                     new
                     {
@@ -139,5 +152,19 @@ public class AIMagic8Ball : Magic8BallData, IMagic8BallService
             // Wrap and rethrow the error back to caller with some context
             throw new Exception($"Failed asking the Magic 8 Ball '{Question}'.", ex);
         }
+    }
+
+    private string? GetConfigValue(string key)
+    {
+        // Try configuration first (if provided via DI)
+        if (_configuration != null)
+        {
+            var value = _configuration[key];
+            if (!string.IsNullOrEmpty(value))
+                return value;
+        }
+
+        // Fall back to environment variables
+        return Environment.GetEnvironmentVariable(key);
     }
 }

@@ -8,6 +8,8 @@
         //"MAGIC8BALL_WEBAPP_URL": "https://lively-plant-00f92b71e.3.azurestaticapps.net/", // Temp
         "MAGIC8BALL_WEBAPP_URL": "https://jolly-water-0879a521e-dev.westus2.3.azurestaticapps.net", // Azure Development (Dev branch)
         //"MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:44308" // IIS Express
-        "MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:7151" // WebApp
+        "MAGIC8BALL_WEBAPP_URL_DEV": "https://localhost:7151", // WebApp
+        "Gemini_Model": "gemini-2.5-flash-lite",
+        "Gemini_BaseUrl": "https://generativelanguage.googleapis.com/v1beta"
     }
 }
