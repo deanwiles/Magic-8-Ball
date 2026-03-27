@@ -3,13 +3,14 @@ using Magic8Ball.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Magic8Ball.Api;
 
-public class AskAI(ILogger<AskAI> logger)
+public class AskAI(ILogger<AskAI> logger, IConfiguration configuration)
 {
     [Function("AskAI")]
     public async Task<IActionResult> Run(
@@ -31,7 +32,7 @@ public class AskAI(ILogger<AskAI> logger)
         logger.LogInformation("Question = \"{Question}\"", question);
 
         // Ask the AI Magic 8 Ball service the provided question
-        var magic8Ball = new AIMagic8Ball();
+        var magic8Ball = new AIMagic8Ball(configuration);
         try
         {
             if (string.IsNullOrWhiteSpace(question))

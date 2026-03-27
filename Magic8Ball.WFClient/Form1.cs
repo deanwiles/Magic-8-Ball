@@ -1,10 +1,8 @@
-using Google.Api;
 using Magic8Ball.AI;
 using Magic8Ball.Classic;
 using Magic8Ball.RESTClient;
 using Magic8Ball.Shared;
 using Microsoft.Extensions.Configuration;
-using System.Text.Json;
 
 // This C# sample is used to test the Classic Magic 8 Ball class.
 namespace Magic8Ball.WFClient;
