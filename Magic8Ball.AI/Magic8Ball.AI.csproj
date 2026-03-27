@@ -6,11 +6,14 @@
     <Nullable>enable</Nullable>
     <Company>Access Computer Systems</Company>
     <Product>Magic 8 Ball</Product>
-    <Copyright>Copyright © 2020-2023 Access Computer Systems</Copyright>
+    <Copyright>Copyright © 2020-2026 Access Computer Systems</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Google.Ai.Generativelanguage.V1Beta3\Google.Ai.Generativelanguage.V1Beta3.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Magic8Ball.Classic\Magic8Ball.Classic.csproj" />
     <ProjectReference Include="..\Magic8Ball.Shared\Magic8Ball.Shared.csproj" />
   </ItemGroup>

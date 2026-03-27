@@ -7,7 +7,7 @@ Click [here](https://jolly-water-0879a521e.3.azurestaticapps.net/) to run the la
 
 The Classic Magic 8 Ball service is available as a local .NET 8.0 library named `Magic8Ball.Classic` or as an Azure Function, which can be accessed via a [REST API](https://jolly-water-0879a521e.3.azurestaticapps.net/api/ask?question=Will%20I%20win%20the%20lottery?), or the `Magic8Ball.RESTClient` library. 
 
-The Artificially Intelligent (AI) Magic 8 Ball service is also available as a local .NET 8.0 library named `Magic8Ball.AI` or via an Azure Function, which can be accessed via a [REST API](https://jolly-water-0879a521e.3.azurestaticapps.net/api/askai?question=Will%20I%20win%20the%20lottery?), or the `Magic8Ball.RESTClient` library. The AI version uses [Google's PaLM API](https://developers.generativeai.google/guide) and a little of the Classic Magic 8 Ball's magic to generate a contextual response.
+The Artificially Intelligent (AI) Magic 8 Ball service is also available as a local .NET 8.0 library named `Magic8Ball.AI` or via an Azure Function, which can be accessed via a [REST API](https://jolly-water-0879a521e.3.azurestaticapps.net/api/askai?question=Will%20I%20win%20the%20lottery?), or the `Magic8Ball.RESTClient` library. The AI version uses [Google's Gemini API](https://developers.generativeai.google/guide) and a little of the Classic Magic 8 Ball's magic to generate a contextual response.
 
 If you haven't yet experienced Mattel's Magic 8 Ball or want to get one of your own, they are available via [Mattel's web site](https://www.mattel.com/products/magic-8-ball-dhw39) or directly on [Amazon](https://www.amazon.com/dp/B0149MC426).
 
